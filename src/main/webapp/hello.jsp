@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>하이요</h1>
-	<h2>안녕하세요</h2>
-	<h1>branch_osr 입니다 수정하겠습니다.</h1>	
-	<h1>브랜치 오새롬 입니다.</h1>
+	<h1>안녕하세요</h1>
 </body>
 </html>
