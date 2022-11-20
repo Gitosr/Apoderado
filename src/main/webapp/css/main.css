@@ -1,0 +1,248 @@
+@charset "UTF-8";
+
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.top_nav {
+	width: 1080px;
+	height: 30px;
+	margin: 10px auto;
+}
+
+.personal {
+	font: sans-serif;
+	float: right;
+	font-size: 12px;
+	float: right;
+}
+
+.menubar {
+	width: 1080px;
+	height: 80px;
+	margin: 0px auto;
+}
+
+#menu {
+	width: 30px;
+	height: 30px;
+	margin: 15px;
+}
+
+.logo {
+	font-family: 'Jua', sans-serif;
+	font-size: 30px;
+	width: 200px;
+	height: 80px;
+	position: relative;
+	left: 350px;
+	position: relative;
+	height: 80px;
+	width: 200px;
+}
+
+.main {
+	width: 1080px;
+	margin: 10px auto;
+}
+
+.weather {
+	font-family: 'Jua', sans-serif;
+	width: 250px;
+	height: 300px;
+	float: left;
+	margin: 10px 10px 10px 50px;
+	padding: 20px;
+	text-align: center;
+	border: solid 1px grey;
+	border-radius: 30px;
+}
+
+.ad {
+	width: 650px;
+	height: 300px;
+	float: right;
+	margin: 10px;
+	border: solid 1px grey;
+}
+
+.main1 {
+	width: 1080px;
+	height: 300px;
+	margin-top: 50px;
+}
+
+.main2, .main3 {
+	width: 1080px;
+	height: 300px;
+	margin: 80px 10px 10px 10px;
+}
+
+.main4, .main5 {
+	width: 500px;
+	height: 350px;
+	margin: 80px 20px;
+	padding: 10px;
+	border: solid 1px grey;
+	float: left;
+}
+
+.search-title {
+	width: 1000px;
+	height: 50px;
+	margin: 10px 30px;
+}
+.search-location{
+	width: 100%;
+	margin: 20px auto;
+}
+.search-box {
+	width: 500px;
+	margin: 10px auto;
+	padding: 5px;
+	border-radius: 30px;
+	border: 3px solid grey;
+}
+
+.search-text {
+	margin-left: 15px;
+	text-align: center;
+	width: 400px;
+	height: 30px;
+	border: none;
+	outline: none;
+	font-size: 17px;
+}
+
+.search-btn {
+	width: 30px;
+	height: 30px;
+	margin-right: 10px;
+}
+
+.offcanvas-header {
+	font-family: 'Jua', sans-serif;
+}
+
+.search-event {
+	width: 1040px;
+	margin: 0px auto;
+}
+
+.event {
+	display: inline-block;
+	text-align: center;
+	font-weight: bold;
+}
+
+.sport {
+	width: 80px;
+	height: 80px;
+	cursor: pointer;
+	margin: 40px 20px 10px 20px;
+}
+
+.community-list {
+	margin: 5px 20px;
+	padding: 5px;
+	border-bottom: dashed 1px grey;
+}
+
+.offcanvas-title {
+	margin: 30px auto;
+}
+
+.offcanvas-body {
+	margin: 10px 30px;
+}
+
+.location>img {
+	width: 30px;
+	height: 30px;
+}
+
+p.weatherIcon {
+	margin-bottom: 0px;
+}
+
+.weatherIcon>img {
+	width: 150px;
+	height: 150px;
+}
+
+.temp {
+	margin-bottom: 0px;
+	font-size: 30px;
+}
+.wrap{
+	width: 720px;
+    height: 200px;
+	margin: 10px;
+	position: relative;
+	left: 80px;
+	overflow: hidden;
+	display: inline-block;
+}
+	
+.img_list{
+	width: 1680px;
+	height: 200px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+    
+.img_list li{
+    float: left;
+    list-style: none;
+}
+    
+.img_list img{
+	width: 200px;
+	height: 200px;
+	margin-right: 40px;
+	cursor: pointer;
+}
+.btn1, .btn2 {
+	display: inline-block;
+	width: 30px;
+	position: relative;
+	margin: 20px;
+	top: 50px;
+	cursor: pointer;
+}
+.btn1 {
+	float: left;
+}
+.btn2 {
+	float: right;
+}
+
+.reservation-best {
+	width: 150px;
+	height: 300px;
+	display: inline-block;
+	margin-left: 5px;
+}
+
+.best {
+	width: 140px;
+	height: 120px;
+}
+.reservation-best p {
+	width: 130px;
+   	height: 50px;
+   	overflow: hidden;
+   	text-overflow: ellipsis;
+   	white-space: nowrap;  
+   	margin: 0px;
+}
+
+
+

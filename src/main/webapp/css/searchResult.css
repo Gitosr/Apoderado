@@ -1,0 +1,97 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+ a {
+	text-decoration: none;
+	color: black;
+}
+
+.top_nav {
+	width: 1080px;
+	height: 30px;
+	margin: 10px auto;
+}
+
+.personal {
+	font: sans-serif;
+	float: right;
+	font-size: 12px;
+	float: right;
+}
+
+#menu {
+	width: 30px;
+	height: 30px;
+	margin: 15px;
+}
+
+.menubar {
+	width: 1080px;
+	height: 80px;
+	margin: 0px auto;
+}
+
+
+.logo {
+	font-family: 'Jua', sans-serif;
+	font-size: 30px;
+	width: 200px;
+	height: 80px;
+	position: relative;
+	left: 350px;
+	position: relative;
+	height: 80px;
+	width: 200px;
+}
+
+img {
+	width: 300px;
+	height: 200px;
+}
+
+.search-box {
+	width: 500px;
+	margin: 10px auto;
+	padding: 5px;
+	border-radius: 30px;
+	border: 3px solid grey;
+}
+
+.search-text {
+	margin-left: 15px;
+	text-align: center;
+	width: 400px;
+	height: 30px;
+	border: none;
+	outline: none;
+	font-size: 17px;
+}
+
+.search-btn {
+	width: 30px;
+	height: 30px;
+	margin-right: 10px;
+}
+
+.result-list {
+	width: 1080px;
+	margin: 100px auto;
+}
+.card{
+	margin-top: 0px;
+}
+
+.card-body p{
+    width: 300px;
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;  
+}
+
+.col .card:hover {
+	border: 1px solid black;
+}
+
