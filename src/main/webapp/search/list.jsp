@@ -1,7 +1,8 @@
+<%@page import="kr.co.dongdong.vo.ClientVO"%>
+<%@page import="kr.co.dongdong.vo.FacilitiesVO"%>
+<%@page import="kr.co.dongdong.dao.FacilitiesDAO"%>
 <%@page import="test.Event"%>
-<%@page import="kr.co.dongdong.vo.FacilityVO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="kr.co.dongdong.dao.FacilityDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -39,6 +40,20 @@
 <script src="../Resources/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="../Resources/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 <script src="../Resources/vendor/php-email-form/validate.js"></script>
+<link rel="stylesheet" href="../css/main.css" />
+
+<!--  수정한 부분 -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+	crossorigin="anonymous"></script>
+	
+<!--  ------------------------------------ -->
 
 <!-- Template Main JS File -->
 <script src="../Resources/js/main.js"></script>
@@ -116,6 +131,8 @@ li.mainmenu ul {
 </style>
 <script>
 	$(function() {
+		$("#dongdong").click
+		
 		$("li.mainmenu ul").hide();
 
 		$("li.mainmenu").hover(function() {
@@ -133,9 +150,20 @@ li.mainmenu ul {
 							.sidebar('setting', 'transition', 'overlay')
 							.sidebar("toggle");
 				})
+				
+		$("#eventul .item").click(function(){
+			console.log($("#headevent").text());
+			console.log($(this).val());
+			$("#headevent").text($(this).text());
+		});
+		$(".locul .item").click(function(){
+			console.log($("#headloc").text());
+			console.log($(this).text());
+			$("#headloc").text($(this).text());
+		});
 
-		$("#eventmenu .item").click(function() {
-							
+		$(".item").click(function() {
+							console.log($("#heventn").text);
 
 							var esav = $("#esave").val();
 							var lsav = $("#lsave").val();
@@ -155,10 +183,10 @@ li.mainmenu ul {
 								urlplus1 += activeTab1
 							}
 							var activeT = urlplus +"&"+ urlplus1;
-							console.log(esav);
-							console.log(lsav);
+							/* console.log(esav);
+							console.log(lsav);*/
 							console.log("urlplus : "+ urlplus);
-							console.log("urlplus1 : "+ urlplus1);
+							console.log("urlplus1 : "+ urlplus1); 
 							console.log("eventlist.jsp?fevent=" + urlplus+"&facloc="+urlplus1);
 							
 							$.ajax({
@@ -176,12 +204,12 @@ li.mainmenu ul {
 											
 										
 										var eventname = response[0].event; 
-										//var facloc = response[0].facloc;
+										//var floc = response[0].floc;
 										var event = response;
 
 										var data = "";
 
-										data += "<h2>" + eventname + "</h2>";
+										data += "<h2>DongDong</h2>";
 											
 										data += "<p>나랑 " + eventname
 													+ "가자~!</p>";
@@ -221,63 +249,68 @@ li.mainmenu ul {
 </script>
 </head>
 <body>
-
 	<section id="services" class="services sections-bg">
-
-
-		<div class="ui sidebar inverted vertical menu" id="eventmenu">
-			<a data-tab="-1" class="item"> 전체 </a>
-			<a data-tab="0" class="item"> 축구장 </a>
-			<a data-tab="1" class="item"> 야구장</a>
-			<a data-tab="2" class="item"> 풋살장 </a>
-			<a data-tab="3" class="item"> 배드민턴장 </a>
-			<a data-tab="4" class="item"> 테니스장 </a>
-			<a data-tab="5" class="item"> 농구장 </a>
-			<a data-tab="6" class="item"> 배구장 </a>
-			<a data-tab="7" class="item"> 탁구장 </a>
-			<a data-tab1="전체" class="item"> 전체</a>
-			<a data-tab1="서초구" class="item"> 서초구</a>
-			<a data-tab1="송파구" class="item"> 송파구 </a>
-			<a data-tab1="광진구" class="item"> 광진구 </a>
-			<a data-tab1="성동구" class="item"> 성동구 </a>
-			<a data-tab1="마포구" class="item"> 마포구 </a>
-			<a data-tab1="영등포구" class="item"> 영등포구 </a>
-			<a data-tab1="양천구" class="item"> 양천구 </a>
-			<a data-tab1="구로구" class="item"> 구로구 </a>
-		</div>
-		<div class="pusher">
-			<button id="emenu" class="ui button">menu</button>
-
-
+	<%
+		int nCurrentPage = 1;
+		session.setAttribute("nCurrentPage", nCurrentPage);
+	%>
+	<!-- 수정된 내용 -->
+	<header id="header" class="header d-flex align-items-center">
+		<jsp:include page="../mainPage/header.jsp" />
+	</header> 
 			<div class="container" data-aos="fade-up">
 
 				<div class="section-header" id="dbody">
 					<%
 					// 종목구분 파라미터 받아오기
 					String faceve = request.getParameter("facevent");
-					faceve = "3";
+					//faceve = "3";
 					// 지역 파라미터 받아오기
-					String facloc = request.getParameter("facloc");
+					//String facloc = request.getParameter("facloc");
+					String facloc = "";
+					String[] faclocArray = request.getParameterValues("facloc");
 					//facloc = "송파구";
 					String event = "";
-					int facevent =30;
-					if(faceve != null){
+					int cnt = 0;
+					int facevent =-1;
+					if(faceve == null && faclocArray == null){
+						facloc = "전체";
+						
+					}
+					else if(faceve != null && faclocArray != null){
+						facevent = Integer.parseInt(faceve);
+						for(String fa : faclocArray){
+							facloc = fa;
+							cnt ++;
+							if(cnt<faclocArray.length) {
+								facloc += "&facloc=";
+							}
+							System.out.println(facloc);
+						}
+					}
+					else if(faceve != null){
 						facevent = Integer.parseInt(faceve);
 						Event e = new Event();
 
 						event += e.selectEvent(facevent);
 						facloc = "전체";
-					}else if(facloc != null){
-						facevent = -1;
+					}else if(faclocArray != null){
+						for(String fa : faclocArray){
+							facloc = fa;
+							cnt ++;
+							if(cnt<faclocArray.length) {
+								facloc += "&facloc=";
+							}
+							System.out.println(facloc);
+						} 
 					}
 
 					
-						System.out.println("facevent" + facevent);
-						System.out.println("facloc" + facloc);
+						/* System.out.println("facevent" + facevent);
+						System.out.println("facloc" + facloc); */
 					%>
 
-					<h2><%=event%></h2>
-					<h3><%=facloc%></h3>
+					<h2>DongDong</h2>
 					<p>
 						나랑
 						<%=event%>
@@ -289,15 +322,26 @@ li.mainmenu ul {
 
 					<div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
 						<%
-						FacilityDAO dao = new FacilityDAO();
-						ArrayList<FacilityVO> list = new ArrayList<FacilityVO>();
-						if (facevent == -1) { // 첫화면 지역 클릭시
-							list = dao.locAll(facloc);
-
-						} else if (facloc == "전체") { // 첫화면 종목 클릭시
-							list = dao.eventAll(facevent);
+						FacilitiesDAO dao = new FacilitiesDAO();
+						ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
+						if(facevent == -1 && facloc.equals("전체")){
+							list = dao.selectAll();
+							System.out.println("dao.selectAll()실행");
+							
+						}else if(facevent != -1 && facloc.equals("전체") != true){
+							list = dao.elAll(facevent, faclocArray);
+							System.out.println("dao.elAll실행");
 						}
-						for (FacilityVO vo : list) {
+						else if(facevent == -1){
+							list = dao.locAll(faclocArray);
+								
+							System.out.println("dao.locAll실행");
+						}else if(facloc.equals("전체")){
+							//facevent = Integer.parseInt(fevent);
+							list = dao.eventAll(facevent);
+							System.out.println("dao.eventAll실행");
+						}
+						for (FacilitiesVO vo : list) {
 						%>
 						<div class="col-lg-4 col-md-6">
 							<div class="service-item  position-relative">
@@ -320,7 +364,6 @@ li.mainmenu ul {
 					</div>
 				</div>
 			</div>
-		</div>
 	</section>
 
 </body>

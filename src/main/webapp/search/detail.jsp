@@ -1,8 +1,6 @@
-<%@page import="vo.EmpVO"%>
-<%@page import="dao.EmpDAO"%>
+<%@page import="kr.co.dongdong.vo.FacilitiesVO"%>
+<%@page import="kr.co.dongdong.dao.FacilitiesDAO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="kr.co.dongdong.vo.FacilityVO"%>
-<%@page import="kr.co.dongdong.dao.FacilityDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -96,10 +94,10 @@
 		int facno = Integer.parseInt(fno);
 		
 		// 4. dao 객체
-		FacilityDAO dao = new FacilityDAO();
+		FacilitiesDAO dao = new FacilitiesDAO();
 		
 		// 5. 상품번호로 vo 객체 얻어오기
-		FacilityVO vo = dao.selectOne(facno);
+		FacilitiesVO vo = dao.selectOne(facno);
 			
 		/* out.println("<h2>" + vo.getFacno() + "</h2>");
 		out.println("<h2>" + vo.getFacname() + "</h2>");  */

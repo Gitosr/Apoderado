@@ -13,6 +13,29 @@
 <title>체육시설 쉐어 플랫폼, 동동</title>
 <link rel="stylesheet" href="../css/main.css" />
 
+<!-- 수정된 부분 -->
+<link href="../Resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/bootstrap-icons/bootstrap-icons.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/aos/aos.css" rel="stylesheet">
+<link href="../Resources/vendor/glightbox/css/glightbox.min.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/swiper/swiper-bundle.min.css"
+	rel="stylesheet">
+<!-- Template Main CSS File -->
+<link href="../Resources/css/main.css" rel="stylesheet">
+<!-- Vendor JS Files -->
+<script src="../Resources/js/bootstrap.bundle.js"></script>
+<script src="../Resources/vendor/aos/aos.js"></script>
+<script src="../Resources/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="../Resources/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="../Resources/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="../Resources/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="../Resources/vendor/php-email-form/validate.js"></script>
+<link rel="stylesheet" href="../css/main.css" />
+<!-- ------------------------------------------- -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
@@ -140,7 +163,11 @@
 </script>
 </head>
 <body>
-	<header>
+	<%
+		int nCurrentPage = 0;
+		session.setAttribute("nCurrentPage", nCurrentPage);
+	%>
+	<header id="header" class="header d-flex align-items-center">
 		<jsp:include page="header.jsp" />
 	</header>
 	<div class="main">

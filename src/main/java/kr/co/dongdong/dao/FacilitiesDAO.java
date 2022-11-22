@@ -73,6 +73,141 @@ public class FacilitiesDAO {
 		}
 		return list;
 	}
+	
+	//종목분류로 전체조회
+		public ArrayList<FacilitiesVO> eventAll(int facevent){
+			ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
+			sb.setLength(0);
+			sb.append("select * from facilities ");
+			sb.append("where facevent = ?");
+			
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setInt(1, facevent);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					int facno = rs.getInt("facno");
+					String facname = rs.getString("facname");
+					String facaddr = rs.getString("facaddr");
+					int facmark = rs.getInt("facmark");
+					int facprice = rs.getInt("facprice");
+					String facexplain = rs.getString("facexplain");
+					String facimg = rs.getString("facimg");
+					int facparking = rs.getInt("facparking");
+					int facshower = rs.getInt("facshower");
+					int factype = rs.getInt("factype");
+					String facregister = rs.getString("facregister");
+					String clid = rs.getString("clid");
+					
+					FacilitiesVO vo = new FacilitiesVO(facno, facevent, facname, facaddr, facmark, facprice, facexplain, facimg, facparking, facshower, factype, facregister, clid);
+					list.add(vo);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return list;
+		}
+		
+		
+		//지역분류로 전체조회
+		public ArrayList<FacilitiesVO> locAll(String[] faclocArray){
+			ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
+			int cnt = 0;
+			sb.setLength(0);
+			sb.append("select * from facilities ");
+			sb.append("where ( ");
+			for(String facloc : faclocArray) {
+				cnt ++;
+				sb.append("facaddr like '%"+facloc+"%' ");
+				if(cnt<faclocArray.length) {
+					sb.append("or ");
+				}
+				System.out.println(sb);
+				System.out.println(faclocArray.length);
+				System.out.println(cnt);
+			}
+			sb.append(")");
+			
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					int facno = rs.getInt("facno");
+					int facevent = rs.getInt("facevent");
+					String facname = rs.getString("facname");
+					String facaddr = rs.getString("facaddr");
+					int facmark = rs.getInt("facmark");
+					int facprice = rs.getInt("facprice");
+					String facexplain = rs.getString("facexplain");
+					String facimg = rs.getString("facimg");
+					int facparking = rs.getInt("facparking");
+					int facshower = rs.getInt("facshower");
+					int factype = rs.getInt("factype");
+					String facregister = rs.getString("facregister");
+					String clid = rs.getString("clid");
+					
+					FacilitiesVO vo = new FacilitiesVO(facno, facevent, facname, facaddr, facmark, facprice, facexplain, facimg, facparking, facshower, factype, facregister, clid);
+					list.add(vo);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return list;
+		}
+		
+		//지역,종목으로 전체조회
+		public ArrayList<FacilitiesVO> elAll(int facevent, String[] faclocArray){
+			ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
+			int cnt = 0;
+			sb.setLength(0);
+			sb.append("select * from facilities ");
+			sb.append("where facevent = ? ");
+			sb.append("AND ( ");
+			for(String facloc : faclocArray) {
+				cnt ++;
+				sb.append("facaddr like '%"+facloc+"%' ");
+				if(cnt<faclocArray.length) {
+					sb.append("or ");
+				}
+			}
+			sb.append(")");
+			
+			
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setInt(1, facevent);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					int facno = rs.getInt("facno");
+					String facname = rs.getString("facname");
+					String facaddr = rs.getString("facaddr");
+					int facmark = rs.getInt("facmark");
+					int facprice = rs.getInt("facprice");
+					String facexplain = rs.getString("facexplain");
+					String facimg = rs.getString("facimg");
+					int facparking = rs.getInt("facparking");
+					int facshower = rs.getInt("facshower");
+					int factype = rs.getInt("factype");
+					String facregister = rs.getString("facregister");
+					String clid = rs.getString("clid");
+					
+					FacilitiesVO vo = new FacilitiesVO(facno, facevent, facname, facaddr, facmark, facprice, facexplain, facimg, facparking, facshower, factype, facregister, clid);
+					list.add(vo);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return list;
+		}
 		
 	// 1건 조회
 	public FacilitiesVO selectOne(int facno) {
