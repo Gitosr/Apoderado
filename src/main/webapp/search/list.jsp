@@ -128,6 +128,12 @@ li.mainmenu ul {
 .section-header p {
 	margin-bottom: 50px;
 }
+
+/* 수정함 */
+#inheart{
+	float:left;
+	margin-bottom : 10px;
+}
 </style>
 <script>
 	$(function() {
@@ -144,12 +150,6 @@ li.mainmenu ul {
 			$("ul", this).stop().slideUp(500);
 		})
 
-		$("#emenu").click(
-				function() {
-					$(".ui.sidebar")
-							.sidebar('setting', 'transition', 'overlay')
-							.sidebar("toggle");
-				})
 				
 		$("#eventul .item").click(function(){
 			console.log($("#headevent").text());
@@ -185,9 +185,9 @@ li.mainmenu ul {
 							var activeT = urlplus +"&"+ urlplus1;
 							/* console.log(esav);
 							console.log(lsav);*/
-							console.log("urlplus : "+ urlplus);
-							console.log("urlplus1 : "+ urlplus1); 
-							console.log("eventlist.jsp?fevent=" + urlplus+"&facloc="+urlplus1);
+							//console.log("urlplus : "+ urlplus);
+							//console.log("urlplus1 : "+ urlplus1); 
+							//console.log("eventlist.jsp?fevent=" + urlplus+"&facloc="+urlplus1);
 							
 							$.ajax({
 									type : 'GET', //get방식으로 통신
@@ -285,7 +285,7 @@ li.mainmenu ul {
 							if(cnt<faclocArray.length) {
 								facloc += "&facloc=";
 							}
-							System.out.println(facloc);
+							//System.out.println(facloc);
 						}
 					}
 					else if(faceve != null){
@@ -301,7 +301,7 @@ li.mainmenu ul {
 							if(cnt<faclocArray.length) {
 								facloc += "&facloc=";
 							}
-							System.out.println(facloc);
+							//System.out.println(facloc);
 						} 
 					}
 
@@ -310,7 +310,6 @@ li.mainmenu ul {
 						System.out.println("facloc" + facloc); */
 					%>
 
-					<h2>DongDong</h2>
 					<p>
 						나랑
 						<%=event%>
@@ -354,6 +353,12 @@ li.mainmenu ul {
 									class="readmore stretched-link">detail more <i
 									class="bi bi-arrow-right"></i></a>
 							</div>
+									
+						</div>
+						<div id = "inheart">
+								<jsp:include page="../mainPage/interestsCheck.jsp"> 
+								<jsp:param name="facno" value="<%=vo.getFacno() %>"></jsp:param>
+								</jsp:include>
 						</div>
 						<%
 						
