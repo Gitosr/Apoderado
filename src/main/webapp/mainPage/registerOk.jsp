@@ -50,7 +50,7 @@
 	
 			dao.insertOne(vo2);
 			out.println("시설등록 완료");
-	
+
 			response.sendRedirect("registerCheck.jsp");
 		}	
 	%>
