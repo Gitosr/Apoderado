@@ -30,7 +30,7 @@ margin-left : 85%;
 	if(obj !=null){
 	ArrayList<Integer> list = dao.selectResno(vo.getClid());
 	%>
-	<form action="">
+	<form action="deleteOk.jsp">
 	<div class="container">
 	
 	<div class="row">
@@ -43,8 +43,6 @@ margin-left : 85%;
 			<li>당일 취소 : 환불 불가</li>
 			</ul>
 	<h5>예약내역 선택</h5>
-	
-	
 	
 	<table class="table table-hover">
 	<thead class="table-success">
@@ -112,24 +110,7 @@ margin-left : 85%;
 			</form>
 	
 		<script>
-		function checkForm(x){
-			var resno = x.form[0].value;
-	         var refreason = x.form[1].value;
-	         if(resno==''){  
-	             alert("환불받으실 내역을 선택해주세요.");
-	             x.form[0].focus();
-	             return; 
-	         }else if(refreason==''){  
-	             alert("환불 사유를 입력해 주세요.");
-	             x.form[1].focus();  
-	             return; 
-	         }
-	         x.form.action = "deleteOk.jsp";
-	         x.form.method="post";
-	         x.form.submit();
-	         alert('환불신청이 접수되었습니다.');
-	         
-		}
+		
 		
 		</script>
 </body>
