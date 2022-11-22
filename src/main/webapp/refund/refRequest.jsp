@@ -30,11 +30,11 @@ margin-left : 85%;
 	if(obj !=null){
 	ArrayList<Integer> list = dao.selectResno(vo.getClid());
 	%>
+	<form action="">
 	<div class="container">
 	
 	<div class="row">
     <div class="col-sm-7">
-	<div>
 	<h5>환불 안내</h5></td></tr>
 			<ul>
 			<li>일주일 전 취소 : 전액 환불</li>
@@ -42,12 +42,12 @@ margin-left : 85%;
 			<li>24시간 전 취소 : 30% 환불</li>
 			<li>당일 취소 : 환불 불가</li>
 			</ul>
-		</div>	
-		<div>
 	<h5>예약내역 선택</h5>
+	
+	
+	
 	<table class="table table-hover">
 	<thead class="table-success">
-	<form action="">
 	<tr align="center">
 	<td></td><td>예약일</td><td>시설명</td><td>이용회차</td><td>결제금액</td><td>환불예정금액</td></tr></thead>
 	
@@ -87,8 +87,9 @@ margin-left : 85%;
 					}else{facp=0;}
 					
 					%>
+	
 	<tr>
-	<td><input type='checkbox' name="resno" value="<%=x%>"></td>
+	<td><input type='radio' name="resno" id="resno" value="<%=x%>" class="checkSelect"></td>
 	<td><%=sdfresdate%></td>
 	<td><%=facname %></td>
 	<td><%= restime%></td>
@@ -97,20 +98,18 @@ margin-left : 85%;
 	</tr>
 			<% }}%>
 			</td></tr>
-			</form></table></div>
+			</table>
 			
-			<div>
 		<h5>환불사유</h5>
 		<textarea name="refreason" rows="5" cols="95%"></textarea>
 		<br>
 	
-	<input type="submit" value="환불신청" onclick="checkForm(this);" align="right" id="btn1" class="btn btn-outline-success" />
-			</form>
-			</div>
+	<input type="submit" value="환불신청" onclick="checkForm(this);" align="right" id="btn1" class="btn btn-outline-success"/>
 			
-	</div>
-	</div>
-	</div>
+			</div>
+			</div>
+			</div>
+			</form>
 	
 		<script>
 		function checkForm(x){
@@ -120,7 +119,6 @@ margin-left : 85%;
 	             alert("환불받으실 내역을 선택해주세요.");
 	             x.form[0].focus();
 	             return; 
-
 	         }else if(refreason==''){  
 	             alert("환불 사유를 입력해 주세요.");
 	             x.form[1].focus();  
