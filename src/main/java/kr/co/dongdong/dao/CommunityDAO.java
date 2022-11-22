@@ -174,7 +174,7 @@ public class CommunityDAO {
 
 		sb.setLength(0);
 		sb.append("insert into community ");
-		sb.append("values ( community_comno_seq.nextval,?,?,?,sysdate,?)");
+		sb.append("values ( community_comno_seq.nextval,?,?,?,sysdate,0)");
 		// 등록날짜는 오늘날짜, 처음 조회수는 0, 처음 글 상태는 정상으로 1.
 
 
@@ -184,7 +184,6 @@ public class CommunityDAO {
 			pstmt.setString(1, vo.getClid());
 			pstmt.setString(2, vo.getComtitle());
 			pstmt.setString(3, vo.getComfield());
-			pstmt.setInt(4, vo.getHits());
 			
 			pstmt.executeUpdate();
 		} catch (SQLException e) {

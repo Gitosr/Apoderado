@@ -21,7 +21,7 @@
 	ArrayList<Integer> list = dao.selectResno(vo.getClid());
 	%>
 	<div class="container">
-		<form action="deleteOk.jsp">	
+		<form action="">	
 		<p>신청내역</p>
 		<select name="resno" id="resno" >
 				<option value="">----</option>
