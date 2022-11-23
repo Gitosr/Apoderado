@@ -9,11 +9,13 @@
 <head>
 <meta charset="UTF-8">
 
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+
 <title>Insert title here</title>
 <style>
-	table,tr,td{
-		border:1px solid black;
-	}
 	
 	ul li{
 		list-style-type:none; display:inline;
@@ -23,6 +25,24 @@
 	}
 	.page_bar * {
 		text-align: center;
+	}
+	th{
+	text-align:center;
+	}
+	#btn10{
+	width:25px;
+	height:25px;
+	}
+	a {
+	text-decoration: none;
+	color: black;
+	}
+	#list10{
+	float:right;
+	}
+	#con{
+	font-size:0.9rem;
+	padding-left:8%;
 	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -71,8 +91,8 @@
 	
 						data += "<tr>";
 						data += "<td>" + res[i].revno + "</td>";
-						data += "<td>" + res[i].clid + "</td>";
 						data += "<td><a href ='javascript:void(0);' onclick='toggleRow(this);' >" + res[i].revtitle + "</a></td>";
+						data += "<td>" + res[i].clid + "</td>";
 						data += "<td>" + res[i].revdate + "</td>";
 						data += "<td>" + res[i].scoreStar + "</td>";
 						data += "</tr>";
@@ -148,12 +168,12 @@
 </head>
 <body>
 	<div class="container">
-		<table>
-		<thead>
+		<table class="table">
+		<thead class="table">
 			<tr>
-				<th>게시물번호</th>
-				<th>시설명</th>
+				<th>번호</th>
 				<th>제목</th>
+				<th>ID</th>
 				<th>날짜</th>
 				<th>평점</th>				
 			</tr>
@@ -164,8 +184,9 @@
 			<tr>
 				<td  colspan="5">
 					<input type="text" name="search" id="search_data" placeholder="검색어"/>
-					<input type="button" value="검색" onclick="search_run();"/>
-					<input type="button" value="목록" onclick="reset();" />
+				
+					<button type="button" onclick="search_run();" style="border:none; background-color:transparent" onclick="search_run();" ><img id="btn10" src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-vert.png" alt=""></button>
+					<input type="button" id="list10" value="목록" onclick="reset();" class="btn btn-outline-success" />
 				</td>
 			</tr>
 		</tfoot>
