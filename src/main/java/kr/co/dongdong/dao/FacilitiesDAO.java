@@ -42,7 +42,9 @@ public class FacilitiesDAO {
 	public ArrayList<FacilitiesVO> selectAll(){
 		ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
 		sb.setLength(0);
-		sb.append("SELECT * FROM facilities ");
+		sb.append("SELECT FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+		sb.append("FROM facilities");
+		
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());

@@ -17,7 +17,7 @@
 		String[] faclocArray = request.getParameterValues("facloc");
 		for(String fa : faclocArray){
 			facloc = fa;
-			System.out.println(facloc);
+			//System.out.println("evntlist/"+facloc);
 		}
 		
 		
@@ -45,12 +45,12 @@
 		boolean heart = false;
 		if (obj != null) {
 			cvo = (ClientVO)obj;
-			System.out.println("obj존재");
-			System.out.println(cvo);
+			System.out.println("evntlist/obj존재");
+			System.out.println("evntlist/"+cvo);
 			
 		}else{
-			System.out.println("obj미존재");
-			System.out.println(cvo);
+			System.out.println("evntlist/obj미존재");
+			System.out.println("evntlist/"+cvo);
 			
 		}
 		
@@ -62,20 +62,20 @@
 		ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
 		if(facevent == -1 && facloc.equals("전체")){
 			list = dao.selectAll();
-			System.out.println("dao.selectAll()실행");
+			System.out.println("evntlist/dao.selectAll()실행");
 			
 		}else if(facevent != -1 && facloc.equals("전체") != true){
 			list = dao.elAll(facevent, faclocArray);
-			System.out.println("dao.elAll실행");
+			System.out.println("evntlist/dao.elAll실행");
 		}
 		else if(facevent == -1){
 			list = dao.locAll(faclocArray);
 				
-			System.out.println("dao.locAll실행");
+			System.out.println("evntlist/dao.locAll실행");
 		}else if(facloc.equals("전체")){
 			//facevent = Integer.parseInt(fevent);
 			list = dao.eventAll(facevent);
-			System.out.println("dao.eventAll실행");
+			System.out.println("evntlist/dao.eventAll실행");
 		}
 		
 		JSONArray jsonArray = new JSONArray();
