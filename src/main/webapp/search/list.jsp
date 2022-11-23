@@ -1,3 +1,4 @@
+<%@page import="kr.co.dongdong.dao.InterestsDAO"%>
 <%@page import="kr.co.dongdong.vo.ClientVO"%>
 <%@page import="kr.co.dongdong.vo.FacilitiesVO"%>
 <%@page import="kr.co.dongdong.dao.FacilitiesDAO"%>
@@ -378,24 +379,28 @@ li.mainmenu ul {
 
 					<div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
 						<%
+						InterestsDAO dao2 = new InterestsDAO();
+						ClientVO vo3 = new ClientVO();
+						vo3 = (ClientVO) obj;
+				System.out.println("vo3:"+vo3);
 						FacilitiesDAO dao = new FacilitiesDAO();
 						ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
 						if(facevent == -1 && facloc.equals("전체")){
 							list = dao.selectAll();
-							System.out.println("dao.selectAll()실행");
+							System.out.println("list/dao.selectAll()실행");
 							
 						}else if(facevent != -1 && facloc.equals("전체") != true){
 							list = dao.elAll(facevent, faclocArray);
-							System.out.println("dao.elAll실행");
+							System.out.println("list/dao.elAll실행");
 						}
 						else if(facevent == -1){
 							list = dao.locAll(faclocArray);
 								
-							System.out.println("dao.locAll실행");
+							System.out.println("list/dao.locAll실행");
 						}else if(facloc.equals("전체")){
 							//facevent = Integer.parseInt(fevent);
 							list = dao.eventAll(facevent);
-							System.out.println("dao.eventAll실행");
+							System.out.println("list/dao.eventAll실행");
 						}
 						for (FacilitiesVO vo : list) {
 						%>
@@ -414,9 +419,29 @@ li.mainmenu ul {
 									class="bi bi-arrow-right"></i></a>
 						
 						<div id = "inheart">
-								<jsp:include page="../mainPage/interestsCheck.jsp"> 
-								<jsp:param name="facno" value="<%=vo.getFacno() %>"></jsp:param>
-								</jsp:include>
+								
+								<%
+								
+								if (vo3 != null) { 
+							System.out.println("vo3:"+vo3);
+									String clid = vo3.getClid();
+									
+									int number = dao2.isExists(clid, vo.getFacno());
+									if (number == 1) {
+									%>
+										<img src="../images/heart.png" alt="" id="heart<%=vo.getFacno() %>" class="heart"/> 
+									<%	
+									} else {
+									%>
+										<img src="../images/empty-heart.png" alt="" id="heart<%=vo.getFacno() %>" class="heart"/>
+									<%
+									}
+									%>
+									<input type="hidden" name="clid" id="cvoclid" value="<%=vo3.getClid()%>" /> 
+									<input type="hidden" name="facno" id="facilityno" value="<%=vo.getFacno()%>" />
+									<%
+								}
+								%>
 						</div>
 							</div>
 									
@@ -425,6 +450,8 @@ li.mainmenu ul {
 						
 
 						}
+						dao.close();
+						dao2.close();
 						%>
 					</div>
 				</div>
