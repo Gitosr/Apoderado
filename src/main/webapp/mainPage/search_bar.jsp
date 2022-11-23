@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../css/search_bar.css" />
 <script type="text/javascript">
 $(function(){
 
@@ -49,7 +50,7 @@ $(function(){
 				placeholder="<%=vo.getClname()%>님, 오늘은 <%=sportname%> 어때요?"
 				onfocus="this.placeholder=''"
 					onblur="this.placeholder='<%=vo.getClname()%>님, 오늘은 <%=sportname%> 어때요?'" id="text1"/>
-			<input type="image" src="../images/search.png" alt="" class="search-btn" id="btn1"/>
+			<input type="image" src="../images/search_btn3.png" alt="" class="search-btn" id="btn1"/>
 		</form>
 	</div>
 	<%
@@ -60,7 +61,7 @@ $(function(){
 			<input type="text" class="search-text" name="keyword"
 				placeholder="종목, 지역으로 검색해보세요." onfocus="this.placeholder=''"
 				onblur="this.placeholder='종목, 지역으로 검색해보세요.'" id="text1" /> 
-			<input type="image" src="../images/search.png" alt="" class="search-btn" id="btn1"/>
+			<input type="image" src="../images/search_btn3.png" alt="" class="search-btn" id="btn1"/>
 		</form>
 	</div>
 	<%
