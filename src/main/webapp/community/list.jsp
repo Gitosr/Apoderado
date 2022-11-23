@@ -9,23 +9,29 @@
 <head>
 <meta charset="UTF-8">
 <style>
-table,tr,td{
-border : 1px solid black;
-}
-ul li{
-list-style-type:none; display:inline;
-}
-</style>
 
+#aligncenter{
+text-align:center;
+}
+#aligncenter2{
+text-align:center;
+}
+
+
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <title>Insert title here</title>
 
 </head>
 <body>
-		<% 
-		ClientVO vo2 = null;
+	<% 
+	ClientVO vo2 = null;
 	Object obj = session.getAttribute("vo");
+	
 	if(obj !=null){
-	vo2 = (ClientVO)obj;
+		vo2 = (ClientVO)obj;
 	}
 	
 	//현재 페이지 
@@ -91,14 +97,18 @@ list-style-type:none; display:inline;
 	%>
 
 	<div class="container">
-		<table>
+	<div class="row">
+    <div class="col-sm-8">
+		<table class="table table-hover">
+		<thead class="table-success">
 			<tr>
-				<th>게시물번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성시간</th>
-				<th>조회수</th>
+				<th width="7%">번호</th>
+				<th width="53%" id="aligncenter">제목</th>
+				<th width="10%">작성자</th>
+				<th width="20%" id="aligncenter2">작성일</th>
+				<th width="7%">조회수</th>
 			</tr>
+			</thead>
 			<%
 			//최근 작성한 게시물 10개만 가져오기
 			ArrayList<CommunityVO> list = dao.selectAll(startNo, endNo);
@@ -106,40 +116,47 @@ list-style-type:none; display:inline;
 			%>
 			<tr>
 				<td><%=vo.getComno()%></td>
-				<form action="detail.jsp?comno=<%=vo.getComno()%>">
-				<td><a href="detail.jsp?comno=<%=vo.getComno()%>" ><%=vo.getComtitle()%></a>
-				</td></form>
+				<td>
+				<a style="text-decoration:none; color:black" href="detail.jsp?comno=<%=vo.getComno()%>" ><%=vo.getComtitle()%></a></td>
 				<td><%=vo.getClid()%></td>
 				<td><%=vo.getComdate()%></td>
 				<td><%=vo.getHits()%></td>
 			</tr>
-
 
 			<%}%>
 			<tr>
 				<td colspan="5">
 					<!-- 부트스트랩 페이지네이션 -->
 					<nav aria-label="Page navigation example">
-						<ul>
+						<ul class="pagination justify-content-center">
 							<%if (isPre) {%>
-							<li><a>Previous</a></li>
+							<li class="page-item"><a class="page-link" style="color:rgba(25,135,84)">Previous</a></li>
 							<%}for (int i = startPage; i <= endPage; i++) {%>
-							<li><a href="list.jsp?cp=<%=i%>"><%=i%></a></li>
+							<li class="page-item"><a class="page-link"  style="color:rgba(25,135,84)" href="list.jsp?cp=<%=i%>"><%=i%></a></li>
 							<%}if (isNext) {%>
-							<li><a href="#">Next</a></li>
+							<li class="page-item"><a class="page-link" style="color:rgba(25,135,84)" href="#">Next</a></li>
 							<%}%>
 						</ul>
 					</nav>
 				</td>
 			</tr>
 			<tr>
+			<td></td>
+			<td align="center" colspan=3>
+			<form action="searchResult.jsp" method="get"><input type="text" name="search" id="" size="30%"/>
+			<button type="submit" style="border:none; background-color:transparent"><img width="25px" src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-vert.png" alt=""></button></form></td>
+			
+			<td align="right">
 			<% if(vo2!=null){ %>
-				<td colspan="5"><a href="write.jsp"><input type="button"
-						value="글쓰기" class="btn btn-primary" /></a>
-						<%} %>
+				<a href="write.jsp"><input type="button" value="글쓰기" class="btn btn-outline-success" /></a>
+			<%} %>
 				</td>
 			</tr>
 		</table>
+		
+		
+	</div>
+	</div>
 	</div>
 	
 	

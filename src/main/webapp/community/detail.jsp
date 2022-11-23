@@ -16,6 +16,26 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <style>
+.comsdate{
+font-size: 0.8rem;
+color : gray;
+}
+.comscon{
+font-size: 0.9rem;
+}
+.mini{
+font-size: 0.5rem;
+color : gray;
+width:40%;
+}
+img{
+width:60%;
+}
+.comtitle{
+font-size: 1.2rem;
+}
+
+.line{border-bottom:0.5px solid rgba(209,231,221);}
 
 </style>
 
@@ -43,26 +63,22 @@
 
 	%>
 	<div class="container">
+	<div class="row">
+    <div class="col-sm-8">
 	<table class="table">
+	<thead class="table-success">
 		<tr>
-			<th>작성자</th>
-			<td><%=vo.getClid()%></td>
-			<th>조회수</th>
-			<td><%=vo.getHits() %></td>
-			<th>작성일시</th>
-			<td><%=vo.getComdate() %></td>
+			<th width="60%" class='comtitle'><%= vo.getComtitle() %></th>
+			<td class='mini'>작성자 | <%=vo.getClid()%> |	조회수 | 
+			<%=vo.getHits()%> | 작성일시 | <%=vo.getComdate()%></td>
+		</tr>
+		</thead>
+		<tr>
+			<td colspan="2" class='comfield'><%=vo.getComfield() %></td>
 		</tr>
 		<tr>
-			<th>제목</th>
-			<td colspan="5"><%= vo.getComtitle() %></td>
-		</tr>
-		<tr>
-			<th>내용</th>
-			<td colspan="5"><%=vo.getComfield() %></td>
-		</tr>
-		<tr>
-			<td colspan="6">
-			<a href="list.jsp"><input type="button" value="목록"/></a>
+			<td></td><td align="right">
+			<a href="list.jsp"><button type="button" class="btn btn-outline-success">목록</button></a>
 			
 			<%
 			String clid2 ="";
@@ -72,32 +88,38 @@
 			String clid = vo.getClid();
 			if(clid2.equals(clid)){ %>
 			<a href="modify.jsp?comno=<%=vo.getComno()%>">
-			<input type="button" value="수정"/></a>
+			<button type="button" class="btn btn-outline-success">수정</button></a>
 			<a href="deleteOk.jsp?comno=<%=vo.getComno()%>">
-			<input type="button" value="삭제"/></a><%} %>
+			<button type="button" class="btn btn-outline-success">삭제</button></a><%} %>
 			</td>
 		</tr>
 	</table>
+	</div>
+	</div>
+	<br>
+	</div>
 	
-	<div id="div1">
+	
+	<div class="container">
+	<div class="row">
+    <div class="col-sm-8">
 		<table>
 			<thead>
+			<tr>
+					<th>댓글</th>
+					<th colspan=3></th>
+				</tr>
 			<%
 			if(obj!=null){ %>
 			<tr>
 				<form action="writecomOk.jsp" method="post" name="frm">
-					<td colspan=4><input type='text' name='txtComscontents' size = 80 id='txtComscomtents' /></td>
+					<td colspan="3"><input type='text' name='txtComscontents' size="100%" id='txtComscomtents' /></td>
 					 <input type="hidden" name="comno" value="<%=vo.getComno()%>" />
-					<td><input type='submit' value='댓글쓰기'/></td>
+					<td><input type='submit' value='등록' class="btn btn-outline-success"/></td>
 				</form>
 				</tr><%} %>
-				<tr>
-					<th>댓글번호</th>
-					<th>작성자</th>
-					<th>내용</th>
-					<th>작성일</th>
-					
-				</tr>
+				
+				
 			</thead>
 
 			<tbody id="dynamicTbody">
@@ -107,25 +129,29 @@
 			ArrayList<CommentsVO> list = dao2.selectOne(comno); 
 				for (CommentsVO x : list) { %>
 				<tr>
-					<td><%=x.getClistno()%></td>
-					<td><%=x.getClid()%></td>
-					<td><%=x.getComscontents()%></td>
-					<td><%=x.getComsdate()%></td>
-					
-					<td>
+					<td rowspan=3 width="10%"><img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77" alt="" /></td>
+					<th colspan=2><%=x.getClid()%></th>
+						<td rowspan=3 width="20%">
 					<% if(vo2!=null){
 					if(vo2.getClid().equalsIgnoreCase(x.getClid())){ %>
 					
 					<a href="deletecomOk.jsp?clistno=<%=x.getClistno()%>&comno=<%=comno%>">
-					<input type="button" value="삭제" /></a>
-					<%}}} %>
-					</td></tr>
+					<input type="button" value="삭제"  class="btn btn-outline-success"/></a><%}} %>
+					
+					</td>
+					
+					</tr>
+					<tr><td  colspan=2 class='comscon'><%=x.getComscontents()%></td></tr>
+					<tr class='line'><td  colspan=2class='comsdate'><%=x.getComsdate()%></td></tr>
+					<%} %>
+				
+					
 			</tbody>
-			<tfoot>
-			</tfoot>
 		</table>
 	</div>
 	</div>
+	</div>
+	
 	<%}%>
 
 </body>

@@ -23,6 +23,12 @@ $(function(){
 		});
 })
 </script>
+<style>
+div.col-sm-8{
+margin-top:10px;
+border-bottom:5px solid rgba(209,231,221);
+border-top:5px solid rgba(209,231,221);}
+</style>
 </head>
 <body>
 <%
@@ -35,9 +41,11 @@ if(no!=null){
 %>
 <form action="modifyOk.jsp" method="get">
 <div class="container">
-		<table class="table table-striped">
+<div class="row">
+    <div class="col-sm-8">
+		<table class="table">
 			<tr>
-				<th>작성자</th>
+				<th width="10%">작성자</th>
 				<td><input type="hidden" name="comno" value="<%=vo.getComno()%>" />
 				<!-- 게시물번호는 pk 값... 히든 으로 숨겨서 보내기. -->
 				<input type="text"  disabled="disabled" name="writer" id="" value="<%=vo.getClid()%>"/>
@@ -45,7 +53,7 @@ if(no!=null){
 			</tr>
 			<tr>
 				<th>제목</th>
-				<td><input type="text" name="title" id="" value="<%=vo.getComtitle() %>"/></td>
+				<td><input type="text" name="title" id="" value="<%=vo.getComtitle() %>" size=80%/></td>
 			</tr>
 			<tr>
 				<th>내용</th>
@@ -53,12 +61,14 @@ if(no!=null){
 				<textarea name="contents" id="summernote" cols="80" rows="20"><%=vo.getComfield()%></textarea></td>
 			</tr>
 			<tr>
-				<td colspan="2">
-				<a href="list.jsp"><input type="button" value="목록" class="btn btn-success"/></a>
-				<input type="submit" value="저장" class="btn btn-primary"/>
+				<td></td><td align="right">
+				<a href="list.jsp"><input type="button" value="목록" class="btn btn-outline-success" /></a>
+				<input type="submit" value="저장" class="btn btn-outline-success" />
 				</td>
 			</tr>
 		</table>
+	</div>
+	</div>
 	</div>
 	
 	

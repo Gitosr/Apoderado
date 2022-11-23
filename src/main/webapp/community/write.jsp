@@ -24,48 +24,58 @@ $(function(){
 	});
 })
 </script>
+<style>
+div.col-sm-8{
+margin-top:10px;
+border-bottom:2px solid rgba(209,231,221);
+border-top:2px solid rgba(209,231,221);}
+</style>
 
 </head>
 
 <body>
-
-<%Object obj = session.getAttribute("vo");
-ClientVO vo = null;
+	<%
+	Object obj = session.getAttribute("vo");
+	ClientVO vo = null;
 	if(obj !=null){
-		vo = (ClientVO)obj;%>
-	
-
-<div class="container">
-	<form action="writeOk.jsp" method="post">
-		<table class="table table-striped">
-			<tr>
-				<th>작성자</th>
-				<td>
-				<input type="text"  disabled="disabled" name="writer" id="" value="<%=vo.getClid()%>"/>
-				<input type="hidden" name="writer" id="" value="<%=vo.getClid()%>"/>
-				</td>
-			</tr>
-			<tr>
-				<th>제목</th>
-				<td><input type="text" name="title" id="" /></td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td>
-				<textarea name="contents" id="summernote" cols="80" rows="30"></textarea></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-				<a href="list.jsp"><input type="button" value="목록" class="btn btn-success"/></a>
-				<input type="submit" value="작성" class="btn btn-primary"/>
-				</td>
-			</tr>
-		</table>
-	
-	</form>
+		vo = (ClientVO)obj;
+	%>
+	<div class="container">
+	<div class="row">
+    <div class="col-sm-8">
+    <span>
+		<form action="writeOk.jsp" method="post">
+			<table class="table">
+				<tr>
+					<th width="10%">작성자</th>
+					<td>
+					<input type="text"  disabled="disabled" name="writer" id="" value="<%=vo.getClid()%>"/>
+					<input type="hidden" name="writer" id="" value="<%=vo.getClid()%>"/>
+					</td>
+				</tr>
+				<tr>
+					<th>제목</th>
+					<td><input type="text" name="title" id="" size="80%" /></td>
+				</tr>
+				<tr>
+					<th>내용</th>
+					<td>
+					<textarea name="contents" id="summernote" cols="80" rows="50"></textarea></td>
+				</tr>
+				<tr>
+					<td></td><td align="right">
+					<a href="list.jsp"><input type="button" value="목록" class="btn btn-outline-success" /></a>
+					<input type="submit" value="작성" class="btn btn-outline-success" />
+					</td>
+				</tr>
+			</table>
+		</form>
+		</span>
 	</div>
-	<% }
-		%>
-	
+	</div>
+	</div>
+	<% 
+	}
+	%>
 </body>
 </html>
