@@ -155,13 +155,13 @@ li.mainmenu ul {
 
 				
 		$("#eventul .item").click(function(){
-			console.log($("#headevent").text());
-			console.log($(this).val());
+			//console.log($("#headevent").text());
+			//console.log($(this).val());
 			$("#headevent").text($(this).text());
 		});
 		$(".locul .item").click(function(){
-			console.log($("#headloc").text());
-			console.log($(this).text());
+			/* console.log($("#headloc").text());
+			console.log($(this).text()); */
 			$("#headloc").text($(this).text());
 		});
 		
@@ -204,104 +204,139 @@ li.mainmenu ul {
 		})
 		
 		
-		
+		//$(".item").click(function()
 
-		$(".item").click(function() {
-							console.log($("#heventn").text);
+		$(document).on("click", ".item", function() {
+			console.log($("#heventn").text);
 
-							var esav = $("#esave").val();
-							var lsav = $("#lsave").val();
-							var activeTab = $(this).attr('data-tab');
-							var activeTab1 = $(this).attr('data-tab1');
-							var urlplus = "";
-							var urlplus1 = "";
+			var esav = $("#esave").val();
+			var lsav = $("#lsave").val();
+			var activeTab = $(this).attr('data-tab');
+			var activeTab1 = $(this).attr('data-tab1');
+			var dataPage = $(this).attr('data-page');
+			console.log(dataPage);
+			var urlplus = "";
+			var urlplus1 = "";
+			var urlpage = "";
+			if(dataPage == null){
+				urlpage = "1";
+			}else{
+				urlpage = dataPage;
+				
+			}
 							
-							if(activeTab == null){
-								urlplus += esav;
-							}else{
-								urlplus += activeTab
-							}
-							if(activeTab1 == null){
-								urlplus1 += lsav;
-							}else{
-								urlplus1 += activeTab1
-							}
-							var activeT = urlplus +"&"+ urlplus1;
-							/* console.log(esav);
-							console.log(lsav);*/
-							//console.log("urlplus : "+ urlplus);
-							//console.log("urlplus1 : "+ urlplus1); 
-							//console.log("eventlist.jsp?fevent=" + urlplus+"&facloc="+urlplus1);
+			if(activeTab == null){
+				urlplus += esav;
+			}else{
+				urlplus += activeTab
+			}
+			if(activeTab1 == null){
+			urlplus1 += lsav;
+			}else{
+				urlplus1 += activeTab1
+			}
+			var activeT = urlplus +"&"+ urlplus1;
+			/* console.log(esav);
+			console.log(lsav);*/
+			console.log("urlplus : "+ urlplus);
+			console.log("urlplus1 : "+ urlplus1); 
+			//console.log("eventlist.jsp?fevent=" + urlplus+"&facloc="+urlplus1);
 							
-							$.ajax({
-									type : 'GET', //get방식으로 통신
-									async : true,
-									url : "eventlist.jsp?fevent=" + urlplus+"&facloc="+urlplus1, //탭의 data-tab속성의 값으로 된 html파일로 통신
-									dataType : "json", //html형식으로 값 읽기
-									success : function(response, status,request) { //통신 성공시 탭 내용담는 div를 읽어들인 값으로 채운다.
-										//console.log(response);
-										//console.log(response[0].facevent);
-										//var facevent = urlplus;
-										if(response.empty == "empty"){
-											alert("정보가 없습니다.");
-										}else{
+			$.ajax({
+					type : 'GET', //get방식으로 통신
+					async : true,
+					url : "eventlist.jsp?fevent=" + urlplus+"&facloc="+urlplus1+"&cp="+urlpage, //탭의 data-tab속성의 값으로 된 html파일로 통신
+					dataType : "json", //html형식으로 값 읽기
+					success : function(response, status,request) { //통신 성공시 탭 내용담는 div를 읽어들인 값으로 채운다.
+						//console.log(response);
+						//console.log(response[0].facevent);
+						//var facevent = urlplus;
+						if(response.empty == "empty"){
+							alert("정보가 없습니다.");
+						}else{
 											
 										
-										var eventname = response[0].event; 
-										//var floc = response[0].floc;
-										var event = response;
+						var eventname = response[0].event; 
+						//var floc = response[0].floc;
+						var event = response;
 
-										var data = "";
+						var data = "";
 
-										data += "<h2>DongDong</h2>";
+						data += "<h2>DongDong</h2>";
 											
-										data += "<p>나랑 " + eventname
+						data += "<p>나랑 " + eventname
 													+ "가자~!</p>";
-										data += "<input type='hidden' name='save' id='esave' value = '"+urlplus +"' />";
-										data += "<input type='hidden' name='save' id='lsave' value = '"+urlplus1 +"' />";
-										data += "<div class='row gy-4' data-aos='fade-up' data-aos-delay='100'>";
+						data += "<input type='hidden' name='save' id='esave' value = '"+urlplus +"' />";
+						data += "<input type='hidden' name='save' id='lsave' value = '"+urlplus1 +"' />";
+						data += "<div class='row gy-4' data-aos='fade-up' data-aos-delay='100'>";
 											
-										event.forEach(function(el, index) {
-											//console.log(el.facno);
-											data += "<div class='col-lg-4 col-md-6'>";
-											data += "<div class='service-item  position-relative'>";
-											data += "<div id='imgdiv'><a href='detail.jsp?facno=" + el.facno + "'><img src="+el.facimg+" alt="+el.facname+"/></a></div>";
-											data += "<h3>"+ el.facname + "</h3>";
-											data += "<p class='font-monospace'>"+ el.facaddr + "</p>";
-											data += "<a href='detail.jsp?facno=" + el.facno + "' class='readmore'>detail more <i class='bi bi-arrow-right'></i></a>";
-											data += "<div id = 'inheart'>";
-											if(el.cvoclid != null){
-												if(el.heart == true){
-													data += "<img src='../images/heart.png' alt='' id='heart"+ el.facno +"' class='heart'/> ";
-												}else{
-													data += "<img src='../images/empty-heart.png' alt='' id='"+ el.facno +"' class='heart'/> ";
-												}
-											data += "<input type='hidden' name='clid' id='cvoclid' value = '"+el.cvoclid+"' />";
-											data += "<input type='hidden' name='facno' id='facilityno' value = '"+el.facno+"' />";
-											}
-											data += "</div>";
-											data += "</div>";
+						event.forEach(function(el, index) {
+							//console.log(el.facno);
+							data += "<div class='col-lg-4 col-md-6'>";
+							data += "<div class='service-item  position-relative'>";
+							data += "<div id='imgdiv'><a href='detail.jsp?facno=" + el.facno + "'><img src="+el.facimg+" alt="+el.facname+"/></a></div>";
+							data += "<h3>"+ el.facname + "</h3>";
+							data += "<p class='font-monospace'>"+ el.facaddr + "</p>";
+							data += "<a href='detail.jsp?facno=" + el.facno + "' class='readmore'>detail more <i class='bi bi-arrow-right'></i></a>";
+							data += "<div id = 'inheart'>";
+							if(el.cvoclid != null){
+								if(el.heart == true){
+									data += "<img src='../images/heart.png' alt='' id='heart"+ el.facno +"' class='heart'/> ";
+								}else{
+									data += "<img src='../images/empty-heart.png' alt='' id='"+ el.facno +"' class='heart'/> ";
+								}
+								data += "<input type='hidden' name='clid' id='cvoclid' value = '"+el.cvoclid+"' />";
+							data += "<input type='hidden' name='facno' id='facilityno' value = '"+el.facno+"' />";
+							}
+							data += "</div>";
+							data += "</div>";
 											
-											data += "</div>";
+							data += "</div>";
 											
 									
 									
-										});
-											data += "</div>";
+						});
+							data += "</div>";
+							
+							
+							data += "<table class='table table-striped'>";
+							data += "<tr>";
+							data += "<td colspan='4'>";
+							data += "<nav aria-label='Page navigation example'>";
+							data += "<ul class='pagination justify-content-center'>";
+							if(response[0].isPre){
+								data += "<li class='page-item disabled'><a class='page-link'>Previous</a></li>";
+								
+							}
+							for(var i = response[0].startPage; i<= response[0].endPage; i++){
+								data += "<li class='page-item'><span class='page-link'><a class='item' href='#' data-page='" +i +"' >"+ i +"</a></span></li>";
+							}
+							if(response[0].isNext){
+								data += "<li class='page-item'><a class='page-link' href='#'>Next</a></li>";
+							}
+							data += "</ul>";
+							data += "</nav>";
+							data += "</td>";
+							data += "</tr>";
+							data += "</div>";
+							data += "</div>";
+							data += "</table>";
+							
+							
 											
-										$("#dbody").empty();
-										$("#dbody").append(data);}
-										},
-										error : function(request, status, error) {
-											alert("code:" + request.status
-													+ "\n" + "\n" + "error:"
-													+ error);
-										}
-									});
+						$("#dbody").empty();
+						$("#dbody").append(data);}
+						},
+						error : function(request, status, error) {
+							alert("code:" + request.status
+									+ "\n" + "\n" + "error:"
+									+ error);
+						}
+					});
 							
 
-						})
-			});
+		})
+});
 
 </script>
 </head>
@@ -379,14 +414,97 @@ li.mainmenu ul {
 
 					<div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
 						<%
+						
+						
+						//-------------------------------------------------
+						
 						InterestsDAO dao2 = new InterestsDAO();
+						
 						ClientVO vo3 = new ClientVO();
 						vo3 = (ClientVO) obj;
-				System.out.println("vo3:"+vo3);
+						
 						FacilitiesDAO dao = new FacilitiesDAO();
+						//-------------------------------------------------
+						// 수정 내용
+						
+						// 현재 페이지
+						String cp = request.getParameter("cp");
+						int currentPage = 0;
+						
+						if( cp != null){
+							currentPage = Integer.parseInt(cp);
+						}else{
+							currentPage = 1;
+						}
+						// 1페이지당 게시물 수
+						int recoredPerPage = 9;
+						// 시작 번호와 끝번호를 계산
+						// 현재페이지가 1이면
+						// 시작번호 : 1부터 끝번호 : 10
+						
+						// 현재페이지가 2이면
+						// 시작번호 11부터 끝번호 : 20
+						
+						int startNo = (currentPage - 1) * recoredPerPage + 1;
+						int endNo = currentPage * recoredPerPage;
+						
+						
+						// 총 게시물 수
+						int totalCount = dao.getTotal();
+						
+						// 총페이지 수
+						int totalPage = (totalCount % recoredPerPage == 0)?totalCount/recoredPerPage : totalCount/recoredPerPage +1;
+						System.out.println(totalPage);
+						// 시작 페이지
+						int startPage = 1;
+						// 끝페이지
+						int endPage = totalPage;
+						
+						// 시작페이지 미세조정
+						if(currentPage <= 5){
+							startPage = 1;
+						}else if(currentPage >= 6){
+							startPage = currentPage -4;
+						}
+						
+						// 끝 페이지 미세 조정
+						if(totalPage - currentPage <= 5){
+							endPage = totalPage;
+						}else if(totalPage - currentPage > 5){
+							if(currentPage <= 5){
+								if(totalPage > 10){
+									endPage = 10;
+								}else{
+									endPage = totalPage;
+								}
+							}else{
+								endPage = currentPage+4;
+							}
+						}
+						
+						boolean isPre = false;
+						boolean isNext = false;
+						
+						// 이전값이 존재하면 true;
+						// 다음값이 존재하면 true;
+						
+						// 현재페이지 번호에서 5를 뺸값이 0이상이면 이전값이 존재
+						if(currentPage - 5 > 0){
+							isPre = true;
+						}
+						
+						// 현재페이지번호에서 5를 더한값이 끝페이지번호보다 작으면 다음값이 존재
+						if(currentPage+5 <= totalPage){
+							isNext = true;
+						}
+						
+						
+						// -----------------------------------------------------
+						
+						
 						ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
 						if(facevent == -1 && facloc.equals("전체")){
-							list = dao.selectAll();
+							list = dao.selectAll(startNo,endNo);
 							System.out.println("list/dao.selectAll()실행");
 							
 						}else if(facevent != -1 && facloc.equals("전체") != true){
@@ -423,7 +541,7 @@ li.mainmenu ul {
 								<%
 								
 								if (vo3 != null) { 
-							System.out.println("vo3:"+vo3);
+							
 									String clid = vo3.getClid();
 									
 									int number = dao2.isExists(clid, vo.getFacno());
@@ -454,7 +572,44 @@ li.mainmenu ul {
 						dao2.close();
 						%>
 					</div>
-				</div>
+					<table class="table table-striped">
+					<tr>
+						<td colspan="4">
+						
+						<nav aria-label="Page navigation example">
+							  <ul class="pagination justify-content-center">
+							  	<%
+							  		if(isPre){
+							  	%>
+							    <li class="page-item disabled"><a class="page-link">Previous</a></li>
+							    <%
+							  		}
+							    %>
+							    <%
+									System.out.println("startPage"+startPage);
+									System.out.println("endPage"+endPage);
+								for(int i = startPage; i<= endPage; i++){
+								%>
+							    <li class="page-item"><span class="page-link"><a class="item" href="#" data-page="<%= i %>" ><%= i %></a></span></li>
+							    <%-- href="list2.jsp?cp=<%= i %> --%>
+							    <%
+									}
+								%>
+								<%
+							  		if(isNext){
+							  	%>
+							    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+							    <%
+							  		}
+							    %>
+							  </ul>
+							</nav>
+						
+						
+						</td>
+					</tr>
+					</table>
+				</div> <!-- id = 'dbody' end -->
 			</div>
 	</section>
 				
