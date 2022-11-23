@@ -141,7 +141,6 @@
 	
 	function toggleRow(obj) {
 		$(obj).parent('td').parent('tr').next('tr').toggle();
-		$(obj).parent('td').parent('tr').next('tr').next('tr').toggle(); 
 	}
 	function reset() {
 		type = 0;
