@@ -128,10 +128,18 @@ li.mainmenu ul {
 .section-header p {
 	margin-bottom: 50px;
 }
+
+/* 수정함 */
+#inheart img{
+	/* float:left;
+	margin-bottom : 10px; */
+	width : 30px;
+	height : 30px;
+}
 </style>
 <script>
 	$(function() {
-		$("#dongdong").click
+		
 		
 		$("li.mainmenu ul").hide();
 
@@ -144,12 +152,6 @@ li.mainmenu ul {
 			$("ul", this).stop().slideUp(500);
 		})
 
-		$("#emenu").click(
-				function() {
-					$(".ui.sidebar")
-							.sidebar('setting', 'transition', 'overlay')
-							.sidebar("toggle");
-				})
 				
 		$("#eventul .item").click(function(){
 			console.log($("#headevent").text());
@@ -161,6 +163,47 @@ li.mainmenu ul {
 			console.log($(this).text());
 			$("#headloc").text($(this).text());
 		});
+		
+		/* $("#inheart .heart").on("click" , function(){
+			console.log("test");
+		}) */
+		
+		$(document).on("click", "#inheart .heart", function() {
+			console.log($(this).attr("src"));
+			var images = $(this);
+			console.log(images);
+			console.log($(this).attr("id"));
+			
+			var clid = $("#cvoclid").val();
+			var facno = $(this).attr("id");
+			
+			$.ajax({
+				url : "../mainPage/interestsOk.jsp",
+				type : "GET",
+				data : {
+					"clid" : clid,
+					"facno" : facno
+				},
+				success : function(data) {
+					//console.log(data+"상태");
+					var result = data;
+					if (result == 0) { // 데이터가 없는 경우
+						
+						images.attr("src", "../images/heart.png"); // 하트 채우기
+					} else {
+						
+						images.attr("src", "../images/empty-heart.png"); // 하트 비우기
+					}
+				},
+				error : function(data) {
+					alert("에러 발생");
+				}
+			});	
+				  
+		})
+		
+		
+		
 
 		$(".item").click(function() {
 							console.log($("#heventn").text);
@@ -185,9 +228,9 @@ li.mainmenu ul {
 							var activeT = urlplus +"&"+ urlplus1;
 							/* console.log(esav);
 							console.log(lsav);*/
-							console.log("urlplus : "+ urlplus);
-							console.log("urlplus1 : "+ urlplus1); 
-							console.log("eventlist.jsp?fevent=" + urlplus+"&facloc="+urlplus1);
+							//console.log("urlplus : "+ urlplus);
+							//console.log("urlplus1 : "+ urlplus1); 
+							//console.log("eventlist.jsp?fevent=" + urlplus+"&facloc="+urlplus1);
 							
 							$.ajax({
 									type : 'GET', //get방식으로 통신
@@ -218,14 +261,30 @@ li.mainmenu ul {
 										data += "<div class='row gy-4' data-aos='fade-up' data-aos-delay='100'>";
 											
 										event.forEach(function(el, index) {
+											//console.log(el.facno);
 											data += "<div class='col-lg-4 col-md-6'>";
 											data += "<div class='service-item  position-relative'>";
-											data += "<div id='imgdiv'><img src="+el.facimg+" alt="+el.facname+"/></div>";
+											data += "<div id='imgdiv'><a href='detail.jsp?facno=" + el.facno + "'><img src="+el.facimg+" alt="+el.facname+"/></a></div>";
 											data += "<h3>"+ el.facname + "</h3>";
 											data += "<p class='font-monospace'>"+ el.facaddr + "</p>";
-											data += "<a href='detail.jsp?facno=" + el.facno + "' class='readmore stretched-link'>detail more <i class='bi bi-arrow-right'></i></a>";
+											data += "<a href='detail.jsp?facno=" + el.facno + "' class='readmore'>detail more <i class='bi bi-arrow-right'></i></a>";
+											data += "<div id = 'inheart'>";
+											if(el.cvoclid != null){
+												if(el.heart == true){
+													data += "<img src='../images/heart.png' alt='' id='heart"+ el.facno +"' class='heart'/> ";
+												}else{
+													data += "<img src='../images/empty-heart.png' alt='' id='"+ el.facno +"' class='heart'/> ";
+												}
+											data += "<input type='hidden' name='clid' id='cvoclid' value = '"+el.cvoclid+"' />";
+											data += "<input type='hidden' name='facno' id='facilityno' value = '"+el.facno+"' />";
+											}
 											data += "</div>";
 											data += "</div>";
+											
+											data += "</div>";
+											
+									
+									
 										});
 											data += "</div>";
 											
@@ -238,12 +297,9 @@ li.mainmenu ul {
 													+ error);
 										}
 									});
+							
 
 						})
-		
-		
-						
-		
 			});
 
 </script>
@@ -253,6 +309,7 @@ li.mainmenu ul {
 	<%
 		int nCurrentPage = 1;
 		session.setAttribute("nCurrentPage", nCurrentPage);
+		Object obj = session.getAttribute("vo");
 	%>
 	<!-- 수정된 내용 -->
 	<header id="header" class="header d-flex align-items-center">
@@ -285,7 +342,7 @@ li.mainmenu ul {
 							if(cnt<faclocArray.length) {
 								facloc += "&facloc=";
 							}
-							System.out.println(facloc);
+							//System.out.println(facloc);
 						}
 					}
 					else if(faceve != null){
@@ -301,7 +358,7 @@ li.mainmenu ul {
 							if(cnt<faclocArray.length) {
 								facloc += "&facloc=";
 							}
-							System.out.println(facloc);
+							//System.out.println(facloc);
 						} 
 					}
 
@@ -310,12 +367,11 @@ li.mainmenu ul {
 						System.out.println("facloc" + facloc); */
 					%>
 
-					<h2>DongDong</h2>
-					<p>
+					<%-- <p>
 						나랑
 						<%=event%>
 						가자~!
-					</p>
+					</p> --%>
 					<input type="hidden" name="save" id="esave" value="<%=facevent%>" />
 					<input type="hidden" name="save" id="lsave" value="<%=facloc%>" />
 
@@ -346,25 +402,35 @@ li.mainmenu ul {
 						<div class="col-lg-4 col-md-6">
 							<div class="service-item  position-relative">
 								<div id="imgdiv">
+								<a href="../apoderado/detailFacilities.jsp?facno=<%=vo.getFacno()%>">
 									<img src="<%=vo.getFacimg()%>" alt="<%=vo.getFacname()%>" />
+								</a>
 								</div>
 								<h3><%=vo.getFacname()%></h3>
 								<p class="font-monospace"><%=vo.getFacaddr()%></p>
-								<a href="detail.jsp?facno=<%=vo.getFacno()%>"
-									class="readmore stretched-link">detail more <i
+								
+								<a href="../apoderado/detailFacilities.jsp?facno=<%=vo.getFacno()%>"
+									class="readmore ">detail more <i
 									class="bi bi-arrow-right"></i></a>
+						
+						<div id = "inheart">
+								<jsp:include page="../mainPage/interestsCheck.jsp"> 
+								<jsp:param name="facno" value="<%=vo.getFacno() %>"></jsp:param>
+								</jsp:include>
+						</div>
 							</div>
+									
 						</div>
 						<%
 						
 
 						}
 						%>
-
 					</div>
 				</div>
 			</div>
 	</section>
+				
 
 </body>
 </html>

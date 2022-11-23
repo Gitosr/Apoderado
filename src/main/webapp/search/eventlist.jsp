@@ -1,3 +1,5 @@
+<%@page import="kr.co.dongdong.vo.ClientVO"%>
+<%@page import="kr.co.dongdong.dao.InterestsDAO"%>
 <%@page import="kr.co.dongdong.vo.FacilitiesVO"%>
 <%@page import="kr.co.dongdong.dao.FacilitiesDAO"%>
 <%@page import="test.Event"%>
@@ -8,39 +10,54 @@
     pageEncoding="UTF-8"%>
 
 	<%
-		
 		String fevent = request.getParameter("fevent");
+		int facevent = Integer.parseInt(fevent);
 		
-		//String facloc = request.getParameter("facloc");
 		String facloc = "";
-		//int cnt = 0;
-		//String floc = "<";
 		String[] faclocArray = request.getParameterValues("facloc");
 		for(String fa : faclocArray){
 			facloc = fa;
-			/* floc += fa;
-			cnt ++;
-			if(cnt<faclocArray.length) {
-				floc += ",";
-			}else{
-				floc += ">";
-			} */
 			System.out.println(facloc);
-			//System.out.println(floc);
-		} 
+		}
 		
-		int facevent = Integer.parseInt(fevent);
-		/* 
-		System.out.println("1.fevent :"+fevent);
-		System.out.println("2.facloc :"+facloc);
-		if(facloc == "전체"){
-			System.out.println("제발제발제발");
-		} */
 		
-		//facevent = -1;
+	
+		
+		
+		
+		
+		
+		
+		
+		
+	
+	
+		//----------------------------------------------------------------
+		Object obj = session.getAttribute("vo");
 		
 		
 		FacilitiesDAO dao = new FacilitiesDAO();
+		ClientVO cvo = new ClientVO();
+		 // 찜 확인
+			InterestsDAO dao2 = new InterestsDAO();
+		 
+		int num = 0;
+		boolean heart = false;
+		if (obj != null) {
+			cvo = (ClientVO)obj;
+			System.out.println("obj존재");
+			System.out.println(cvo);
+			
+		}else{
+			System.out.println("obj미존재");
+			System.out.println(cvo);
+			
+		}
+		
+		
+			
+			
+			
 		
 		ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
 		if(facevent == -1 && facloc.equals("전체")){
@@ -60,25 +77,26 @@
 			list = dao.eventAll(facevent);
 			System.out.println("dao.eventAll실행");
 		}
-		/* else{
-			//facevent = Integer.parseInt(fevent);
-			list = dao.elAll(facevent, faclocArray);
-			System.out.println("dao.elAll실행");
-		} */
 		
 		JSONArray jsonArray = new JSONArray();
 		
 		Event e = new Event();
-
 		String event = e.selectEvent(facevent);
+		
 		if(list.isEmpty()){
 			JSONObject jsonobject = new JSONObject();
 			jsonobject.put("empty", "empty");
 			out.println(jsonobject);
 		}else{
-		//System.out.println(list);
 		for(FacilitiesVO vo : list){
+			num = dao2.isExists(cvo.getClid() ,vo.getFacno());
+			if(num == 1){
+				heart = true;
+			}else{
+				heart = false;
+			}
 			JSONObject jsonobject = new JSONObject();
+			
 			
 			jsonobject.put("facno", vo.getFacno());
 			//jsonobject.put("floc", floc);
@@ -94,7 +112,8 @@
 			jsonobject.put("factype", vo.getFactype());
 			jsonobject.put("facregister", vo.getFacregister());
 			jsonobject.put("clid", vo.getClid());
-			
+			jsonobject.put("heart",heart);
+			jsonobject.put("cvoclid",cvo.getClid());
 			jsonArray.add(jsonobject);
 			
 		}

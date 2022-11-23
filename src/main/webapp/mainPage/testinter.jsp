@@ -23,13 +23,12 @@ String param = request.getParameter("facno");
 
 int facno = Integer.parseInt(param);
 %>
-
-	$(function() { 
+	$(function() {
 		$("#heart<%=facno %>").on("click", function() {
 			var clid = $("#clid").val();
 			var facno =  $("#facno<%=facno %>").val();
-			
-			//console.log(facno+"hidden");
+			console.log(<%=facno %>+"facno");
+			console.log(facno+"hidden");
 			
 			$.ajax({
 				url : "../mainPage/interestsOk.jsp",
@@ -39,7 +38,7 @@ int facno = Integer.parseInt(param);
 					"facno" : facno
 				},
 				success : function(data) {
-					//console.log(data+"상태");
+					console.log(data+"상태");
 					var result = data;
 					if (result == 0) { // 데이터가 없는 경우
 						$("#heart<%=facno %>").attr("src", "../images/heart.png"); // 하트 채우기
@@ -55,7 +54,6 @@ int facno = Integer.parseInt(param);
 	})
 </script>
 </head>
-<body>
 	<%
 	request.setCharacterEncoding("UTF-8");
 	param = request.getParameter("facno");
@@ -90,9 +88,7 @@ int facno = Integer.parseInt(param);
 				<input type="hidden" name="facno" id="facno<%=vo.getFacno() %>" value="<%=vo.getFacno()%>" />
 			<%
 		}
-		//System.out.println("클릭");
+		System.out.println("클릭");
 		
 	}
 	%>
-</body>
-</html>
