@@ -1,43 +1,44 @@
 @charset "UTF-8";
 
-.footer{
+.footer1 {
 	background: #f6f6f6;
 	height: 230px;
 }
-.footer-box {
+.footer1-box {
 	width: 1080px;
 	height: 150px;
 	margin: 10px auto;
 }
 
-.footer-info {
+.footer1-info {
 	width: 700px;
 	height: 150px;
+	margin-top: 50px;
 	color: grey;
 	font-weight: lighter;
 	color: grey;
 	display: inline-block;
 }
 
-.footer-info a {
+.footer1-info a {
 	color: grey;
 }
 
-.footer-logo {
+.footer1-logo {
 	width: 200px;
 	height: 50px;
 	position: relative;
-	left: 100px;
+	left: 120px;
 	bottom: 80px;
 	display: inline-block;
 }
 
-.footer-logo h1 {
+.footer1-logo h1 {
 	font-family: "Montserrat";
 	font-weight: bold;
 	font-size: 30px;
 	color: black;
 }
-.footer-logo > h1 > span {
+.footer1-logo > h1 > span {
 	color: #f96f59;
 }
