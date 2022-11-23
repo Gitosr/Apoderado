@@ -149,7 +149,7 @@
 		$("img.sport").click(function() {
 			var value = $(this).attr("name");
 			console.log(value);
-			location.href = "facList.jsp?event=" + value;
+			location.href = "../search/list.jsp?event=" + value; // 파라미터 전달 페이지 링크 수정
 		});
 		
 		<!-- 11/18 16:00 수정-->
@@ -157,7 +157,7 @@
 		$("img.region").click(function() {
 			var value = $(this).attr("name");
 			console.log(value);
-			location.href = "facList.jsp?region=" + value;
+			location.href = "../search/list.jsp?region=" + value;
 		});
 	});	
 </script>

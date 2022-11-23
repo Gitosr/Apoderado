@@ -14,8 +14,8 @@ import kr.co.dongdong.vo.RefundVO;
 public class RefundDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-	String user = "apoderado";
-	String password = "tiger";
+	String user = "admin";
+	String password = "oracletiger";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -97,7 +97,7 @@ public class RefundDAO {
 		sb.append("select resdate ");
 		sb.append("from reserve ");
 		sb.append("where resno = ?");
-
+		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 		Date resdate = null;
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -107,25 +107,44 @@ public class RefundDAO {
 			rs.next();
 			resdate = rs.getDate("resdate");
 			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return resdate;
 	}
+	//예약번호로 이용회차 가져오기
+		public int selectRestime(int resno) {
+			sb.setLength(0);
+			sb.append("select restime ");
+			sb.append("from reserve ");
+			sb.append("where resno = ?");
+			int restime = -1;
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setInt(1, resno);
+				rs = pstmt.executeQuery();
+
+				rs.next();
+				restime = rs.getInt("restime");
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return restime;
+		}
 			
 	//예약번호에서 시설번호->시설명 끌어오기
 	public String selectNameTime(int resno) {
 
 		sb.setLength(0);
-		sb.append("select r.resdate, f.facname, r.restime ");
+		sb.append("select f.facname ");
 		sb.append("from reserve r join facilities f ");
 		sb.append("using(facno) where r.resno=?");
 		
 		String facname = "";
-		String resdate = "";
-		String result ="";
-		int restime =-1;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일"); 
+		 
 
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -133,15 +152,37 @@ public class RefundDAO {
 			rs = pstmt.executeQuery();
 
 			rs.next();
-			resdate = sdf.format(rs.getDate("resdate"));
 			facname = rs.getString("facname");
-			restime = rs.getInt("restime");
-			result = resdate + " " + facname + " 이용회차 : " + restime;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return result;
+		return facname;
+	}
+	
+	//예약번호에서 시설번호->가격 끌어오기
+	public int selectPrice(int resno) {
+
+		sb.setLength(0);
+		sb.append("select f.facprice ");
+		sb.append("from reserve r join facilities f ");
+		sb.append("using(facno) where r.resno=?");
+		
+		int facprice = -1;
+		 
+
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, resno);
+			rs = pstmt.executeQuery();
+
+			rs.next();
+			facprice = rs.getInt("facprice");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return facprice;
 	}
 			
 	// 예약테이블 상태 취소로 변경

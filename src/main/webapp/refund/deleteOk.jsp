@@ -11,9 +11,15 @@
 String refreason="";
 String no = request.getParameter("resno");
 refreason = request.getParameter("refreason");
+System.out.println(no);
+System.out.println(refreason);
 
 RefundVO vo = new RefundVO();
 	RefundDAO dao = new RefundDAO();
+if(no==null){
+	out.println("<script>alert('환불내역을 선택해주세요.'); location.href='refRequest.jsp'</script>");
+    out.flush();
+}
 
 if(no!=null){
 	int resno = Integer.parseInt(no); 
@@ -23,8 +29,8 @@ if(no!=null){
 	dao.insertOne(vo); //환불게시판에 추가
 	dao.deleteOne(resno); //예약게시판 상태변경
 	
-	response.sendRedirect("refRequest.jsp");
+	out.println("<script>alert('환불신청이 접수되었습니다.'); location.href='refRequest.jsp'</script>");
+    out.flush();
 
 }
 %>
-    
