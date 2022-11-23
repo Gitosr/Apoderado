@@ -9,10 +9,48 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<!-- --------header  -------- -->
+<link rel="stylesheet" href="../css/main.css" />
+
+<!-- 수정된 부분 -->
+<link href="../Resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/bootstrap-icons/bootstrap-icons.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/aos/aos.css" rel="stylesheet">
+<link href="../Resources/vendor/glightbox/css/glightbox.min.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/swiper/swiper-bundle.min.css"
+	rel="stylesheet">
+<!-- Template Main CSS File -->
+<link href="../Resources/css/main.css" rel="stylesheet">
+<!-- Vendor JS Files -->
+<script src="../Resources/js/bootstrap.bundle.js"></script>
+<script src="../Resources/vendor/aos/aos.js"></script>
+<script src="../Resources/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="../Resources/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="../Resources/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="../Resources/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="../Resources/vendor/php-email-form/validate.js"></script>
+<link rel="stylesheet" href="../css/main.css" />
+<!-- ------------------------------------------- -->
+
+
 <style>
 
 #aligncenter{
 text-align:center;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+div.margind{
+width:65%;
+margin:30px;
+margin-left:auto;
+margin-right:auto;
 }
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -22,6 +60,9 @@ text-align:center;
 
 </head>
 <body>
+<header id="header" class="header d-flex align-items-center">
+		<jsp:include page="../mainPage/header.jsp" />
+	</header>
 	<% 
 	ClientVO vo2 = null;
 	Object obj = session.getAttribute("vo");
@@ -92,9 +133,7 @@ text-align:center;
 	}
 	%>
 
-	<div class="container">
-	<div class="row">
-    <div class="col-sm-8">
+	<div class="margind">
 		<table class="table table-hover">
 		<thead class="table-success">
 			<tr>
@@ -146,9 +185,7 @@ text-align:center;
 			</tr>
 		</table>
 		
-		
-	</div>
-	</div>
+
 	</div>
 	
 	
