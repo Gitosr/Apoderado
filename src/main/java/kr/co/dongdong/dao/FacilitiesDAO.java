@@ -111,12 +111,23 @@ public class FacilitiesDAO {
 		return list;
 	}
 	//지역분류로 전체조회
-	public ArrayList<FacilitiesVO> locAll(String facloc){
+	public ArrayList<FacilitiesVO> locAll(String[] faclocArray){
 		ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
+		int cnt = 0;
 		sb.setLength(0);
 		sb.append("select * from facilities ");
-		sb.append("where facaddr like '%"+facloc+"%'");
-
+		sb.append("where ( ");
+		for(String facloc : faclocArray) {
+			cnt ++;
+			sb.append("facaddr like '%"+facloc+"%' ");
+			if(cnt<faclocArray.length) {
+				sb.append("or ");
+			}
+			System.out.println(sb);
+			System.out.println(faclocArray.length);
+			System.out.println(cnt);
+		}
+		sb.append(")");
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -149,12 +160,21 @@ public class FacilitiesDAO {
 	}
 	
 	//지역,종목으로 전체조회
-	public ArrayList<FacilitiesVO> elAll(int facevent, String facloc){
+	public ArrayList<FacilitiesVO> elAll(int facevent, String[] faclocArray){
 		ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
+		int cnt = 0;
 		sb.setLength(0);
 		sb.append("select * from facilities ");
-		sb.append("where facaddr like '%"+facloc+"%' ");
-		sb.append("AND facevent = ?");
+		sb.append("where facevent = ? ");
+		sb.append("AND ( ");
+		for(String facloc : faclocArray) {
+			cnt ++;
+			sb.append("facaddr like '%"+facloc+"%' ");
+			if(cnt<faclocArray.length) {
+				sb.append("or ");
+			}
+		}
+		sb.append(")");
 		
 		
 		try {
@@ -186,6 +206,7 @@ public class FacilitiesDAO {
 		}
 		return list;
 	}
+	
 	
 		
 	// 1건 조회
@@ -329,7 +350,42 @@ public class FacilitiesDAO {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	// 검색 결과 조회
+	public ArrayList<Integer> selectKeywordArr(String[] keyword){
+		ArrayList<Integer> list = new ArrayList<Integer>();
 		
+		sb.setLength(0);
+		
+		for(int i=0; i < keyword.length; i++) {
+			sb.append("SELECT facno ");
+			sb.append("FROM FACILITIES ");
+			sb.append("WHERE FACNAME LIKE '%" + keyword[i] + "%' ");
+			sb.append("OR FACADDR LIKE '%" + keyword[i] + "%' ");	
+			
+			if(i < keyword.length-1) {
+				sb.append("union ");
+				
+			}
+		}
+
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				int facno = rs.getInt("facno");
+				System.out.println(facno);
+				
+				Integer vo = new Integer(facno);
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 	// 한 주간 예약횟수 상위 시설 출력 == 여기까지
