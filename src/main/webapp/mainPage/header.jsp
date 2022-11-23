@@ -23,7 +23,7 @@
 						
 				
           %>
-          <li><a href="../search/list.jsp">종목/지역별로 찾아보기!</a></li>
+          <li><a href="../search/list.jsp">종목/위치별로 찾아보기!</a></li>
           <%
 					}
 					else if(nCurrentPage == 1){
@@ -43,7 +43,7 @@
               <li><a data-tab="7" class="item" href="#"> 탁구장 </a></li>
             </ul>
           </li>
-          <li class="dropdown"><a data-tab1="전체" class="item" href="#"><span id="headloc">위치</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a data-tab1="전체" class="item" href="#"><span id="headloc">지역</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul class ="locul">
                 <li><a data-tab1="전체" class="item" href="#">전체</a></li>
               <li class="dropdown"><a href="#"><span>강남</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
