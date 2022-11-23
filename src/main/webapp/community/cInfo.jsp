@@ -16,7 +16,7 @@ CommentsDAO dao = new CommentsDAO();
 ArrayList<CommentsVO> list = dao.selectOne(comno);
 
 
-JSONArray jsonArray= new JSONArray();
+JSONArray jsonArray = new JSONArray();
 
 //반복문 사용해서 화면에 h3태그로 요소의 값 출력
 for (CommentsVO vo : list) {
