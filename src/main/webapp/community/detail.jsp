@@ -54,6 +54,7 @@ font-size: 0.9rem;
 font-size: 0.5rem;
 color : gray;
 width:40%;
+text-align:right;
 }
 
 .comtitle{
