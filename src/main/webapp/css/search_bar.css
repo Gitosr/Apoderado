@@ -1,0 +1,22 @@
+.search-box {
+	width: 500px;
+	margin: 40px auto;
+	padding: 5px;
+	border-bottom: 4px solid #aaaaaa;
+}
+
+.search-text {
+	margin-left: 15px;
+	text-align: center;
+	width: 400px;
+	height: 30px;
+	border: none;
+	outline: none;
+	font-size: 17px;
+}
+
+.search-btn {
+	width: 30px;
+	height: 30px;
+	margin-top: 5px;
+}

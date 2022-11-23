@@ -20,8 +20,31 @@ a {
 
 .main {
 	width: 1080px;
-	height: 2000px;
+	height: 2100px;
 	margin: 10px auto;
+}
+
+.search-box {
+	width: 500px;
+	margin: 40px auto;
+	padding: 5px;
+	border-bottom: 4px solid #aaaaaa;
+}
+
+.search-text {
+	margin-left: 15px;
+	text-align: center;
+	width: 400px;
+	height: 30px;
+	border: none;
+	outline: none;
+	font-size: 17px;
+}
+
+.search-btn {
+	width: 30px;
+	height: 30px;
+	margin-top: 5px;
 }
 
 .weather {
@@ -35,7 +58,8 @@ a {
 	height: 50px;
 	padding: 10px;
 	text-align: center;
-	background: #9FD0CB;
+	background: #f6f6f6;
+	border: #cccccc;
 	border-radius: 20px;
 }
 
@@ -61,7 +85,7 @@ a {
 .main1 {
 	width: 1080px;
 	height: 400px;
-	margin-top: 100px;
+	margin-top: 50px;
 }
 
 .main2, .main3 {
@@ -71,11 +95,13 @@ a {
 }
 
 .main4, .main5 {
-	width: 500px;
+	width: 520px;
 	height: 350px;
-	margin: 80px 20px;
-	padding: 10px;
+	margin: 80px 10px;
+	padding: 20px;
 	float: left;
+	border: 1px solid #f6f6f6;
+	border-radius: 20px;
 }
 
 .main4 > h3 {
@@ -91,6 +117,9 @@ a {
 }
 .main5 > h3 > a> span{
 	color: #f96f59;
+}
+.main6 > a > img {
+	border: solid 1px #eeeeee;
 }
 
 .search-title {
