@@ -16,9 +16,23 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <style>
-#btn1{
-margin-left : 85%;
+a {
+	text-decoration: none;
+	color: black;
 }
+div.margind{
+width:50%;
+margin:30px;
+margin-left:auto;
+margin-right:auto;
+}
+#btn1{
+margin-left:88%;
+}
+textarea{
+width:100%;
+}
+
 </style>
 </head>
 <body>
@@ -31,10 +45,8 @@ margin-left : 85%;
 	ArrayList<Integer> list = dao.selectResno(vo.getClid());
 	%>
 	<form action="deleteOk.jsp">
-	<div class="container">
+	<div class="margind">
 	
-	<div class="row">
-    <div class="col-sm-7">
 	<h5>환불 안내</h5></td></tr>
 			<ul>
 			<li>일주일 전 취소 : 전액 환불</li>
@@ -99,13 +111,11 @@ margin-left : 85%;
 			</table>
 			
 		<h5>환불사유</h5>
-		<textarea name="refreason" rows="5" cols="95%"></textarea>
+		<textarea name="refreason" rows="3"></textarea>
 		<br>
 	
-	<input type="submit" value="환불신청" onclick="checkForm(this);" align="right" id="btn1" class="btn btn-outline-success"/>
+	<input type="submit" value="환불신청" onclick="checkForm(this);" id="btn1" class="btn btn-outline-success"/>
 			
-			</div>
-			</div>
 			</div>
 			</form>
 	
