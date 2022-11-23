@@ -34,8 +34,37 @@ width:100%;
 }
 
 </style>
+<!-- --------header  -------- -->
+<link rel="stylesheet" href="../css/main.css" />
+
+<!-- 수정된 부분 -->
+<link href="../Resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/bootstrap-icons/bootstrap-icons.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/aos/aos.css" rel="stylesheet">
+<link href="../Resources/vendor/glightbox/css/glightbox.min.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/swiper/swiper-bundle.min.css"
+	rel="stylesheet">
+<!-- Template Main CSS File -->
+<link href="../Resources/css/main.css" rel="stylesheet">
+<!-- Vendor JS Files -->
+<script src="../Resources/js/bootstrap.bundle.js"></script>
+<script src="../Resources/vendor/aos/aos.js"></script>
+<script src="../Resources/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="../Resources/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="../Resources/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="../Resources/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="../Resources/vendor/php-email-form/validate.js"></script>
+<link rel="stylesheet" href="../css/main.css" />
+<!-- ------------------------------------------- -->
+
 </head>
 <body>
+<header id="header" class="header d-flex align-items-center">
+		<jsp:include page="../mainPage/header.jsp" />
+	</header>
 	<%
 	Object obj = session.getAttribute("vo");
 	RefundDAO dao = new RefundDAO();
