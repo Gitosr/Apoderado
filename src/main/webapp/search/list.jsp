@@ -274,10 +274,10 @@ li.mainmenu ul {
 							//console.log(el.facno);
 							data += "<div class='col-lg-4 col-md-6'>";
 							data += "<div class='service-item  position-relative'>";
-							data += "<div id='imgdiv'><a href='detail.jsp?facno=" + el.facno + "'><img src="+el.facimg+" alt="+el.facname+"/></a></div>";
+							data += "<div id='imgdiv'><a href='../apoderado/detailFacilities.jsp?facno=" + el.facno + "'><img src="+el.facimg+" alt="+el.facname+"/></a></div>";
 							data += "<h3>"+ el.facname + "</h3>";
 							data += "<p class='font-monospace'>"+ el.facaddr + "</p>";
-							data += "<a href='detail.jsp?facno=" + el.facno + "' class='readmore'>detail more <i class='bi bi-arrow-right'></i></a>";
+							data += "<a href='../apoderado/detailFacilities.jsp?facno=" + el.facno + "' class='readmore'>detail more <i class='bi bi-arrow-right'></i></a>";
 							data += "<div id = 'inheart'>";
 							if(el.cvoclid != null){
 								if(el.heart == true){
