@@ -28,7 +28,7 @@
 		text-align: center;
 	}
 	div.margind{
-	width:60%;
+	width:65%;
 	margin:10px;
 	margin-left:auto;
 	margin-right:auto;
@@ -45,6 +45,9 @@
 	}
 	.btn2{
 	border-left:0px;
+	}
+	#con{
+	font-size:0.9rem;
 	}
 	</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -94,12 +97,12 @@
 	
 						data += "<tr>";
 						data += "<td>" + res[i].revno + "</td>";
-						data += "<td>" + res[i].clid + "</td>";
+						data += "<td>" + res[i].facname + "</td>";
 						data += "<td><a href ='javascript:void(0);' onclick='toggleRow(this);' >" + res[i].revtitle + "</a></td>";
 						data += "<td>" + res[i].revdate + "</td>";
 						data += "<td>" + res[i].scoreStar + "</td>";
 						data += "</tr>";
-						data += "<tr style='display:'><td colspan=4 id='con'  style='border-right: none;'>" + res[i].revcontents + "</td>";
+						data += "<tr style='display:'><td colspan=4 id='con' style='border-right:none;'>" + res[i].revcontents + "</td>";
 
 						
 						data += "<td style='border-left: none;'><div class='btn'><a href ='../review/modify.jsp?revno="+res[i].revno+"'>";

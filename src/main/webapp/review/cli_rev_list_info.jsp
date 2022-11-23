@@ -66,6 +66,7 @@
 		
 		String revtitle = vo.getRevtitle();
 		String clid = dao.selectID(vo.getResno());
+		String facname = dao.selectFacname(vo.getResno());
 		String revdate = vo.getRevdate();
 		
 		int score = vo.getRevscore();
@@ -79,6 +80,7 @@
 	
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("revno",revno);		
+		jsonObject.put("facname",facname);		
 		jsonObject.put("revtitle",revtitle);
 		jsonObject.put("revcontents",revcontents);
 		jsonObject.put("revdate",revdate);
