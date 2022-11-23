@@ -23,7 +23,7 @@
 						
 				
           %>
-          <li><a href="../search/list.jsp">종목/위치별로 찾아보기!</a></li>
+          <li><a href="../search/list.jsp">종목/지역별로 찾아보기!</a></li>
           <%
 					}
 					else if(nCurrentPage == 1){
