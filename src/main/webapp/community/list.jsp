@@ -77,6 +77,13 @@ margin:30px;
 margin-left:auto;
 margin-right:auto;
 }
+th{
+border-top:1px solid green;
+}
+div.scbox{
+float:right;
+margin-bottom:10px;
+}
 </style>
 <!-- ---------header --------- -->
 
@@ -156,6 +163,9 @@ margin-right:auto;
 	}
 	%>
 	<div class="margind">
+	<div class="scbox">
+	<form action="searchResult.jsp" method="get"><input type="text" name="search" id="" size="15%" placeholder="검색어"/>
+			<button type="submit" style="border:none; background-color:transparent"><img width="25px" src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-vert.png" alt=""></button></form></div>
 		<table class="table table-hover">
 		<thead class="table-success">
 			<tr>
@@ -182,7 +192,7 @@ margin-right:auto;
 
 			<%}%>
 			<tr>
-				<td colspan="5">
+				<td colspan="4">
 					<!-- 부트스트랩 페이지네이션 -->
 					<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-center">
@@ -196,12 +206,7 @@ margin-right:auto;
 						</ul>
 					</nav>
 				</td>
-			</tr>
-			<tr>
-			<td></td>
-			<td align="center" colspan=3>
-			<form action="searchResult.jsp" method="get"><input type="text" name="search" id="" size="30%"/>
-			<button type="submit" style="border:none; background-color:transparent"><img width="25px" src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-vert.png" alt=""></button></form></td>
+			
 			
 			<td align="right">
 			<% if(vo2!=null){ %>
