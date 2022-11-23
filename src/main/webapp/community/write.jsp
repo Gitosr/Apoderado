@@ -28,42 +28,44 @@ $(function(){
 </head>
 
 <body>
-	<%
-	Object obj = session.getAttribute("vo");
-	ClientVO vo = null;
+
+<%Object obj = session.getAttribute("vo");
+ClientVO vo = null;
 	if(obj !=null){
-		vo = (ClientVO)obj;
-	%>
-	<div class="container">
-		<form action="writeOk.jsp" method="post">
-			<table class="table table-striped">
-				<tr>
-					<th>작성자</th>
-					<td>
-					<input type="text"  disabled="disabled" name="writer" id="" value="<%=vo.getClid()%>"/>
-					<input type="hidden" name="writer" id="" value="<%=vo.getClid()%>"/>
-					</td>
-				</tr>
-				<tr>
-					<th>제목</th>
-					<td><input type="text" name="title" id="" /></td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td>
-					<textarea name="contents" id="summernote" cols="80" rows="30"></textarea></td>
-				</tr>
-				<tr>
-					<td colspan="2">
-					<a href="list.jsp"><input type="button" value="목록" class="btn btn-success"/></a>
-					<input type="submit" value="작성" class="btn btn-primary"/>
-					</td>
-				</tr>
-			</table>
-		</form>
+		vo = (ClientVO)obj;%>
+	
+
+<div class="container">
+	<form action="writeOk.jsp" method="post">
+		<table class="table table-striped">
+			<tr>
+				<th>작성자</th>
+				<td>
+				<input type="text"  disabled="disabled" name="writer" id="" value="<%=vo.getClid()%>"/>
+				<input type="hidden" name="writer" id="" value="<%=vo.getClid()%>"/>
+				</td>
+			</tr>
+			<tr>
+				<th>제목</th>
+				<td><input type="text" name="title" id="" /></td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td>
+				<textarea name="contents" id="summernote" cols="80" rows="30"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<a href="list.jsp"><input type="button" value="목록" class="btn btn-success"/></a>
+				<input type="submit" value="작성" class="btn btn-primary"/>
+				</td>
+			</tr>
+		</table>
+	
+	</form>
 	</div>
-	<% 
-	}
-	%>
+	<% }
+		%>
+	
 </body>
 </html>

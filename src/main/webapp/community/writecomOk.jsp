@@ -3,7 +3,7 @@
 <%@page import="kr.co.dongdong.dao.CommentsDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% 
+    <% 
 	request.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html;charset=UTF-8"); 
 	
@@ -14,19 +14,18 @@
 	
 	
 	if(obj !=null){
-		ClientVO vo2 = (ClientVO)obj;
-		CommentsVO vo = new CommentsVO();
-	    CommentsDAO dao = new CommentsDAO();
-		
-		String comtxt = request.getParameter("txtComscontents");
+	ClientVO vo2 = (ClientVO)obj;
+	CommentsVO vo = new CommentsVO();
+    CommentsDAO dao = new CommentsDAO();
 	
+	String comtxt = request.getParameter("txtComscontents");
+
+
+	vo.setComno(comno);
+	vo.setClid(vo2.getClid());
+	vo.setComscontents(comtxt);
 	
-		vo.setComno(comno);
-		vo.setClid(vo2.getClid());
-		vo.setComscontents(comtxt);
-		
-		dao.insertOne(vo);
-		response.sendRedirect("detail.jsp?comno="+vo.getComno());
-		
-	}
-%>
+	dao.insertOne(vo);
+	response.sendRedirect("detail.jsp?comno="+vo.getComno());
+	
+	}%>

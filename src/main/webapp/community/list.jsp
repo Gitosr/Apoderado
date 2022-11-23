@@ -16,19 +16,16 @@ ul li{
 list-style-type:none; display:inline;
 }
 </style>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
 <title>Insert title here</title>
 
 </head>
 <body>
-	<% 
-	ClientVO vo2 = null;
+		<% 
+		ClientVO vo2 = null;
 	Object obj = session.getAttribute("vo");
-	
 	if(obj !=null){
-		vo2 = (ClientVO)obj;
+	vo2 = (ClientVO)obj;
 	}
 	
 	//현재 페이지 
@@ -109,11 +106,14 @@ list-style-type:none; display:inline;
 			%>
 			<tr>
 				<td><%=vo.getComno()%></td>
-				<td><a href="detail.jsp?comno=<%=vo.getComno()%>" ><%=vo.getComtitle()%></a></td>
+				<form action="detail.jsp?comno=<%=vo.getComno()%>">
+				<td><a href="detail.jsp?comno=<%=vo.getComno()%>" ><%=vo.getComtitle()%></a>
+				</td></form>
 				<td><%=vo.getClid()%></td>
 				<td><%=vo.getComdate()%></td>
 				<td><%=vo.getHits()%></td>
 			</tr>
+
 
 			<%}%>
 			<tr>
@@ -134,8 +134,9 @@ list-style-type:none; display:inline;
 			</tr>
 			<tr>
 			<% if(vo2!=null){ %>
-				<td colspan="5"><a href="write.jsp"><input type="button" value="글쓰기" class="btn btn-primary" /></a>
-			<%} %>
+				<td colspan="5"><a href="write.jsp"><input type="button"
+						value="글쓰기" class="btn btn-primary" /></a>
+						<%} %>
 				</td>
 			</tr>
 		</table>
