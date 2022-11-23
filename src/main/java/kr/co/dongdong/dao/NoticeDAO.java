@@ -17,8 +17,8 @@ public class NoticeDAO {
 
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-	String user = "admin";
-	String password = "oracletiger";
+	String user = "apoderado";
+	String password = "tiger";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
