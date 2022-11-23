@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.top_nav {
+	width: 1080px;
+	height: 30px;
+	margin: 10px auto;
+}
+
+.personal {
+	font: sans-serif;
+	float: right;
+	font-size: 12px;
+	float: right;
+}
+
+.menubar {
+	width: 1080px;
+	height: 80px;
+	margin: 0px auto;
+}
+
+#menu {
+	width: 30px;
+	height: 30px;
+	margin: 15px;
+}
+
+.logo {
+	font-family: 'Jua', sans-serif;
+	font-size: 30px;
+	width: 200px;
+	height: 80px;
+	position: relative;
+	left: 350px;
+	position: relative;
+	height: 80px;
+	width: 200px;
+}
+img {
+	width: 550px;
+	height: 300px;
+}
+
+ul.tabs {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+ul.tabs li {
+	background: none;
+	color: #222;
+	display: inline-block;
+	padding: 10px 25px;
+	cursor: pointer;
+}
+
+ul.tabs li.current {
+	background: #ededed;
+	color: #222;
+}
+
+.tab-content {
+	display: none;
+	padding: 15px 0;
+	border-top: 3px solid #eee;
+}
+
+.tab-content.current {
+	display: inherit;
+}
+#tab-1, #tab-2, #tab-3 {
+	width: 1000px;
+	heigth: 500px;
+}
+
+img.heart {
+	width: 30px;
+	height : 30px;
+}
+
+.custom_calendar_table td {
+	width: 80px;
+	height: 20px;
+}
+
+#heart_loc {
+	text-align: right;
+}

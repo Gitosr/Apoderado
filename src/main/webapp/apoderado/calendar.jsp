@@ -66,18 +66,19 @@
 }
 
 
-    </style>
-    <script type="text/javascript">
-    $(function () {
-        <%
-        String no = request.getParameter("facno");
-        %>
-    	var today = new Date();
-        calendarMaker($("#calendarForm"), new Date());
-       
-        $.ajax({
-           	url : "timeCount.jsp",
-           	data : { "cnt" : count, "fno" : <%=no%> },
+</style>
+<script type="text/javascript">
+<%
+String no = request.getParameter("facno");
+int facno = Integer.parseInt(no);
+%>
+$(function () {
+	var today = new Date();
+    calendarMaker($("#calendarForm"), new Date());
+   
+    $.ajax({
+       	url : "timeCount.jsp",
+       	data : { "cnt" : count, "fno" : <%=no%> },
            	dataType : "json",
            	success : function(res){
 				var depart = res;
@@ -233,7 +234,35 @@
             $(".custom_calendar_table").on("click", "td", function () {
                 $(".custom_calendar_table .select_day").removeClass("select_day");
                 $(this).removeClass("select_day").addClass("select_day");
-                console.log(year+"/"+month+"/"+$(this).find(".day").text());
+                var date = year+"/"+month+"/"+$(this).find(".day").text();
+               
+                $.ajax({
+                	url : "../apoderado/selectDay.jsp",
+                	data : { "date" : date, "facno" : <%= no%>},
+                	dataType : "json",
+                	success : function(response) {
+						var res = response;
+                		
+                		var data = "";
+                		
+                		if(res.length==0) {
+                			console.log("데이터가 없습니다.");
+                		}else {
+                			data += '<form name="reserve" method="get">';
+                			data += '<select name="restime" id="">-----------';
+                			for(var i=0; i<res.length; i++) {
+                				data += '<option value="'+ res[i].restime +'">' + res[i].restime + ' : ' +res[i].usetime+ "</option>";
+                			}
+                			data += '</select>';
+                			data += '<input type="hidden" name="resdate" value="'+date+'"/>';
+                			data += '<input type="hidden" name="facno" value="<%=facno%>"/>';
+            				data += '</form><input type="button" value="전송" onclick="openReserve();"/>';
+                		}
+                		
+                		$("#select_time").empty();
+    					$("#select_time").append(data);	
+                	}
+                });  
             });
         }
 	}
@@ -242,7 +271,7 @@
 <body>
 	
     <div id="calendarForm"></div>
-    
+    <div id="#select_time"></div>
 
 </body>
 </html>

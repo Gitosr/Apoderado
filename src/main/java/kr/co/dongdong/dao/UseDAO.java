@@ -93,6 +93,41 @@ import kr.co.dongdong.vo.UseVO;
 		return vo;
 	}
 	
+	public ArrayList<UseVO> getTime(int facno, String resdate) {
+		sb.setLength(0);
+		sb.append("select * from ( " );
+		sb.append("select restime, usetime from use ");
+		sb.append("where facno = ? and restime not in ");
+		sb.append("(select restime from reserve where resdate = ? and facno = ? ) ");
+		sb.append(") order by restime asc ");
+		
+		ArrayList<UseVO> list = new ArrayList<UseVO>();
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, facno);
+			pstmt.setString(2, resdate);
+			pstmt.setInt(3, facno);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				int restime = rs.getInt("restime");
+				String usetime = rs.getString("usetime");
+				
+				UseVO vo = new UseVO(facno, restime, usetime);
+				list.add(vo);
+						
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+		
+	}
+	
 	// 자원반납
 	public void close() {
 		try {
