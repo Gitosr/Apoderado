@@ -12,6 +12,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!-- --------header  -------- -->
+<link rel="stylesheet" href="../css/main.css" />
+
+<!-- 수정된 부분 -->
+<link href="../Resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/bootstrap-icons/bootstrap-icons.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/aos/aos.css" rel="stylesheet">
+<link href="../Resources/vendor/glightbox/css/glightbox.min.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/swiper/swiper-bundle.min.css"
+	rel="stylesheet">
+<!-- Template Main CSS File -->
+<link href="../Resources/css/main.css" rel="stylesheet">
+<!-- Vendor JS Files -->
+<script src="../Resources/js/bootstrap.bundle.js"></script>
+<script src="../Resources/vendor/aos/aos.js"></script>
+<script src="../Resources/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="../Resources/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="../Resources/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="../Resources/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="../Resources/vendor/php-email-form/validate.js"></script>
+<link rel="stylesheet" href="../css/main.css" />
+<!-- ------------------------------------------- -->
+
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
@@ -28,19 +55,27 @@ font-size: 0.5rem;
 color : gray;
 width:40%;
 }
-img{
-width:60%;
-}
+
 .comtitle{
 font-size: 1.2rem;
 }
 
 .line{border-bottom:0.5px solid rgba(209,231,221);}
 
+div.margind{
+width:65%;
+margin-top:30px;
+margin-left:auto;
+margin-right:auto;
+}
+
 </style>
 
 </head>
 <body>
+<header id="header" class="header d-flex align-items-center">
+		<jsp:include page="../mainPage/header.jsp" />
+	</header>
 	<%
 	
 	ClientVO vo2 = null;
@@ -62,10 +97,8 @@ font-size: 1.2rem;
 		CommunityVO vo = dao.selectOne(comno);
 
 	%>
-	<div class="container">
-	<div class="row">
-    <div class="col-sm-8">
-	<table class="table">
+	<div class="margind">
+	<table class="table table-hover">
 	<thead class="table-success">
 		<tr>
 			<th width="60%" class='comtitle'><%= vo.getComtitle() %></th>
@@ -94,15 +127,10 @@ font-size: 1.2rem;
 			</td>
 		</tr>
 	</table>
-	</div>
-	</div>
+</div>
 	<br>
-	</div>
 	
-	
-	<div class="container">
-	<div class="row">
-    <div class="col-sm-8">
+	<div class="margind">
 		<table>
 			<thead>
 			<tr>
@@ -113,7 +141,7 @@ font-size: 1.2rem;
 			if(obj!=null){ %>
 			<tr>
 				<form action="writecomOk.jsp" method="post" name="frm">
-					<td colspan="3"><input type='text' name='txtComscontents' size="100%" id='txtComscomtents' /></td>
+					<td colspan="3"><input type='text' name='txtComscontents' size="80%" id='txtComscomtents' /></td>
 					 <input type="hidden" name="comno" value="<%=vo.getComno()%>" />
 					<td><input type='submit' value='등록' class="btn btn-outline-success"/></td>
 				</form>
@@ -129,7 +157,7 @@ font-size: 1.2rem;
 			ArrayList<CommentsVO> list = dao2.selectOne(comno); 
 				for (CommentsVO x : list) { %>
 				<tr>
-					<td rowspan=3 width="10%"><img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77" alt="" /></td>
+					<td rowspan=3 width="10%"><img width="60%" src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77" alt="" /></td>
 					<th colspan=2><%=x.getClid()%></th>
 						<td rowspan=3 width="20%">
 					<% if(vo2!=null){
@@ -149,9 +177,6 @@ font-size: 1.2rem;
 			</tbody>
 		</table>
 	</div>
-	</div>
-	</div>
-	
 	<%}%>
 
 </body>
