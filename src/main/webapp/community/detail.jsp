@@ -169,8 +169,8 @@ margin-right:auto;
 					</td>
 					
 					</tr>
-					<tr><td  colspan=2 class='comscon'><%=x.getComscontents()%></td></tr>
-					<tr class='line'><td  colspan=2class='comsdate'><%=x.getComsdate()%></td></tr>
+					<tr><td colspan=2 class='comscon'><%=x.getComscontents()%></td></tr>
+					<tr class='line'><td  colspan=2 class='comsdate'><%=x.getComsdate()%></td></tr>
 					<%} %>
 				
 					
