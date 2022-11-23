@@ -355,6 +355,43 @@ public class FacilitiesDAO {
 		
 	}
 	
+	// 검색 결과 조회 문자열
+		public ArrayList<Integer> selectKeywordArr(String[] keyword){
+			ArrayList<Integer> list = new ArrayList<Integer>();
+			
+			sb.setLength(0);
+			
+			for(int i=0; i < keyword.length; i++) {
+				sb.append("SELECT facno ");
+				sb.append("FROM FACILITIES ");
+				sb.append("WHERE FACNAME LIKE '%" + keyword[i] + "%' ");
+				sb.append("OR FACADDR LIKE '%" + keyword[i] + "%' ");	
+				
+				if(i < keyword.length-1) {
+					sb.append("union ");
+					
+				}
+			}
+
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					int facno = rs.getInt("facno");
+					System.out.println(facno);
+					
+					Integer vo = new Integer(facno);
+					list.add(vo);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return list;
+		}
+		
+	
 	// 한 주간 예약횟수 상위 시설 출력 == 여기까지
 	public ArrayList<ToprankVO> selectToprank(){
 		ArrayList<ToprankVO> list = new ArrayList<ToprankVO>();

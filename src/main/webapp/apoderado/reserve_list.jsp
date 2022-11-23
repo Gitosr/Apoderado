@@ -1,3 +1,4 @@
+<%@page import="kr.co.dongdong.dao.ReviewDAO"%>
 <%@page import="kr.co.dongdong.dao.ReserveDAO"%>
 <%@page import="kr.co.dongdong.vo.ClientVO"%>
 <%@page import="kr.co.dongdong.vo.ReserveVO"%>
@@ -101,19 +102,21 @@
 		<table class="table table-striped">
 			<tr>
 				<th>예약번호</th>
+				<th>예약시설</th>
 				<th>예약날짜</th>
 				<th>이용회차</th>
 				<th>상태</th>
 			</tr>
 			<!-- db 연결해서 데이터를 가져온 후 완성 -->
 			<%
-
+			ReviewDAO dao2 = new ReviewDAO();
 			// 최근 작성한 게시물 20개만 가져오기
 			ArrayList<ReserveVO> list = dao.selectAll(voi.getClid(), startNo, endNo);
 			for (ReserveVO vo : list) {
 			%>
 			<tr>
 				<td><a href="detailFacilities.jsp?facno=<%=vo.getFacno()%>"><%=vo.getResno()%></a></td>
+				<td><a href="detailFacilities.jsp?facno=<%=vo.getFacno()%>"><%=dao2.selectFacname(vo.getResno()) %></a></td>
 				<td><%=vo.getResdate()%></td>
 				<td><%=vo.getRestime()%></td>
 				<td><%=vo.getResstate()%></td>
@@ -123,7 +126,7 @@
 			}
 			%>
 			<tr>
-				<td colspan="4">
+				<td colspan="5">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-center">
 							<%
@@ -153,8 +156,9 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="4"><a href="write.jsp"> <input type="button"
-						value="수정" class="btn btn-primary" />
+				<td colspan="5">
+				<a href="../refund/refRequest.jsp"> 
+					<input type="button" value="환불신청" class="btn btn-primary" />
 				</a></td>
 			</tr>
 		</table>

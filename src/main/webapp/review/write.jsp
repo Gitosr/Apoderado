@@ -35,6 +35,7 @@ $(function(){
 
 <body>
 <%Object obj = session.getAttribute("vo");
+
 ClientVO vo =null;
 	if(obj !=null){
 		vo = (ClientVO)obj;
@@ -47,7 +48,7 @@ ClientVO vo =null;
 			<tr>
 			<% 
 			
-			 ReviewDAO dao = new ReviewDAO();
+			ReviewDAO dao = new ReviewDAO();
 			ArrayList<Integer> list = dao.selectResno(vo.getClid());
 			%>
 			
@@ -89,18 +90,17 @@ ClientVO vo =null;
 			</tr>
 			<tr>
 				<td colspan="2">
-				<a href="../review/list.jsp"><input type="button" value="목록" class="btn btn-success"/></a>
 				<input type="submit" value="작성" class="btn btn-primary"/>
 				</td>
 			</tr>
 		</table>
-	
+		<input type="hidden" name="pre" value="<%=request.getHeader("referer") %>"/>
 	</form>
 	</div>
 	<% }
 	else{ 
 		out.println("<script>alert('로그인 해 주세요'); location.href='../review/list.jsp'</script>");
 	}
-		%>
+	%>
 </body>
 </html>

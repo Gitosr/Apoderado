@@ -1,8 +1,10 @@
-<%@page import="kr.co.dongdong.vo.ClientVO"%>
-<%@page import="kr.co.dongdong.dao.InterestsDAO"%>
-<%@page import="kr.co.dongdong.vo.FacilitiesVO"%>
-<%@page import="kr.co.dongdong.dao.FacilitiesDAO"%>
+
 <%@page import="test.Event"%>
+<%@page import="kr.co.dongdong.vo.FacilitiesVO"%>
+<%@page import="kr.co.dongdong.dao.InterestsDAO"%>
+<%@page import="kr.co.dongdong.vo.ClientVO"%>
+<%@page import="kr.co.dongdong.dao.FacilitiesDAO"%>
+
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="org.json.simple.JSONArray"%>
 <%@page import="java.util.ArrayList"%>

@@ -154,7 +154,29 @@ public class InterestsDAO {
 		}
 		return list;
 	}
-	
+	// 시설번호로 시설명 가져오기
+		public String selectFacname(int facno) {
+
+			sb.setLength(0);
+			sb.append("select facname ");
+			sb.append("from facilities ");
+			sb.append("where facno= ? ");
+
+			String facname = "";
+
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setInt(1, facno);
+				rs = pstmt.executeQuery();
+
+				rs.next();
+				facname = rs.getString("facname");
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return facname;
+		}
 	// 자원반납
 	public void close() {
 		try {

@@ -82,6 +82,37 @@ public class ReserveDAO {
 		return count;
 	}
 	
+	//전체조회
+		public ArrayList<ReserveVO> selectAll(){
+			ArrayList<ReserveVO> list = new ArrayList<ReserveVO>();
+			sb.setLength(0);
+			sb.append("SELECT RESNO, CLID, FACNO, RESTIME, RESDATE, ORDERDATE, RESSTATE ");
+			sb.append("FROM reserve");
+			
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					int resno = rs.getInt("resno");
+					String clid = rs.getString("clid");
+					int facno = rs.getInt("facno");
+					int restime = rs.getInt("restime");
+					String resdate = rs.getString("resdate");
+					String orderdate = rs.getString("orderdate");
+					int resstate = rs.getInt("resstate");
+					
+					ReserveVO vo = new ReserveVO(resno, clid, facno, restime, resdate, orderdate, resstate);
+					list.add(vo);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return list;
+		}
+		
 	// 전체 조회
 	public ArrayList<ReserveVO> selectAll(String id, int startNo, int endNo){
 		ArrayList<ReserveVO> list = new ArrayList<ReserveVO>();
@@ -120,6 +151,47 @@ public class ReserveDAO {
 		}
 		return list;
 	}
+	
+	// 추가
+		public void insertOne(ReserveVO vo) {
+			sb.setLength(0);
+			sb.append("INSERT INTO reserve ");
+			sb.append("VALUES (reserve_resno_SEQ.NEXTVAL,?,?,?,?,sysdate,0)");
+			
+			if(vo != null) {
+				try {
+					pstmt = conn.prepareStatement(sb.toString());
+					pstmt.setString(1, vo.getClid());
+					pstmt.setInt(2, vo.getFacno());
+					pstmt.setInt(3, vo.getRestime());
+					pstmt.setString(4, vo.getResdate());
+					
+					pstmt.executeUpdate();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		//상태 변경 (등급 0으로)
+		public void modifyOne(int resno) {
+			sb.setLength(0);
+			sb.append("UPDATE reserve ");
+			sb.append("SET RESSTATE = 0 ");
+			sb.append("WHERE resno = ?");
+			
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setInt(1, resno);
+				
+				pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 	
 	// 자원반납
 	public void close() {

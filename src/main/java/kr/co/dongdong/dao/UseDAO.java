@@ -64,6 +64,35 @@ import kr.co.dongdong.vo.UseVO;
 		return count;
 	}
 	
+	public UseVO selecttime(int facno,int useorder) {
+		sb.setLength(0);
+		sb.append("SELECT * FROM use u , facilities f ");
+		sb.append("WHERE f.facno = u.facno ");
+		sb.append("AND f.facno = ? ");
+		sb.append("AND useorder = ?");
+		
+		UseVO vo = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, facno);
+			pstmt.setInt(2, useorder);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				String usetime = rs.getString("usetime");
+				
+				vo = new UseVO(facno, useorder, usetime);
+						
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return vo;
+	}
+	
 	// 자원반납
 	public void close() {
 		try {

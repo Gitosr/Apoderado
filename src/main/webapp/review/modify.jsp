@@ -27,12 +27,12 @@ $(function(){
 </head>
 <body>
 <%
-String no = request.getParameter("revno");
-if(no!=null){
-	int revno = Integer.parseInt(no);
-	ReviewDAO dao = new ReviewDAO();
-	ReviewVO vo = dao.selectOne(revno);
-	String clid = dao.selectID(vo.getResno());
+	String no = request.getParameter("revno");
+	if(no!=null){
+		int revno = Integer.parseInt(no);
+		ReviewDAO dao = new ReviewDAO();
+		ReviewVO vo = dao.selectOne(revno);
+		String clid = dao.selectID(vo.getResno());
 
 %>
 <form action="modifyOk.jsp" method="get">
@@ -64,17 +64,17 @@ if(no!=null){
 			<tr>
 				<th>내용</th>
 				<td>
-				<textarea name="contents" id="summernote" cols="80" rows="20"><%=vo.getRevcontents()%></textarea></td>
+				<textarea name="contents" id="summernote" cols="80" rows="50"><%=vo.getRevcontents()%></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2">
 				<a href="../review/list.jsp"><input type="button" value="목록" class="btn btn-success"/></a>
+				<input type="hidden" name="pre" value="<%=request.getHeader("referer") %>"/>
 				<input type="submit" value="저장" class="btn btn-primary"/>
 				</td>
 			</tr>
 		</table>
 	</div>
-
 	</form>
 	<%} %>
 

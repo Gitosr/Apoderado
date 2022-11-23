@@ -4,30 +4,32 @@
 	pageEncoding="UTF-8"%>
 
 <%
-//1. 파라미터값 가져오기
-request.setCharacterEncoding("UTF-8");
-response.setContentType("text/html;charset=UTF-8");
-
-String no = request.getParameter("revno");
-
-if (no != null) {
-	int revno = Integer.parseInt(no);
-	String score = request.getParameter("score");
-	int revscore = Integer.parseInt(score);
-	String revtitle = request.getParameter("title");
-	String revcontents = request.getParameter("contents");
-
-	//2. dao
-	ReviewDAO dao = new ReviewDAO();
-	ReviewVO vo = new ReviewVO();
-	vo.setRevno(revno);
-	vo.setRevscore(revscore);
-	vo.setRevtitle(revtitle);
-	vo.setRevcontents(revcontents);
-	dao.updateOne(vo);
+	//1. 파라미터값 가져오기
+	request.setCharacterEncoding("UTF-8");
+	response.setContentType("text/html;charset=UTF-8");
 	
-
-	response.sendRedirect("../review/list.jsp");
+	String no = request.getParameter("revno");
+	String pre = request.getParameter("pre");
+	
+	if (no != null) {
+		int revno = Integer.parseInt(no);
+		String score = request.getParameter("score");
+		int revscore = Integer.parseInt(score);
+		String revtitle = request.getParameter("title");
+		String revcontents = request.getParameter("contents");
+	
+		//2. dao
+		ReviewDAO dao = new ReviewDAO();
+		ReviewVO vo = new ReviewVO();
+		vo.setRevno(revno);
+		vo.setRevscore(revscore);
+		vo.setRevtitle(revtitle);
+		vo.setRevcontents(revcontents);
+		dao.updateOne(vo);
+		
+	
+		response.sendRedirect(pre);
+		System.out.println(pre);
 
 }
 %>

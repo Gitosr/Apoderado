@@ -82,17 +82,6 @@ ul.tabs li.current {
 			$("#tab-3").addClass('current');
 		}
 		
-		var tab = link.includes("?rewl="); 
-		if(tab) {
-			console.log(tab);
-			$("ul.tabs li").removeClass('current');
-			$("#tab-1").removeClass('current');
-			$("#tab-2").removeClass('current');
-			$("#tab-3").removeClass('current');
-			$("ul.tabs li:nth-child(2)").addClass('current');
-			$("#tab-2").addClass('current');
-		}
-
 		$("#btn1").on("click", function() {
 
 			var pw = $("#pw").val();

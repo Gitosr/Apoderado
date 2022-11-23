@@ -65,6 +65,7 @@
 	color: white;
 }
 
+
     </style>
     <script type="text/javascript">
     $(function () {
@@ -150,15 +151,6 @@
         function assembly(year, month) {
             var calendar_html_code =
                 "<table class='custom_calendar_table'>" +
-                "<colgroup>" +
-                "<col style='width:60px'/>" +
-                "<col style='width:60px'/>" +
-                "<col style='width:60px'/>" +
-                "<col style='width:60px'/>" +
-                "<col style='width:60px'/>" +
-                "<col style='width:60px'/>" +
-                "<col style='width:60px'/>" +
-                "</colgroup>" +
                 "<thead class='cal_date'>" +
                 "<th><button type='button' class='prev'><</button></th>" +
                 "<th colspan='5'><p><span>" + year + "</span>년 <span>" + month + "</span>월</p></th>" +

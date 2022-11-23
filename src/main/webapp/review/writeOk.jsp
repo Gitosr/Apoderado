@@ -8,7 +8,7 @@
 	//1. 파라미터값 가져오기
 	request.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html;charset=UTF-8");
-	
+	String pre = request.getParameter("pre");
 	
 	String title = request.getParameter("title");
 	String score = request.getParameter("score");
@@ -29,6 +29,7 @@
 		dao.insertOne(vo);
 		
 		//list.jsp로 리다이렉트
-		response.sendRedirect("../review/list.jsp");
+		System.out.println(pre);
+		response.sendRedirect(pre);
 	}
 %>

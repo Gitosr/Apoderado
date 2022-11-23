@@ -102,20 +102,20 @@
 		<table class="table table-striped">
 			<tr>
 				<th>시설번호</th>
-				<th>찜 아이디</th>
 				<th>찜 날짜</th>
 			</tr>
 			<!-- db 연결해서 데이터를 가져온 후 완성 -->
 			<%
-
+			
 			// 최근 작성한 게시물 20개만 가져오기
 			ArrayList<InterestsVO> list = dao.selectAll(voi.getClid(), startNo, endNo);
 			for (InterestsVO vo : list) {
-				System.out.println(vo.getFacno());
+				
+				
 			%>
 			<tr>
-				<td><a href="detailFacilities.jsp?facno=<%=vo.getFacno()%>"><%=vo.getFacno()%></a></td>
-				<td><%=vo.getClid()%></td>
+				<td><a href="detailFacilities.jsp?facno=<%=vo.getFacno()%>"><%=vo.getFacno()%>  .  
+				<%=dao.selectFacname(vo.getFacno())%></a></td>
 				<td><%=vo.getIntdate()%></td>
 			</tr>
 			<%
@@ -150,11 +150,6 @@
 						</ul>
 					</nav>
 				</td>
-			</tr>
-			<tr>
-				<td colspan="4"><a href="write.jsp"> <input type="button"
-						value="수정" class="btn btn-primary" />
-				</a></td>
 			</tr>
 		</table>
 	</div>
