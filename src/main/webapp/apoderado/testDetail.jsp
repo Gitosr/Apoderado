@@ -1,3 +1,4 @@
+<%@page import="kr.co.dongdong.dao.ReviewDAO"%>
 <%@page import="test.Event"%>
 <%@page import="kr.co.dongdong.vo.FacilitiesVO"%>
 <%@page import="kr.co.dongdong.dao.FacilitiesDAO"%>
@@ -112,6 +113,12 @@ element.style {
 		
 		FacilitiesDAO dao = new FacilitiesDAO();
 		FacilitiesVO vo = dao.selectOne(facno);	
+		
+		
+		ReviewDAO rdao = new ReviewDAO();
+		
+		int rcnt = rdao.getTotal_facno(vo.getFacno());
+		
 		//수정
 		String facevent = "";
 		/* if(vo.getFacevent()==0) {
@@ -194,8 +201,8 @@ element.style {
 
              <div class="meta-top">
                 <ul>
-                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html"><%= facmark %></a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">12 Comments</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i><%= facmark %></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i><%= rcnt %> Comments</li>
                 </ul>
               </div>
               
