@@ -1,4 +1,5 @@
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="kr.co.dongdong.vo.ReviewVO"%>
 <%@page import="kr.co.dongdong.dao.ReviewDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -67,11 +68,13 @@ margin-right:auto;
 	</header>
 <%
 	String no = request.getParameter("revno");
+String facname ="";
 	if(no!=null){
 		int revno = Integer.parseInt(no);
 		ReviewDAO dao = new ReviewDAO();
 		ReviewVO vo = dao.selectOne(revno);
 		String clid = dao.selectID(vo.getResno());
+		facname = dao.selectFacname(vo.getResno());
 
 %>
 <form action="modifyOk.jsp" method="get">
@@ -85,8 +88,11 @@ margin-right:auto;
 				<input type="hidden" name="writer" id="" value="ID<%=vo.getResno()%>"></td>
 			</tr>
 			<tr>
-				<th>제목</th>
-				<td><input type="text" name="title" id="" value="<%=vo.getRevtitle()%>"/></td>
+				<th>시설명</th>
+				<td><select name="resno" id="">
+				<option value=""><%= facname%></option>
+				
+				</select></td>
 			</tr>
 			<tr>
 				<th>평점</th>
@@ -101,9 +107,13 @@ margin-right:auto;
 				</select></td>
 			</tr>
 			<tr>
+				<th>제목</th>
+				<td><input type="text" name="title" id="" value="<%=vo.getRevtitle()%>" size="90%"/></td>
+			</tr>
+			<tr>
 				<th>내용</th>
 				<td>
-				<textarea name="contents" id="summernote" cols="80" rows="50"><%=vo.getRevcontents()%></textarea></td>
+				<textarea name="contents" id="summernote"><%=vo.getRevcontents()%></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="right">
