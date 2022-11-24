@@ -9,7 +9,7 @@
 	String clid = request.getParameter("clid");
 	String param = request.getParameter("facno");
 	
-	System.out.println(param);
+	System.out.println("param"+param);
 	int result = 0;
 	
 	if(clid != null && param != null){

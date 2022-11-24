@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+.img-fluid {
+   	width: 450px;
+}
+
+element.style {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+img.heart {
+	width: 30px;
+	height : 30px;
+}
+
+.custom_calendar_table td {
+	width: 80px;
+	height: 20px;
+}
+
+#heart_loc {
+	text-align: right;
+}

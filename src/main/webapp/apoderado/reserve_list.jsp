@@ -1,3 +1,4 @@
+<%@page import="kr.co.dongdong.dao.ReviewDAO"%>
 <%@page import="kr.co.dongdong.dao.ReserveDAO"%>
 <%@page import="kr.co.dongdong.vo.ClientVO"%>
 <%@page import="kr.co.dongdong.vo.ReserveVO"%>
@@ -9,6 +10,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+
+<style>
+.btnref{
+float:right;
+}
+div.margind{
+	margin:10px;
+	margin-left:auto;
+	margin-right:auto;
+	}
+	table{
+	width:100%;
+	}
+	.tablehd{
+	background:rgb(209,231,221);
+	}
+</style>
 </head>
 <body>
 <%
@@ -96,34 +120,36 @@
 		isNext = true;
 	}
 	%>
-	예약내역조회 내용이 들어갑니다
-	<div class="container">
-		<table class="table table-striped">
-			<tr>
+	
+	<div class="margind">
+		<table class="table table-hover">
+			<tr class="tablehd">
 				<th>예약번호</th>
+				<th>예약시설</th>
 				<th>예약날짜</th>
 				<th>이용회차</th>
 				<th>상태</th>
 			</tr>
 			<!-- db 연결해서 데이터를 가져온 후 완성 -->
 			<%
-
+			ReviewDAO dao2 = new ReviewDAO();
 			// 최근 작성한 게시물 20개만 가져오기
 			ArrayList<ReserveVO> list = dao.selectAll(voi.getClid(), startNo, endNo);
 			for (ReserveVO vo : list) {
 			%>
 			<tr>
-				<td><a href="detailFacilities.jsp?facno=<%=vo.getFacno()%>"><%=vo.getResno()%></a></td>
-				<td><%=vo.getResdate()%></td>
-				<td><%=vo.getRestime()%></td>
-				<td><%=vo.getResstate()%></td>
+				<td align="center"><a href="detailFacilities.jsp?facno=<%=vo.getFacno()%>"><%=vo.getResno()%></a></td>
+				<td><a href="detailFacilities.jsp?facno=<%=vo.getFacno()%>"><%=dao2.selectFacname(vo.getResno()) %></a></td>
+				<td align="center"><%=vo.getResdate()%></td>
+				<td align="center"><%=vo.getRestime()%></td>
+				<td align="center"><%=vo.getResstate()%></td>
 			
 			</tr>
 			<%
 			}
 			%>
 			<tr>
-				<td colspan="4">
+				<td colspan="5">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-center">
 							<%
@@ -153,9 +179,11 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="4"><a href="write.jsp"> <input type="button"
-						value="수정" class="btn btn-primary" />
-				</a></td>
+				<td colspan="5">
+				<div class="btnref">
+				<a href="../refund/refRequest.jsp"> 
+					<input type="button" value="환불신청" class="btn btn-success"/>
+				</a></div></td>
 			</tr>
 		</table>
 	</div>

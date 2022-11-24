@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+.footer1 {
+	background: #f6f6f6;
+	height: 230px;
+}
+.footer1-box {
+	width: 1080px;
+	height: 150px;
+	margin: 10px auto;
+}
+
+.footer1-info {
+	width: 700px;
+	height: 150px;
+	margin-top: 50px;
+	color: grey;
+	font-weight: lighter;
+	color: grey;
+	display: inline-block;
+}
+
+.footer1-info a {
+	color: grey;
+}
+
+.footer1-logo {
+	width: 200px;
+	height: 50px;
+	position: relative;
+	left: 120px;
+	bottom: 80px;
+	display: inline-block;
+}
+
+.footer1-logo h1 {
+	font-family: "Montserrat";
+	font-weight: bold;
+	font-size: 30px;
+	color: black;
+}
+.footer1-logo > h1 > span {
+	color: #f96f59;
+}

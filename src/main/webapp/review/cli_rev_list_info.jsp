@@ -7,28 +7,89 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-
+	
 	ReviewDAO dao = new ReviewDAO();
 	Object obj = session.getAttribute("vo");
+	String no = request.getParameter("currentPage");
+	String no3 = request.getParameter("count");
+	
 	ClientVO vo2 = null;
+	
+	
 	if(obj != null) {
-		vo2 = (ClientVO)obj; 
+		vo2 = (ClientVO)obj;
 	}
-	//dao.selectAll(); --> list 
-	ArrayList<ReviewVO> list = dao.selectReview(vo2.getClid());
+	
+	int count = -1;
+	int facno = -1;
+	int currentPage = -1;
+	
+	if(no!=null && no3!=null){
+		currentPage = Integer.parseInt(no);
+		count = Integer.parseInt(no3);
+	}
+	
+	/* 1페이지당 게시물 수  */
+	int recordPerPage = 10;
+	
+	int startNo = (currentPage - 1) * recordPerPage + 1;
+	int endNo = currentPage * recordPerPage;
+	
+	//총 리뷰게시물 수 (아이디 당)
+	int totalCount = dao.getTotal_clid(vo2.getClid()); 
+	System.out.println(totalCount);
+	//총 페이지 수
+	int totalPage = 0; 
+	if(totalCount > recordPerPage) {
+		totalPage = (totalCount % recordPerPage == 0) ? totalCount / recordPerPage : totalCount / recordPerPage + 1;
+	
+	} else {
+		totalPage = 1;
+	}
+	
+	//시작페이지번호
+	int startPage = (count*10)+1;
+	
+	//끝페이지번호
+	int endPage = startPage+9;
+	if(endPage > totalPage) {
+		endPage = totalPage;
+	}
 	
 	JSONArray jsonArray= new JSONArray();
-	
-	//반복문 사용해서 화면에 h3태그로 요소의 값 출력
+
+	//최근 작성한 게시물 10개만 가져오기
+	ArrayList<ReviewVO> list = dao.selectReview(vo2.getClid(), startNo, endNo);
 	for (ReviewVO vo : list) {
+		int revno = vo.getRevno();
+		String revcontents = vo.getRevcontents();
+		
+		String revtitle = vo.getRevtitle();
+		String clid = dao.selectID(vo.getResno());
+		String facname = dao.selectFacname(vo.getResno());
+		String revdate = vo.getRevdate();
+		
+		int score = vo.getRevscore();
+		String scoreStar = "";
+		
+		if(score==1){scoreStar = "★";}
+		if(score==2){scoreStar = "★★";}
+		if(score==3){scoreStar = "★★★";}
+		if(score==4){scoreStar = "★★★★";}
+		if(score==5){scoreStar = "★★★★★";}
+	
 		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("revno",vo.getRevno());
-		jsonObject.put("revtitle",vo.getRevtitle());
-		jsonObject.put("revcontents",vo.getRevcontents());
-		jsonObject.put("revdate",vo.getRevdate());
-		jsonObject.put("revscore",vo.getRevscore());
-		jsonObject.put("clid", dao.selectID(vo.getResno()));
-		jsonObject.put("facname", dao.selectFacname(vo.getResno()));
+		jsonObject.put("revno",revno);		
+		jsonObject.put("facname",facname);		
+		jsonObject.put("revtitle",revtitle);
+		jsonObject.put("revcontents",revcontents);
+		jsonObject.put("revdate",revdate);
+		jsonObject.put("scoreStar",scoreStar);
+		jsonObject.put("clid",clid);
+		
+		jsonObject.put("startPage", startPage);
+		jsonObject.put("endPage", endPage);
+		jsonObject.put("totalPage", totalPage);
 		
 		jsonArray.add(jsonObject);
 	}

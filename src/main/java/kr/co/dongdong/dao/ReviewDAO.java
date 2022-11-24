@@ -149,7 +149,7 @@ public class ReviewDAO {
 
 	};
 	
-	// 총 리뷰 게시물 수 아이디 별
+	// 총 리뷰 게시물 수 시설 별
 	public int getTotal_facno(int facno) {
 
 		sb.setLength(0);
@@ -379,6 +379,44 @@ public class ReviewDAO {
 		return list;
 	}
 	
+	// 특정 아이디가 작성한 리뷰들 모으기 시작과 끝페이지
+		public ArrayList<ReviewVO> selectReview(String clid, int startNo, int endNo) {
+			ArrayList<ReviewVO> list = new ArrayList<ReviewVO>();
+			sb.setLength(0);
+			
+			sb.append("select revno, revtitle, revcontents, revdate, revscore, resno ");
+			sb.append("from ( select rownum rn, revno, revtitle, revcontents, revdate, revscore, resno ");
+			sb.append("from ( select rw.revno, rw.revtitle, rw.revcontents, rw.revdate, rw.revscore, resno ");
+			sb.append("from review rw join reserve rs using(resno) where rs.clid = ? ");
+			sb.append("ORDER BY rw.revno DESC ) ");
+			sb.append("WHERE ROWNUM <= ? )");
+			sb.append("WHERE RN >= ? ");
+
+
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setString(1, clid);
+				pstmt.setInt(2, endNo);
+				pstmt.setInt(3, startNo);
+				rs = pstmt.executeQuery();
+				
+				while (rs.next()) {
+					int revno = rs.getInt("revno");
+					String revtitle = rs.getString("revtitle");
+					String revcontents = rs.getString("revcontents");
+					String revdate = rs.getString("revdate");
+					int revscore = rs.getInt("revscore");
+					int resno = rs.getInt("resno");
+					
+					ReviewVO vo = new ReviewVO(revno, revtitle, revcontents, revdate, revscore, resno);
+					list.add(vo);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return list;
+		}
+	
 	//검색
 	public ArrayList<ReviewVO> searchRev(String x) {
 		ArrayList<ReviewVO> list = new ArrayList<ReviewVO>();
@@ -413,6 +451,88 @@ public class ReviewDAO {
 		}
 		return list;
 	}
+	
+	// 시설에서 검색 후 리뷰번호 가져오기
+		public ArrayList<Integer> searchRevno(String[] x, int facno) {
+			ArrayList<Integer> list = new ArrayList<Integer>();
+			sb.setLength(0);
+			
+			sb.append("select DISTINCT revno from ( ");
+			System.out.println(x.length);
+			
+			for(int i=0; i < x.length; i++) {
+				
+				sb.append("select revno ");
+				sb.append("from (select revno, revtitle, revcontents, revdate, revscore, resno " );
+				sb.append("from review where resno in ( select resno from reserve where facno = "+facno+" ))");
+				sb.append("where revtitle like '%" + x[i] + "%' ");
+				sb.append("or revcontents like '%" + x[i] + "%' ");
+				
+				if(i < x.length-1) {
+					sb.append("union all ");
+				}		
+			}
+			sb.append(") order by revno desc ");
+			
+			try {
+				
+				pstmt = conn.prepareStatement(sb.toString());
+				rs = pstmt.executeQuery();
+				
+				while (rs.next()) {
+
+					int revno = rs.getInt("revno");
+					
+					Integer vo = new Integer(revno);
+					list.add(vo);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return list;
+		}
+		
+		// 마이페이지에서 검색 후 리뷰번호 가져오기
+		public ArrayList<Integer> searchRevnoId(String[] x, String clid) {
+			ArrayList<Integer> list = new ArrayList<Integer>();
+			sb.setLength(0);
+			
+			sb.append("select DISTINCT revno from ( ");
+			System.out.println(x.length);
+			
+			for(int i=0; i < x.length; i++) {
+				
+				sb.append("select revno ");
+				sb.append("from (select revno, revtitle, revcontents, revdate, revscore, resno " );
+				sb.append("from review where resno in ( select resno from reserve where clid = '" + clid + "' ))");
+				sb.append("where revtitle like '%" + x[i] + "%' ");
+				sb.append("or revcontents like '%" + x[i] + "%' ");
+				
+				if(i < x.length-1) {
+					sb.append("union all ");
+				}		
+			}
+			sb.append(") order by revno desc ");
+			
+			try {
+				
+				pstmt = conn.prepareStatement(sb.toString());
+				rs = pstmt.executeQuery();
+				
+				while (rs.next()) {
+
+					int revno = rs.getInt("revno");
+					
+					Integer vo = new Integer(revno);
+					list.add(vo);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return list;
+		}
+		
+		
 	//예약번호에서 시설번호->시설명 끌어오기
 	public String selectNameTime(int resno) {
 

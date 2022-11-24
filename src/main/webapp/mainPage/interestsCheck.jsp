@@ -20,14 +20,16 @@
 <script>
 <%
 String param = request.getParameter("facno");
+
 int facno = Integer.parseInt(param);
 %>
-	$(function() {
+
+	$(function() { 
 		$("#heart<%=facno %>").on("click", function() {
 			var clid = $("#clid").val();
 			var facno =  $("#facno<%=facno %>").val();
-			console.log(<%=facno %>+"facno");
-			console.log(facno+"hidden");
+			
+			//console.log(facno+"hidden");
 			
 			$.ajax({
 				url : "../mainPage/interestsOk.jsp",
@@ -37,7 +39,7 @@ int facno = Integer.parseInt(param);
 					"facno" : facno
 				},
 				success : function(data) {
-					console.log(data+"상태");
+					//console.log(data+"상태");
 					var result = data;
 					if (result == 0) { // 데이터가 없는 경우
 						$("#heart<%=facno %>").attr("src", "../images/heart.png"); // 하트 채우기
@@ -60,14 +62,14 @@ int facno = Integer.parseInt(param);
 
 	if (param != null) {
 		facno = Integer.parseInt(param);
-
-		FacilitiesDAO dao = new FacilitiesDAO();
-		FacilitiesVO vo = dao.selectOne(facno);
+		
 		
 		InterestsDAO dao2 = new InterestsDAO();
 		Object obj = session.getAttribute("vo");
 
 		if (obj != null) { // 로그인한 상태에서만 찜할 수 있음
+			FacilitiesDAO dao = new FacilitiesDAO();
+			FacilitiesVO vo = dao.selectOne(facno);
 			ClientVO vo3 = (ClientVO) obj;
 			
 			String clid = vo3.getClid(); // 로그인한 사용자의 id
@@ -88,6 +90,7 @@ int facno = Integer.parseInt(param);
 				<input type="hidden" name="facno" id="facno<%=vo.getFacno() %>" value="<%=vo.getFacno()%>" />
 			<%
 		}
+		//System.out.println("클릭");
 		
 	}
 	%>

@@ -9,6 +9,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+div.margind{
+	width:65%;
+	margin:10px;
+	margin-left:auto;
+	margin-right:auto;
+	}
+	.tablehd{
+	background:rgb(209,231,221);
+	}
+	img#x{
+	width:20px;
+	}
+</style>
 </head>
 <body>
 <%
@@ -97,26 +111,28 @@
 		isNext = true;
 	}
 	%>
-	예약내역조회 내용이 들어갑니다
-	<div class="container">
-		<table class="table table-striped">
-			<tr>
-				<th>시설번호</th>
-				<th>찜 아이디</th>
-				<th>찜 날짜</th>
+	
+	<div class="margind">
+		<table class="table table-hover">
+			<tr class="tablehd">
+				<th>시설명</th>
+				<th>찜한 날짜</th>
+				<th>삭제</th>
 			</tr>
 			<!-- db 연결해서 데이터를 가져온 후 완성 -->
 			<%
-
+			
 			// 최근 작성한 게시물 20개만 가져오기
 			ArrayList<InterestsVO> list = dao.selectAll(voi.getClid(), startNo, endNo);
 			for (InterestsVO vo : list) {
-				System.out.println(vo.getFacno());
+				
+				
 			%>
 			<tr>
-				<td><a href="detailFacilities.jsp?facno=<%=vo.getFacno()%>"><%=vo.getFacno()%></a></td>
-				<td><%=vo.getClid()%></td>
-				<td><%=vo.getIntdate()%></td>
+				<td><a href="detailFacilities.jsp?facno=<%=vo.getFacno()%>"><%=vo.getFacno()%>  .  
+				<%=dao.selectFacname(vo.getFacno())%></a></td>
+				<td align="center"><%=vo.getIntdate()%></td>
+				<td align="center"><a href="deleteHeart.jsp?facno=<%=vo.getFacno()%>"><img id="x" src="https://icones.pro/wp-content/uploads/2022/05/icone-fermer-et-x-rouge-1.png" alt="" /></a></td>
 			</tr>
 			<%
 			}
@@ -150,11 +166,6 @@
 						</ul>
 					</nav>
 				</td>
-			</tr>
-			<tr>
-				<td colspan="4"><a href="write.jsp"> <input type="button"
-						value="수정" class="btn btn-primary" />
-				</a></td>
 			</tr>
 		</table>
 	</div>

@@ -8,20 +8,57 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<!-- --------header  -------- -->
+<link rel="stylesheet" href="../css/main.css" />
+
+<!-- 수정된 부분 -->
+<link href="../Resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/bootstrap-icons/bootstrap-icons.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/aos/aos.css" rel="stylesheet">
+<link href="../Resources/vendor/glightbox/css/glightbox.min.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/swiper/swiper-bundle.min.css"
+	rel="stylesheet">
+<!-- Template Main CSS File -->
+<link href="../Resources/css/main.css" rel="stylesheet">
+<!-- Vendor JS Files -->
+<script src="../Resources/js/bootstrap.bundle.js"></script>
+<script src="../Resources/vendor/aos/aos.js"></script>
+<script src="../Resources/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="../Resources/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="../Resources/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="../Resources/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="../Resources/vendor/php-email-form/validate.js"></script>
+<link rel="stylesheet" href="../css/main.css" />
+<!-- ------------------------------------------- -->
+
+
 <title>Insert title here</title>
 <style>
 ul.tabs {
+float: left;
 	margin: 0px;
 	padding: 0px;
 	list-style: none;
+	width: 15%;
+  height: 300px;
 }
 
 ul.tabs li {
+float: left;
+    width: 100%;
 	background: none;
 	color: #222;
-	display: inline-block;
-	padding: 10px 25px;
+	padding: 22px 16px;
 	cursor: pointer;
+    text-align: center;
+	display: inline-block;
+    outline: none;
+    transition: 0.3s;
+  
 }
 
 ul.tabs li.current {
@@ -30,14 +67,29 @@ ul.tabs li.current {
 }
 
 .tab-content {
+width:85%;
+	float: left;
 	display: none;
-	padding: 15px 0;
+	padding: 10px 20px;
 	border-top: 3px solid #eee;
 }
 
 .tab-content.current {
+
 	display: inherit;
 }
+div.tap-1{
+margin-left:50px;
+}
+#tab-1{
+padding:100px;
+padding-left:20%;
+}
+h6{
+font-family: GmarketSansMedium;
+}
+
+
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -82,17 +134,6 @@ ul.tabs li.current {
 			$("#tab-3").addClass('current');
 		}
 		
-		var tab = link.includes("?rewl="); 
-		if(tab) {
-			console.log(tab);
-			$("ul.tabs li").removeClass('current');
-			$("#tab-1").removeClass('current');
-			$("#tab-2").removeClass('current');
-			$("#tab-3").removeClass('current');
-			$("ul.tabs li:nth-child(2)").addClass('current');
-			$("#tab-2").addClass('current');
-		}
-
 		$("#btn1").on("click", function() {
 
 			var pw = $("#pw").val();
@@ -108,6 +149,9 @@ ul.tabs li.current {
 </script>
 </head>
 <body>
+<header id="header" class="header d-flex align-items-center">
+		<jsp:include page="../mainPage/header.jsp" />
+	</header>
 
 	<%
 	Object obj = session.getAttribute("vo");
@@ -115,7 +159,7 @@ ul.tabs li.current {
 	if (obj != null) {
 		ClientVO vo = (ClientVO) obj;
 	%>
-	<div class="container">
+	<div>
 		<ul class="tabs">
 			<li class="tab-link current" data-tab="tab-1">회원정보수정</li>
 			<li class="tab-link" data-tab="tab-2">예약내역조회</li>
@@ -124,21 +168,15 @@ ul.tabs li.current {
 		</ul>
 
 		<div id="tab-1" class="tab-content current">
-
+			
 			<form action="" name="frm">
-				<table>
-					<tr>
-						<th>PW</th>
-						<td><input type="password" name="pw" id="pw" /> <input
-							type="hidden" name="pwok" id="pwok" value="<%=vo.getClpw()%>" />
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2"><input type="button" value="확인" id="btn1" />
-						</td>
-					</tr>
-				</table>
+				
+					<h6>비밀번호를 입력해주세요.</h6>
+					<p><input type="password" name="pw" id="pw" /> <input
+							type="hidden" name="pwok" id="pwok" value="<%=vo.getClpw()%>" />　<input type="button" value="확인" id="btn13"/>
+						</p>
 			</form>
+			
 		</div>
 
 		<div id="tab-2" class="tab-content">

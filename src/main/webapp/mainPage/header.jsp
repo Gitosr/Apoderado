@@ -2,80 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%-- <div class="top_nav">
-	<%
-	Object obj = session.getAttribute("vo");
-	if (obj != null) {
-		ClientVO vo = (ClientVO) obj;
-	%>
-	<div class="personal">
-		<a href="../apoderado/mypage.jsp">마이페이지 </a><a href="../apoderado/logout.jsp">| 로그아웃</a>
-	</div>
-	<%
-	} else {
-	%>
-	<div class="personal">
-		<a href="../apoderado/login.jsp">로그인</a> <a href="../apoderado/register.jsp"> | 회원가입</a> 		
-	</div>
-	<%
-	}
-	%>
-</div>
-<div class="menubar">
-	<button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
-		<img src="../images/menu1.png" alt="" id="menu" />
-	</button>
-
-	<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-		<div class="offcanvas-header">
-			<h3 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">DongDong</h3>
-			<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-		</div>
-		<div class="offcanvas-body">
-			<a href="">종목별 찾기</a><br />
-			<a href="">지역별 찾기</a><br /> 
-			<a href="../community/list.jsp">용병게시판</a><br />
-			<hr />
-			<a href="">프로젝트 소개</a><br /> 
-			<a href="">자주 묻는 질문</a><br /> 
-			<a href="">시설 등록하기</a><br />
-		</div>
-	</div>
-	<a href="main.jsp"><span class="logo">DongDong</span></a>
-</div>
-<%
-if (obj != null) {
-	ClientVO vo = (ClientVO) obj;
-%>
-<div class="search-box">
-	<%
-	String[] sport = { "축구", "야구", "풋살", "배드민턴", "테니스", "농구", "배구", "탁구" };
-	int num = (int) (Math.floor(Math.random() * 8));
-	String sportname = sport[num];
-	%>
-	<form action="searchResult.jsp">
-		<input type="text" class="search-text" name="keyword"
-			placeholder="<%=vo.getClname()%>님, 오늘은 <%=sportname%> 어때요?"
-			onfocus="this.placeholder=''"
-				onblur="this.placeholder='<%=vo.getClname()%>님, 오늘은 <%=sportname%> 어때요?'" id="text1"/>
-		<input type="image" src="../images/search.png" alt="" class="search-btn" id="btn1"/>
-	</form>
-</div>
-<%
-} else {
-%>
-<div class="search-box">
-	<form action="searchResult.jsp">
-		<input type="text" class="search-text" name="keyword"
-			placeholder="종목, 지역으로 검색해보세요." onfocus="this.placeholder=''"
-			onblur="this.placeholder='종목, 지역으로 검색해보세요.'" id="text1" /> 
-		<input type="image" src="../images/search.png" alt="" class="search-btn" id="btn1"/>
-	</form>
-</div>
-<%
-}
-%> --%>
-
 <!--  밑에부터 수정된 내용 -->
 
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
@@ -86,7 +12,7 @@ if (obj != null) {
       </a>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="">자주 묻는 질문</a></li>
+          <li><a href="../notice/list.jsp">공지사항</a></li>
           <li><a href="../community/list.jsp">용병게시판</a></li>
           <%
 	          Object obj1 = session.getAttribute("nCurrentPage");
@@ -97,7 +23,7 @@ if (obj != null) {
 						
 				
           %>
-          <li><a href="../search/list.jsp">종목,위치별로 찾아보기!</a></li>
+          <li><a href="../search/list.jsp">종목/지역별로 찾아보기!</a></li>
           <%
 					}
 					else if(nCurrentPage == 1){
@@ -117,20 +43,20 @@ if (obj != null) {
               <li><a data-tab="7" class="item" href="#"> 탁구장 </a></li>
             </ul>
           </li>
-          <li class="dropdown"><a data-tab1="전체" class="item" href="#"><span id="headloc">위치</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a data-tab1="전체" class="item" href="#"><span id="headloc">지역</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul class ="locul">
                 <li><a data-tab1="전체" class="item" href="#">전체</a></li>
               <li class="dropdown"><a href="#"><span>강남</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                 <ul class ="locul">
-                  <li><a data-tab1="서초구&facloc=강남구&facloc=송파구&facloc=강동구" class="item" href="#">서초구,강남구,송파구,강동구</a></li>
-                  <li><a data-tab1="강서구&facloc=양천구&facloc=구로구" class="item" href="#">강서구,양천구,구로구</a></li>
-                  <li><a data-tab1="영등포구&facloc=동작구&facloc=관악구" class="item" href="#">영등포구,동작구,관악구</a></li>
+                  <li><a data-tab1="서초구&facloc=강남구&facloc=송파구&facloc=강동구" class="item" href="#">서초/강남/송파/강동</a></li>
+                  <li><a data-tab1="강서구&facloc=양천구&facloc=구로구" class="item" href="#">강서/양천/구로</a></li>
+                  <li><a data-tab1="영등포구&facloc=동작구&facloc=관악구" class="item" href="#">영등포/동작/관악</a></li>
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>강북</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                 <ul class ="locul">
-                  <li><a data-tab1="마포구&facloc=용산구&facloc=종로구" class="item" href="#">마포구,용산구,종로구</a></li>
-                  <li><a data-tab1="동대문구&facloc=성동구&facloc=광진구" class="item" href="#">동대문구,성동구,광진구</a></li>
+                  <li><a data-tab1="마포구&facloc=용산구&facloc=종로구" class="item" href="#">마포/용산/종로</a></li>
+                  <li><a data-tab1="동대문구&facloc=성동구&facloc=광진구" class="item" href="#">동대문/성동/광진</a></li>
                   <li><a data-tab1="과천시" class="item" href="#">과천시</a></li>
                   
                 </ul>

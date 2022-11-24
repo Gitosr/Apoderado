@@ -38,11 +38,165 @@ public class FacilitiesDAO {
 		}
 	}
 	
+	
+	// 총 게시물 수
+	public int getTotal() {
+		sb.setLength(0);
+		sb.append("SELECT COUNT(*) cnt FROM facilities");
+		int count = -1; // 기본값
+			
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			rs = pstmt.executeQuery();
+			rs.next();
+			count = rs.getInt("cnt");
+				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	
+	// 종목분류 게시물 수
+		public int getTotal(int facevent) {
+			sb.setLength(0);
+			sb.append("SELECT COUNT(*) cnt FROM facilities ");
+			sb.append("where facevent = ?");
+			int count = -1; // 기본값
+				
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setInt(1, facevent);
+				rs = pstmt.executeQuery();
+				rs.next();
+				count = rs.getInt("cnt");
+					
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return count;
+		}
+		
+		
+		
+		// 위치분류 게시물 수
+		public int getTotal(String[] faclocArray) {
+			int cnt = 0;
+			sb.setLength(0);
+			sb.append("SELECT COUNT(*) cnt FROM facilities ");
+			sb.append("where ( ");
+			for(String facloc : faclocArray) {
+				cnt ++;
+				sb.append("facaddr like '%"+facloc+"%' ");
+				if(cnt<faclocArray.length) {
+					sb.append("or ");
+				}
+			}
+			sb.append(")");
+			int count = -1; // 기본값
+				
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				rs = pstmt.executeQuery();
+				rs.next();
+				count = rs.getInt("cnt");
+					
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return count;
+		}
+		
+		
+		// 종목,위치 분류 게시물 수
+		public int getTotal(int facevent, String[] faclocArray) {
+			int cnt = 0;
+			sb.setLength(0);
+			sb.append("SELECT COUNT(*) cnt FROM facilities ");
+			sb.append("where facevent = ? ");
+			sb.append("AND ( ");
+			for(String facloc : faclocArray) {
+				cnt ++;
+				sb.append("facaddr like '%"+facloc+"%' ");
+				if(cnt<faclocArray.length) {
+					sb.append("or ");
+				}
+			}
+			sb.append(")");
+			
+			int count = -1; // 기본값
+				
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setInt(1, facevent);
+				rs = pstmt.executeQuery();
+				rs.next();
+				count = rs.getInt("cnt");
+					
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return count;
+		}
+	
+
+		
+	// selectAll a-b까지의 게시물 가져오기
+	public ArrayList<FacilitiesVO> selectAll(int startNo, int endNo){
+		sb.setLength(0);
+		sb.append("SELECT RN, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+		sb.append("FROM (SELECT ROWNUM RN, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+		sb.append("FROM ( SELECT FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+		sb.append("		FROM facilities ");
+		sb.append("		ORDER BY FACNO DESC) ");
+		sb.append("	WHERE ROWNUM <= ?) ");
+		sb.append("WHERE RN >= ?");
+		ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, endNo);
+			pstmt.setInt(2, startNo);
+				
+			rs = pstmt.executeQuery();
+				
+			while(rs.next()) {
+				int facno = rs.getInt("facno");
+				int facevent = rs.getInt("facevent");
+				String facname = rs.getString("facname");
+				String facaddr = rs.getString("facaddr");
+				double facmark = rs.getDouble("facmark");
+				int facprice = rs.getInt("facprice");
+				String facexplain = rs.getString("facexplain");
+				String facimg = rs.getString("facimg");
+				int facparking = rs.getInt("facparking");
+				int facshower = rs.getInt("facshower");
+				int factype = rs.getInt("factype");
+				String facregister = rs.getString("facregister");
+				String clid = rs.getString("clid");
+					
+				FacilitiesVO vo = new FacilitiesVO(facno, facevent, facname, facaddr, facmark, facprice, facexplain, facimg, facparking, facshower, factype, facregister, clid);
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+		
+		
 	// 전체 조회
 	public ArrayList<FacilitiesVO> selectAll(){
 		ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
 		sb.setLength(0);
-		sb.append("SELECT * FROM facilities ");
+		sb.append("SELECT FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+		sb.append("FROM facilities");
+		
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -111,6 +265,50 @@ public class FacilitiesDAO {
 			return list;
 		}
 		
+		// eventAll a-b까지의 게시물 가져오기
+		public ArrayList<FacilitiesVO> eventAll(int facevent, int startNo, int endNo){
+			sb.setLength(0);
+			sb.append("SELECT RN, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+			sb.append("FROM (SELECT ROWNUM RN, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+			sb.append("FROM ( SELECT FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+			sb.append("		FROM facilities ");
+			sb.append("		WHERE FACEVENT = ? ");
+			sb.append("		ORDER BY FACNO DESC) ");
+			sb.append("	WHERE ROWNUM <= ?) ");
+			sb.append("WHERE RN >= ?");
+			ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setInt(1, facevent);
+				pstmt.setInt(2, endNo);
+				pstmt.setInt(3, startNo);
+					
+				rs = pstmt.executeQuery();
+					
+				while(rs.next()) {
+					int facno = rs.getInt("facno");
+					String facname = rs.getString("facname");
+					String facaddr = rs.getString("facaddr");
+					double facmark = rs.getDouble("facmark");
+					int facprice = rs.getInt("facprice");
+					String facexplain = rs.getString("facexplain");
+					String facimg = rs.getString("facimg");
+					int facparking = rs.getInt("facparking");
+					int facshower = rs.getInt("facshower");
+					int factype = rs.getInt("factype");
+					String facregister = rs.getString("facregister");
+					String clid = rs.getString("clid");
+						
+					FacilitiesVO vo = new FacilitiesVO(facno, facevent, facname, facaddr, facmark, facprice, facexplain, facimg, facparking, facshower, factype, facregister, clid);
+					list.add(vo);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return list;
+		}
+		
 		
 		//지역분류로 전체조회
 		public ArrayList<FacilitiesVO> locAll(String[] faclocArray){
@@ -125,9 +323,6 @@ public class FacilitiesDAO {
 				if(cnt<faclocArray.length) {
 					sb.append("or ");
 				}
-				System.out.println(sb);
-				System.out.println(faclocArray.length);
-				System.out.println(cnt);
 			}
 			sb.append(")");
 			
@@ -151,6 +346,60 @@ public class FacilitiesDAO {
 					String facregister = rs.getString("facregister");
 					String clid = rs.getString("clid");
 					
+					FacilitiesVO vo = new FacilitiesVO(facno, facevent, facname, facaddr, facmark, facprice, facexplain, facimg, facparking, facshower, factype, facregister, clid);
+					list.add(vo);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return list;
+		}
+		
+
+		// locAll a-b까지의 게시물 가져오기
+		public ArrayList<FacilitiesVO> locAll(String[] faclocArray, int startNo, int endNo){
+			int cnt = 0;
+			sb.setLength(0);
+			sb.append("SELECT RN, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+			sb.append("FROM (SELECT ROWNUM RN, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+			sb.append("FROM ( SELECT FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+			sb.append("		FROM facilities ");
+			sb.append("where ( ");
+			for(String facloc : faclocArray) {
+				cnt ++;
+				sb.append("facaddr like '%"+facloc+"%' ");
+				if(cnt<faclocArray.length) {
+					sb.append("or ");
+				}
+			}
+			sb.append(") ");
+			sb.append("		ORDER BY FACNO DESC) ");
+			sb.append("	WHERE ROWNUM <= ?) ");
+			sb.append("WHERE RN >= ?");
+			ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setInt(1, endNo);
+				pstmt.setInt(2, startNo);
+							
+				rs = pstmt.executeQuery();
+							
+				while(rs.next()) {
+					int facno = rs.getInt("facno");
+					int facevent = rs.getInt("facevent");
+					String facname = rs.getString("facname");
+					String facaddr = rs.getString("facaddr");
+					double facmark = rs.getDouble("facmark");
+					int facprice = rs.getInt("facprice");
+					String facexplain = rs.getString("facexplain");
+					String facimg = rs.getString("facimg");
+					int facparking = rs.getInt("facparking");
+					int facshower = rs.getInt("facshower");
+					int factype = rs.getInt("factype");
+					String facregister = rs.getString("facregister");
+					String clid = rs.getString("clid");
+								
 					FacilitiesVO vo = new FacilitiesVO(facno, facevent, facname, facaddr, facmark, facprice, facexplain, facimg, facparking, facshower, factype, facregister, clid);
 					list.add(vo);
 				}
@@ -208,6 +457,60 @@ public class FacilitiesDAO {
 			}
 			return list;
 		}
+		
+		// elAll a-b까지의 게시물 가져오기
+	public ArrayList<FacilitiesVO> elAll(int facevent, String[] faclocArray, int startNo, int endNo){
+		int cnt = 0;
+		sb.setLength(0);
+		sb.append("SELECT RN, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+		sb.append("FROM (SELECT ROWNUM RN, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+		sb.append("FROM ( SELECT FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+		sb.append("		FROM facilities ");
+		sb.append("where facevent = ? ");
+		sb.append("AND ( ");
+		for(String facloc : faclocArray) {
+			cnt ++;
+			sb.append("facaddr like '%"+facloc+"%' ");
+			if(cnt<faclocArray.length) {
+				sb.append("or ");
+			}
+		}
+		sb.append(") ");
+		sb.append("		ORDER BY FACNO DESC) ");
+		sb.append("	WHERE ROWNUM <= ?) ");
+		sb.append("WHERE RN >= ?");
+		ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, facevent);
+			pstmt.setInt(2, endNo);
+			pstmt.setInt(3, startNo);
+									
+			rs = pstmt.executeQuery();
+									
+			while(rs.next()) {
+				int facno = rs.getInt("facno");
+				String facname = rs.getString("facname");
+				String facaddr = rs.getString("facaddr");
+				double facmark = rs.getDouble("facmark");
+				int facprice = rs.getInt("facprice");
+				String facexplain = rs.getString("facexplain");
+				String facimg = rs.getString("facimg");
+				int facparking = rs.getInt("facparking");
+				int facshower = rs.getInt("facshower");
+				int factype = rs.getInt("factype");
+				String facregister = rs.getString("facregister");
+				String clid = rs.getString("clid");
+										
+				FacilitiesVO vo = new FacilitiesVO(facno, facevent, facname, facaddr, facmark, facprice, facexplain, facimg, facparking, facshower, factype, facregister, clid);
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 		
 	// 1건 조회
 	public FacilitiesVO selectOne(int facno) {
@@ -352,6 +655,43 @@ public class FacilitiesDAO {
 		return list;
 		
 	}
+	
+	// 검색 결과 조회 문자열
+		public ArrayList<Integer> selectKeywordArr(String[] keyword){
+			ArrayList<Integer> list = new ArrayList<Integer>();
+			
+			sb.setLength(0);
+			
+			for(int i=0; i < keyword.length; i++) {
+				sb.append("SELECT facno ");
+				sb.append("FROM FACILITIES ");
+				sb.append("WHERE FACNAME LIKE '%" + keyword[i] + "%' ");
+				sb.append("OR FACADDR LIKE '%" + keyword[i] + "%' ");	
+				
+				if(i < keyword.length-1) {
+					sb.append("union ");
+					
+				}
+			}
+
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					int facno = rs.getInt("facno");
+					System.out.println(facno);
+					
+					Integer vo = new Integer(facno);
+					list.add(vo);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return list;
+		}
+		
 	
 	// 한 주간 예약횟수 상위 시설 출력 == 여기까지
 	public ArrayList<ToprankVO> selectToprank(){

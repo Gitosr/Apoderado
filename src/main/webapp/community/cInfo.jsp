@@ -1,8 +1,8 @@
 
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="org.json.simple.JSONArray"%>
 <%@page import="kr.co.dongdong.dao.CommentsDAO"%>
 <%@page import="kr.co.dongdong.vo.CommentsVO"%>
-<%@page import="org.json.simple.JSONArray"%>
-<%@page import="org.json.simple.JSONObject"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

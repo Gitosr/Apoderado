@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 
 public class UseVO {
 	int facno;
-	int useorder;
+	int restime;
 	String usetime;
 }

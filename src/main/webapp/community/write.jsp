@@ -5,6 +5,34 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<!-- --------header  -------- -->
+<link rel="stylesheet" href="../css/main.css" />
+
+<!-- 수정된 부분 -->
+<link href="../Resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/bootstrap-icons/bootstrap-icons.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/aos/aos.css" rel="stylesheet">
+<link href="../Resources/vendor/glightbox/css/glightbox.min.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/swiper/swiper-bundle.min.css"
+	rel="stylesheet">
+<!-- Template Main CSS File -->
+<link href="../Resources/css/main.css" rel="stylesheet">
+<!-- Vendor JS Files -->
+<script src="../Resources/js/bootstrap.bundle.js"></script>
+<script src="../Resources/vendor/aos/aos.js"></script>
+<script src="../Resources/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="../Resources/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="../Resources/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="../Resources/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="../Resources/vendor/php-email-form/validate.js"></script>
+<link rel="stylesheet" href="../css/main.css" />
+<!-- ------------------------------------------- -->
+
+
 <title>Insert title here</title>
 
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -24,19 +52,30 @@ $(function(){
 	});
 })
 </script>
+<style>
+div.margind{
+width:60%;
+margin:30px;
+margin-left:auto;
+margin-right:auto;
+}
+</style>
 
 </head>
 
 <body>
+<header id="header" class="header d-flex align-items-center">
+		<jsp:include page="../mainPage/header.jsp" />
+	</header>
 	<%
 	Object obj = session.getAttribute("vo");
 	ClientVO vo = null;
 	if(obj !=null){
 		vo = (ClientVO)obj;
 	%>
-	<div class="container">
+	<div class="margind">
 		<form action="writeOk.jsp" method="post">
-			<table class="table table-striped">
+			<table class="table">
 				<tr>
 					<th>작성자</th>
 					<td>
@@ -46,17 +85,17 @@ $(function(){
 				</tr>
 				<tr>
 					<th>제목</th>
-					<td><input type="text" name="title" id="" /></td>
+					<td><input type="text" name="title" id="" size="90%" /></td>
 				</tr>
 				<tr>
 					<th>내용</th>
 					<td>
-					<textarea name="contents" id="summernote" cols="80" rows="30"></textarea></td>
+					<textarea name="contents" id="summernote"></textarea></td>
 				</tr>
 				<tr>
-					<td colspan="2">
-					<a href="list.jsp"><input type="button" value="목록" class="btn btn-success"/></a>
-					<input type="submit" value="작성" class="btn btn-primary"/>
+					<td></td><td align="right">
+					<input type="button" value="취소" onClick="history.go(-1)" class="btn btn-outline-success" />
+					<input type="submit" value="작성" class="btn btn-outline-success" />
 					</td>
 				</tr>
 			</table>

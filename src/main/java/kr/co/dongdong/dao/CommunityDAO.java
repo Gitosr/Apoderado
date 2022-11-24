@@ -99,7 +99,36 @@ public class CommunityDAO {
 		}
 		return list;
 	}
+public ArrayList<CommunityVO> searchRev(String x) {
+			ArrayList<CommunityVO> list = new ArrayList<CommunityVO>();
+			sb.setLength(0);
+			sb.append("select comno, clid, comtitle, comfield, comdate, hits ");
+			sb.append("from community ");
+			sb.append("where comtitle like '%"+x+"%' ");
+			sb.append("or comfield like '%"+x+"%'");
+			
+			try {
+				
+				pstmt = conn.prepareStatement(sb.toString());
+				rs = pstmt.executeQuery();
+				
+				while (rs.next()) {
 
+					int comno = rs.getInt("comno");
+					String clid = rs.getString("clid");
+					String comtitle = rs.getString("comtitle");
+					String comfield = rs.getString("comfield");
+					String comdate = rs.getString("comdate");
+					int hits = rs.getInt("hits");
+					
+					CommunityVO vo = new CommunityVO(comno, clid, comtitle,comfield, comdate, hits);
+					list.add(vo);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return list;
+		}
 	//조회수 1 증가
 	public void raiseHits(int comno) {
 		sb.setLength(0);
