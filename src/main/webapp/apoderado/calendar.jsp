@@ -168,38 +168,39 @@ $(function () {
 
         function calMoveEvtFn() {
             //전달 클릭
-            $(".custom_calendar_table").on("click", ".prev", function () {
-                nowDate = new Date(nowDate.getFullYear(), nowDate.getMonth() - 1, nowDate.getDate());
-                calendarMaker($(target), nowDate);
-                count--;
-
-                $.ajax({
-	               	url : "timeCount.jsp",
-	               	data : { "cnt" : count, "fno" : <%=no%> },
-	               	dataType : "json",
-	               	success : function(res){
+            if(count >= 1) {
+				$(".custom_calendar_table").on("click", ".prev", function () {
+				    nowDate = new Date(nowDate.getFullYear(), nowDate.getMonth() - 1, nowDate.getDate());
+				    calendarMaker($(target), nowDate);
+				    count--;
+				
+				    $.ajax({
+				    	url : "timeCount.jsp",
+				    	data : { "cnt" : count, "fno" : <%=no%> },
+				            	dataType : "json",
+				            	success : function(res){
 						var depart = res;
-	               		
-	               		for(var i=0; i<depart.length; i++) {
-	               			var total = parseInt(depart[i].total);
-	               			var n = parseInt(depart[i].n);
-	               			
+				            		
+				            		for(var i=0; i<depart.length; i++) {
+				            			var total = parseInt(depart[i].total);
+				            			var n = parseInt(depart[i].n);
+				            			
 							if(n!=total) {
 								$("#cou_day"+(i+1)+" .num").text(depart[i].n+"/"+depart[i].total);	
-	                       		$("#cou_day"+(i+1)+" .num").addClass("num")
-	                  		}else {
-	                  			$("#cou_day"+(i+1)+" .num").text(depart[i].n+"/"+depart[i].total);
-	                  			$("#calendar_"+(i+1)).attr("onclick",'event.cancelBubble=true');
-	                  			$("#calendar_"+(i+1)).addClass("time_full");
-	                  			$("#cou_day"+(i+1)+" .num").removeClass("num")
-	               			}
-	               		}
-	               	}
-	               
+				                    		$("#cou_day"+(i+1)+" .num").addClass("num")
+				               		}else {
+				               			$("#cou_day"+(i+1)+" .num").text(depart[i].n+"/"+depart[i].total);
+				               			$("#calendar_"+(i+1)).attr("onclick",'event.cancelBubble=true');
+				               			$("#calendar_"+(i+1)).addClass("time_full");
+				               			$("#cou_day"+(i+1)+" .num").removeClass("num")
+				            			}
+				            		}
+				            	}
+				            
 				});
-            });
-            //다음날 클릭
+				        });
             
+            //다음날 클릭            
             $(".custom_calendar_table").on("click", ".next", function () {
                 nowDate = new Date(nowDate.getFullYear(), nowDate.getMonth() + 1, nowDate.getDate());
                 calendarMaker($(target), nowDate); 

@@ -1,9 +1,11 @@
+<%@page import="kr.co.dongdong.vo.FacilitiesVO"%>
+<%@page import="kr.co.dongdong.dao.FacilitiesDAO"%>
 <%@page import="kr.co.dongdong.vo.UseVO"%>
 <%@page import="kr.co.dongdong.dao.UseDAO"%>
 <%@page import="test.Event"%>
-<%@page import="kr.co.dongdong.vo.FacilityVO"%>
+
 <%@page import="kr.co.dongdong.vo.ClientVO"%>
-<%@page import="kr.co.dongdong.dao.FacilityDAO"%>
+
 <%@page import="kr.co.dongdong.dao.ClientDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -94,9 +96,9 @@
 			
 			ClientDAO cdao = new ClientDAO();
 			
-			FacilityDAO fdao = new FacilityDAO();
+			FacilitiesDAO fdao = new FacilitiesDAO();
 			
-			FacilityVO fvo = fdao.selectOne(facno);
+			FacilitiesVO fvo = fdao.selectOne(facno);
 			
 			Event e = new Event();
 			
@@ -115,33 +117,33 @@
 	<form action="" name = "frm">
 		<input type="hidden" name="resdate" value = "<%= resdate %>" />
 		<input type="hidden" name="facno" value="<%= fvo.getFacno()%>"/>
-		<input type="hidden" name="restime" value="<%= uvo.getUseorder()%>"/>
+		<input type="hidden" name="restime" value=""/>
 	<div id ="head">
 		<h2><%=fvo.getFacname() %><span><%=event %></span></h2>
 		<p><%=fvo.getFacaddr() %></p>
 		<br/>
 		<p><%=year %>년 <%=date.substring(0, 2) %>월 <%=date.substring(3) %>일</p>
 		
-		<p><%=uvo.getUsetime() %> (<%=uvo.getUseorder() %>)차</p>
+		<p><%=uvo.getUsetime() %> 차</p>
 		<hr/>
 		<p>총 결제 금액 <span><%=fvo.getFacprice() %></span></p>
 	</div>
 	<div id="body">
 		<div>
-		<p>카드 번호 <span><%=cvo.getClcardno() %></span></p>
-		<p>신청자명 <%=cvo.getClname() %></p>
-		<p>연락처  <%=cvo.getClmp() %></p>
-	</div>
-		<hr />
-		<ol>
-		<li><input type="checkbox" id="ckboxall" />전체동의</li>
-		<li><input type="checkbox" name = "ckbox1" class="ckbox" id="ckbox1"  />개인정보 제 3자제공방침</li>
-		<li><input type="checkbox" name = "ckbox2" class="ckbox" id="ckbox2" />개인정보 취급 방침</li>
-		<li><input type="checkbox" name = "ckbox3" class="ckbox" id="ckbox3" />시설 이용 약관</li>
-		</ol>
-		
-		<input type="button" id="reserve" value="예약하기" />
-		<a href="back.jsp"><input type="button" id="back" value="돌아가기" /></a>
+			<p>카드 번호 <span><%=cvo.getClcardno() %></span></p>
+			<p>신청자명 <%=cvo.getClname() %></p>
+			<p>연락처  <%=cvo.getClmp() %></p>
+		</div>
+			<hr />
+			<ol>
+			<li><input type="checkbox" id="ckboxall" />전체동의</li>
+			<li><input type="checkbox" name = "ckbox1" class="ckbox" id="ckbox1"  />개인정보 제 3자제공방침</li>
+			<li><input type="checkbox" name = "ckbox2" class="ckbox" id="ckbox2" />개인정보 취급 방침</li>
+			<li><input type="checkbox" name = "ckbox3" class="ckbox" id="ckbox3" />시설 이용 약관</li>
+			</ol>
+			
+			<input type="button" id="reserve" value="예약하기" />
+			<a href="back.jsp"><input type="button" id="back" value="돌아가기" /></a>
 	</div>
 	
 	
