@@ -10,6 +10,27 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+
+<style>
+.btnref{
+float:right;
+}
+div.margind{
+	width:65%;
+	margin:10px;
+	margin-left:auto;
+	margin-right:auto;
+	}
+	.tablehd{
+	background:rgb(209,231,221);
+	}
+</style>
 </head>
 <body>
 <%
@@ -97,10 +118,10 @@
 		isNext = true;
 	}
 	%>
-	예약내역조회 내용이 들어갑니다
-	<div class="container">
-		<table class="table table-striped">
-			<tr>
+	
+	<div class="margind">
+		<table class="table table-hover">
+			<tr class="tablehd">
 				<th>예약번호</th>
 				<th>예약시설</th>
 				<th>예약날짜</th>
@@ -157,9 +178,10 @@
 			</tr>
 			<tr>
 				<td colspan="5">
+				<div class="btnref">
 				<a href="../refund/refRequest.jsp"> 
-					<input type="button" value="환불신청" class="btn btn-primary" />
-				</a></td>
+					<input type="button" value="환불신청" class="btn btn-success"/>
+				</a></div></td>
 			</tr>
 		</table>
 	</div>

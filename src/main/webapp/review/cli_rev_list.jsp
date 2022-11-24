@@ -230,7 +230,7 @@
 		<div class="btn">
 			
 				<a href="../review/write.jsp">
-	<input type="button" value="리뷰작성" class="btn btn-outline-success" />
+	<input type="button" value="리뷰작성" class="btn btn-success" />
 	</a>		
 			</div>
 
