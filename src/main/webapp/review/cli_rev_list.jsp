@@ -55,6 +55,11 @@
 	margin-bottom:10px;
 	float:right;
 	}
+	#btnlist{
+	float:left;
+	padding:5px 10px 5px 10px;
+	}
+	
 	</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -196,6 +201,9 @@
 </head>
 <body>
 	<div class="margind">
+	
+	<input type="button" value="목록" onclick="reset();" id="btnlist" class="btn btn-outline-success" />
+	
 	<div class="scbox">
 	<input type="text" name="search" id="search_data" placeholder="검색어"/>
 	<button type="button" style="border:none; background-color:transparent" onclick="search_run();" ><img width="25px" src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-vert.png" alt=""></button></div>
@@ -219,7 +227,10 @@
 		</tbody>
 		</table>
 		<div class="btn">
-			<input type="button" value="목록" onclick="reset();" class="btn btn-outline-success" />
+			
+				<a href="../review/write.jsp">
+	<input type="button" value="리뷰작성" class="btn btn-outline-success" />
+	</a>		
 			</div>
 
 			
