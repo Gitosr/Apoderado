@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: 
+}
+
+.title {
+	margin: 80px auto;
+	text-align: center;
+}
+
+.title>h1>span {
+	color: #f96f59;
+}
+
+table {
+	width: 780px;
+	height: 1000px;
+	margin : 10px auto;
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.register-form {
+	width: 800px;
+	height: 1200px;
+	margin: 50px auto;
+	padding: 20px;
+	border: solid 1px grey;
+	border-radius: 20px;
+	overflow: auto;
+	box-shadow: 1px 1px 10px grey;
+}
+
+th {
+	width: 200px;
+	height: 100px;
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+	border-right: 2px dotted #eeeeee;
+}
+td {
+	width: 600px;
+}
+
+tr {
+	border-bottom: 2px dotted #eeeeee;
+}
+
+input {
+	border : none;
+}
+.text {
+	height: 30px;
+	padding: 10px;
+	border-bottom : solid 1px grey;
+	text-align : center;
+}
+.file {
+	margin-left: 50px;
+}
+
+.btn-box {
+	text-align: center;
+	height : 50px;
+	border-bottom: none;
+}
