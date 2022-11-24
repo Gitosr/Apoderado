@@ -71,6 +71,7 @@
 <%
 String no = request.getParameter("facno");
 int facno = Integer.parseInt(no);
+
 %>
 var count = 0;
 $(function () {
@@ -136,7 +137,7 @@ $(function () {
             tag += "<td onclick='event.cancelBubble=true'></td>";
             cnt++;
         }
- 
+
         //날짜 채우기
         for (var i = 1; i <= thisLastDay.getDate(); i++) {
             if (cnt % 7 == 0) { tag += "<tr>"; }
