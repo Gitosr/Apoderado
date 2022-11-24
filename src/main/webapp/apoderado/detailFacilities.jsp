@@ -1,3 +1,5 @@
+<%@page import="kr.co.dongdong.vo.ClientVO"%>
+<%@page import="kr.co.dongdong.dao.ClientDAO"%>
 <%@page import="kr.co.dongdong.vo.FacilitiesVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kr.co.dongdong.dao.FacilitiesDAO"%>
@@ -44,7 +46,18 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$(function() {
+<%
+Object obj2 = session.getAttribute("vo");
+int ch = -1;
+
+if(obj2 !=null) {
+	ch = 0;
+}else {
+	ch = 1;
+}
+%>
+$(function() {
+	console.log(<%=ch%>+"로그인")
 		$('ul.tabs li').click(function() {
 	
 			var tab_id = $(this).attr('data-tab');
@@ -70,13 +83,22 @@
 		});
 	});
 	
+	
+
 	function openReserve() {
-		console.log("openReserve");		
-		window.open("", "popOpen", 'top=350, left=500, width=500, height=2000, status=no, menubar=no, toolbar=no, resizable=no' );
-		reserve.target="popOpen";
-		reserve.action="reserve.jsp";
-		reserve.submit( );
+		
+		if(<%=ch%> == 0) {
+			window.open("", "popOpen", 'top=350, left=500, width=500, height=2000, status=no, menubar=no, toolbar=no, resizable=no' );
+			reserve.target="popOpen";
+			reserve.action="reserve.jsp";
+			reserve.submit( );	
+		}else {
+			alert("로그인을 부탁드립니다.");
+		}
+		
 	}
+	
+
 </script>
 </head>
 <body>	
@@ -87,6 +109,15 @@
 		FacilitiesDAO dao = new FacilitiesDAO();
 		FacilitiesVO vo = dao.selectOne(facno);	
 		
+		Object obj = session.getAttribute("vo");
+		int login = -1;
+
+		if(obj !=null) {
+			login = 0;
+		}else {
+			login = 1;
+		}
+
 		String facevent = "";
 		if(vo.getFacevent()==0) {
 			facevent = "축구장";
@@ -177,10 +208,10 @@
 				<td>: <%=factype %></td>
 			</tr>
 			<tr>
-			
 				<th>선택날짜</th>
 				<td id="select_time" colspan="2"></td>	
 			</tr>
+
 		</table>
 
 		<ul class="tabs">
