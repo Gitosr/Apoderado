@@ -146,7 +146,7 @@ ul.tabs li.current {
 	if (obj != null) {
 		ClientVO vo = (ClientVO) obj;
 	%>
-	<div class="container">
+	<div>
 		<ul class="tabs">
 			<li class="tab-link current" data-tab="tab-1">회원정보수정</li>
 			<li class="tab-link" data-tab="tab-2">예약내역조회</li>
