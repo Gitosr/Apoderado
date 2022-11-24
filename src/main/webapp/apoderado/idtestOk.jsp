@@ -17,12 +17,12 @@
 	if(vo == null) {
 		// 사용 가능한 아이디
 		session.setAttribute("idtest", id);
-		response.sendRedirect("register.jsp");
+		response.sendRedirect("register2.jsp");
 	
 	}else {
 		// 사용 불가능한 아이디
 		session.setAttribute("idtest", "");
-		response.sendRedirect("register.jsp");
+		response.sendRedirect("register2.jsp");
 	}
 	
 %>

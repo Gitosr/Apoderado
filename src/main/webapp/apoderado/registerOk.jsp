@@ -26,15 +26,23 @@
 		String mp = request.getParameter("mp");
 		
 		String gender = request.getParameter("gender");
+		System.out.println("gender"+gender);
 		
 		String cardno = request.getParameter("cardno");
 		
 		ClientDAO dao = new ClientDAO();
 		ClientVO vo = new ClientVO();
 		
+		String email = email1+"@"+email2;
+		System.out.println("email"+email);
+		
+		
+		
+		
 		vo.setClid(id);
 		vo.setClname(name);
 		vo.setClpw(pw);
+		
 		vo.setClmail(email1+email2);
 		vo.setClcardno(cardno);
 		

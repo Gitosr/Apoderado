@@ -92,7 +92,7 @@
 		
 	});
 </script>
-<link rel="stylesheet" href="../css/facRegister2.css" />
+<link rel="stylesheet" href="../css/fac_Register.css" />
 <link rel="stylesheet" href="../css/footer.css" />
 </head>
 <body>
