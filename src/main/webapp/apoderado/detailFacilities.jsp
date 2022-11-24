@@ -49,9 +49,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="../css/detailFacilities.css" />
 
-<style>
-
-</style>
 <script type="text/javascript">
 <%
 	Object obj2 = session.getAttribute("vo");
@@ -65,9 +62,14 @@
 %>
 
 	function openReserve() {
+		var popupWidth = 460;
+		var popupHeight = 800;
+
+		var popupX = 2600;
+		var popupY= 100;
 		
 		if(<%=ch%> == 0) {
-			window.open("", "popOpen", 'top=350, left=500, width=500, height=2000, status=no, menubar=no, toolbar=no, resizable=no' );
+			window.open("", "popOpen", 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
 			reserve.target="popOpen";
 			reserve.action="reserve.jsp";
 			reserve.submit( );	
@@ -152,7 +154,7 @@
 	                	<img src="<%=vo.getFacimg() %>" alt="" class="img-fluid">
 					</div>
 	
-					<h2 class="title"><%=vo.getFacname() %></h2>
+					<h2 class="title"><%=vo.getFacname() %> <jsp:include page="../mainPage/interestsCheck.jsp" /> </h2>
 	
 					<div class="meta-top">
 						<ul>
@@ -247,7 +249,12 @@
 								</tr>
 								<tr>
 									<th>선택날짜</th>
-									<td id="select_time" colspan="2"></td>	
+									<td id="select_time" colspan="2">날짜를 선택해 주세요</td>	
+								</tr>
+								<tr>
+									<td colspan="2" id="btn_bar">
+										<input type="button" value="예매하기" onclick="openReserve();" type="button" class="btn btn-outline-primary" style="width:120pt;height:30pt;" />
+									</td>
 								</tr>
 				  			</table>
 						</div>
