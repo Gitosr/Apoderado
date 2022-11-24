@@ -5,6 +5,6 @@
 	session.invalidate(); // 세션을 무효화
 
 	// login.jsp 리다이렉트
-	response.sendRedirect("login.jsp");
+	response.sendRedirect("../mainPage/main.jsp");
 
 %>

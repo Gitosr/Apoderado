@@ -555,7 +555,7 @@ li.mainmenu ul {
 									<%	
 									} else {
 									%>
-										<img src="../images/empty-heart.png" alt="" id="heart<%=vo.getFacno() %>" class="heart"/>
+										<img src="../images/empty-heart.png" alt="" id="<%=vo.getFacno() %>" class="heart"/>
 									<%
 									}
 									%>
