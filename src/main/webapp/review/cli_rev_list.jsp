@@ -55,9 +55,6 @@
 	margin-bottom:10px;
 	float:right;
 	}
-	#tfoot1{
-	border-bottom:0px;
-	}
 	</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -201,7 +198,7 @@
 	<div class="margind">
 	<div class="scbox">
 	<input type="text" name="search" id="search_data" placeholder="검색어"/>
-					<button type="button" style="border:none; background-color:transparent" onclick="search_run();" ><img width="25px" src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-vert.png" alt=""></button></div>
+	<button type="button" style="border:none; background-color:transparent" onclick="search_run();" ><img width="25px" src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-vert.png" alt=""></button></div>
 
 		<table class="table">
 		<thead class="table-success">
@@ -224,6 +221,8 @@
 		<div class="btn">
 			<input type="button" value="목록" onclick="reset();" class="btn btn-outline-success" />
 			</div>
+
+			
 	</div>
 </body>
 </html>
