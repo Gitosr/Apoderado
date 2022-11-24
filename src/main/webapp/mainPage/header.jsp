@@ -48,7 +48,8 @@
                 <li><a data-tab1="전체" class="item" href="#">전체</a></li>
               <li class="dropdown"><a href="#"><span>강남</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                 <ul class ="locul">
-                  <li><a data-tab1="서초구&facloc=강남구&facloc=송파구&facloc=강동구" class="item" href="#">서초/강남/송파/강동</a></li>
+                  <li><a data-tab1="송파구&facloc=강동구" class="item" href="#">강동/송파</a></li>
+                  <li><a data-tab1="서초구&facloc=강남구" class="item" href="#">강남/서초</a></li>
                   <li><a data-tab1="강서구&facloc=양천구&facloc=구로구" class="item" href="#">강서/양천/구로</a></li>
                   <li><a data-tab1="영등포구&facloc=동작구&facloc=관악구" class="item" href="#">영등포/동작/관악</a></li>
                 </ul>
@@ -56,7 +57,7 @@
               <li class="dropdown"><a href="#"><span>강북</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                 <ul class ="locul">
                   <li><a data-tab1="마포구&facloc=용산구&facloc=종로구" class="item" href="#">마포/용산/종로</a></li>
-                  <li><a data-tab1="동대문구&facloc=성동구&facloc=광진구" class="item" href="#">동대문/성동/광진</a></li>
+                  <li><a data-tab1="동대문구&facloc=성동구&facloc=광진구&facloc=중랑" class="item" href="#">동대문/성동/광진/중랑</a></li>
                   <li><a data-tab1="과천시" class="item" href="#">과천시</a></li>
                   
                 </ul>
@@ -72,7 +73,7 @@
 			if (obj != null) {
 				ClientVO vo = (ClientVO) obj;
 			%>
-			<li><a href="#">시설 등록하기</a></li>
+			<li><a href="../mainPage/fac_Register.jsp">시설 등록하기</a></li>
 			<li><a href="../apoderado/mypage.jsp">마이페이지</a></li>
           	<li><a href="../apoderado/logout.jsp">로그아웃</a></li>
 			<%
