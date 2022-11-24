@@ -97,7 +97,7 @@ if(no!=null){
 			</tr>
 			<tr>
 				<td></td><td align="right">
-				<a href="list.jsp"><input type="button" value="목록" class="btn btn-outline-success" /></a>
+				<input type="button" value="취소" onClick="history.go(-1)" class="btn btn-outline-success" />
 				<input type="submit" value="저장" class="btn btn-outline-success" />
 				</td>
 			</tr>

@@ -122,7 +122,7 @@ font-size:1.2rem;
 			clid2 = vo2.getClid();}
 			
 			String clid = vo.getClid();
-			if(clid2.equals(clid)){ %>
+			if(clid2.equals(clid)|(clid2.equals("admin"))){ %>
 			<a href="modify.jsp?notno=<%=vo.getNotno()%>">
 			<input type="button" value="수정" class="btn btn-outline-success"/></a>
 			<a href="deleteOk.jsp?notno=<%=vo.getNotno()%>">

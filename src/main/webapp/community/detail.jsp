@@ -118,7 +118,7 @@ margin-right:auto;
 			clid2 = vo2.getClid();}
 			
 			String clid = vo.getClid();
-			if(clid2.equals(clid)){ %>
+			if(clid2.equals(clid)|clid2.equals("admin")){ %>
 			<a href="modify.jsp?comno=<%=vo.getComno()%>">
 			<button type="button" class="btn btn-outline-success">수정</button></a>
 			<a href="deleteOk.jsp?comno=<%=vo.getComno()%>">
