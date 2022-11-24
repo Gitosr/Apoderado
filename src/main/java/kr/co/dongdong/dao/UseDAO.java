@@ -93,6 +93,33 @@ import kr.co.dongdong.vo.UseVO;
 		return vo;
 	}
 	
+	public UseVO getUseTime(int facno, int restime) {
+		sb.setLength(0);
+		sb.append("SELECT * FROM use ");
+		sb.append("WHERE facno = ? and restime = ? ");
+		
+		UseVO vo = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, facno);
+			pstmt.setInt(2, restime);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				String usetime = rs.getString("usetime");
+				
+				vo = new UseVO(facno, restime, usetime);
+						
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return vo;
+	}
+	
 	public ArrayList<UseVO> getTime(int facno, String resdate) {
 		sb.setLength(0);
 		sb.append("select * from ( " );

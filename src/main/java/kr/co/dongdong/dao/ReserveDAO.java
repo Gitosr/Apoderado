@@ -153,26 +153,26 @@ public class ReserveDAO {
 	}
 	
 	// 추가
-		public void insertOne(ReserveVO vo) {
-			sb.setLength(0);
-			sb.append("INSERT INTO reserve ");
-			sb.append("VALUES (reserve_resno_SEQ.NEXTVAL,?,?,?,?,sysdate,0)");
-			
-			if(vo != null) {
-				try {
-					pstmt = conn.prepareStatement(sb.toString());
-					pstmt.setString(1, vo.getClid());
-					pstmt.setInt(2, vo.getFacno());
-					pstmt.setInt(3, vo.getRestime());
-					pstmt.setString(4, vo.getResdate());
-					
-					pstmt.executeUpdate();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	public void insertOne(ReserveVO vo) {
+		sb.setLength(0);
+		sb.append("INSERT INTO reserve ");
+		sb.append("VALUES (reserve_resno_SEQ.NEXTVAL,?,?,?,?,sysdate,0)");
+		
+		if(vo != null) {
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setString(1, vo.getClid());
+				pstmt.setInt(2, vo.getFacno());
+				pstmt.setInt(3, vo.getRestime());
+				pstmt.setString(4, vo.getResdate());
+				
+				pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
+	}
 		
 		//상태 변경 (등급 0으로)
 		public void modifyOne(int resno) {

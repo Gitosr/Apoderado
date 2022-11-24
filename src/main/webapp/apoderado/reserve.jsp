@@ -1,3 +1,6 @@
+<%@page import="kr.co.dongdong.vo.UseVO"%>
+<%@page import="kr.co.dongdong.vo.FacilitiesVO"%>
+<%@page import="kr.co.dongdong.dao.FacilitiesDAO"%>
 <%@page import="kr.co.dongdong.dao.UseDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -51,10 +54,19 @@
 </head>
 <body>
 	<%
-		String data = request.getParameter("facno");
-		String data1 = request.getParameter("restime");
-		String data2 = request.getParameter("resdate");
-		UseDAO dao = new UseDAO();
+		String no = request.getParameter("facno");
+		String time = request.getParameter("restime");
+		String resdate = request.getParameter("resdate");
+		
+		int facno = Integer.parseInt(no);
+		int restime = Integer.parseInt(time);
+		
+		FacilitiesDAO dao = new FacilitiesDAO();
+		FacilitiesVO vo = new FacilitiesVO();
+		vo = dao.selectOne(facno);
+		
+		UseDAO dao2 = new UseDAO();
+		UseVO vo2 = dao2.getUseTime(facno, restime);
 		
 	%>
 	
@@ -81,10 +93,14 @@
 			<textarea name="" id="" cols="50" rows="10">시설 이용 약관</textarea>
 		</li>
 	</ol>
-	<h3><%=data %></h3>
-	<h3><%=data2 %></h3>
-	<h3><%=data1 %></h3>
-	
-	<input type="button" id="reserve" value="예약하기" />
+	<form action="../search/reservationOk.jsp">
+		<h3>장소 : <%=vo.getFacname() %></h3>		
+		<h3>예약날짜 : <%=resdate %></h3>
+		<h3>이용시간 : <%=restime %> : <%=vo2.getUsetime() %></h3>
+		<input type="hidden" name="facno" value='<%=facno%>'/>
+		<input type="hidden" name="restime" value='<%=restime%>'/>
+		<input type="hidden" name="resdate" value='<%=resdate%>'/>			
+		<input type="submit" id="reserve" value="예약하기" />
+	</form>
 </body>
 </html>
