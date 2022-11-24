@@ -17,7 +17,7 @@
 	
 	if(vo == null) {
 		// 로그인 실패
-		response.sendRedirect("login.jsp");
+		response.sendRedirect("login2.jsp");
 	
 	}else {
 		// 로그인 성공
