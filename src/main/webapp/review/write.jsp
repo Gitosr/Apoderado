@@ -89,7 +89,7 @@ ClientVO vo =null;
 			<tr>
 			<% 
 			ReviewDAO dao = new ReviewDAO();
-			ArrayList<Integer> list = dao.selectResno(vo.getClid());
+			ArrayList<Integer> list = dao.selectResnoRef(vo.getClid());
 			%>
 			
 				<th>작성자</th>

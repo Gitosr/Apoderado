@@ -94,6 +94,7 @@
 			String revtitle = list2.get(i).getRevtitle();
 			String clid = dao.selectID(list2.get(i).getResno());
 			String revdate = list2.get(i).getRevdate();
+			String facname = dao.selectFacname(list2.get(i).getResno());
 			
 			int score = list2.get(i).getRevscore();
 			
@@ -112,7 +113,8 @@
 			if(score==5){scoreStar = "★★★★★";}
 		
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("revno",revno);		
+			jsonObject.put("revno",revno);
+			jsonObject.put("facname",facname);		
 			jsonObject.put("revtitle",revtitle);
 			jsonObject.put("revcontents",revcontents);
 			jsonObject.put("revdate",revdate);

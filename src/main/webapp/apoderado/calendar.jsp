@@ -261,14 +261,15 @@ $(function () {
                 			console.log("데이터가 없습니다.");
                 		}else {
                 			data += '<form name="reserve" method="get">';
-                			data += '<select name="restime" id="">-----------';
+                			data += '<select name="restime" id="">';
+                			data += '<option selected>이용 가능한 시간</option>';
                 			for(var i=0; i<res.length; i++) {
                 				data += '<option value="'+ res[i].restime +'">' +res[i].usetime+ "</option>";
                 			}
                 			data += '</select>';
                 			data += '<input type="hidden" name="resdate" value="'+date+'"/>';
                 			data += '<input type="hidden" name="facno" value="<%=facno%>"/>';
-            				data += '</form><input type="button" value="전송" onclick="openReserve();"/>';
+            				data += '</form>';
                 		}
                 		
                 		$("#select_time").empty();

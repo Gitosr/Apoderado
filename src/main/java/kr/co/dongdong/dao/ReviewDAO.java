@@ -274,6 +274,32 @@ public class ReviewDAO {
 		return list;
 	}
 	
+	//예약테이블에서 내가 썼던 예약번호들 가져오기 환불된 것 제외한다.
+	public ArrayList<Integer> selectResnoRef(String clid) {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		sb.setLength(0);
+		sb.append("select resno ");
+		sb.append("from reserve ");
+		sb.append("where clid = ?");
+		sb.append("and resstate = 1 ");
+
+
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, clid);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+			int resno = rs.getInt("resno");
+			list.add(resno);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+		
+	
 	// 특정 시설번호에 대한 리뷰들 모으기 
 	public ArrayList<ReviewVO> selectReview(int facno) {
 		ArrayList<ReviewVO> list = new ArrayList<ReviewVO>();

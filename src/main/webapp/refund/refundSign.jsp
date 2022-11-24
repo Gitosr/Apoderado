@@ -64,11 +64,14 @@ width:100%;
 <body>
 <header id="header" class="header d-flex align-items-center">
 		<jsp:include page="../mainPage/header.jsp" />
-	</header>
+</header>
 	<%
 	Object obj = session.getAttribute("vo");
 	RefundDAO dao = new RefundDAO();
-	ClientVO vo = (ClientVO)obj;
+	ClientVO vo =null;
+	if(vo !=null) {	
+		vo = (ClientVO)obj;
+	}
 	if(obj !=null){
 	ArrayList<Integer> list = dao.selectResno(vo.getClid());
 	%>
