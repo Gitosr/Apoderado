@@ -67,7 +67,7 @@ ul.tabs li.current {
 }
 
 .tab-content {
-width:85%;
+width:50%;
 	float: left;
 	display: none;
 	padding: 10px 20px;
@@ -149,6 +149,10 @@ font-family: GmarketSansMedium;
 </script>
 </head>
 <body>
+<%
+	int nCurrentPage = 0;
+	session.setAttribute("nCurrentPage", nCurrentPage);
+	%>
 <header id="header" class="header d-flex align-items-center">
 		<jsp:include page="../mainPage/header.jsp" />
 	</header>

@@ -27,12 +27,7 @@
 	.page_bar * {
 		text-align: center;
 	}
-	div.margind{
-	width:65%;
-	margin:10px;
-	margin-left:auto;
-	margin-right:auto;
-	}
+	
 	div.btn{
 	padding:0px;
 	}

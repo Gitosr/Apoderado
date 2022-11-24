@@ -21,11 +21,7 @@
 .btnref{
 float:right;
 }
-div.margind{
-	margin:10px;
-	margin-left:auto;
-	margin-right:auto;
-	}
+
 	table{
 	width:100%;
 	}
