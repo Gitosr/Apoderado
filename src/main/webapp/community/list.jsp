@@ -90,6 +90,11 @@ margin-bottom:10px;
 
 </head>
 <body>
+<%
+int nCurrentPage = 0;
+session.setAttribute("nCurrentPage", nCurrentPage);
+
+%>
 <header id="header" class="header d-flex align-items-center">
 		<jsp:include page="../mainPage/header.jsp" />
 	</header>

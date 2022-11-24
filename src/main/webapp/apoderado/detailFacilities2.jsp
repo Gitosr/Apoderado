@@ -126,11 +126,14 @@
 		}else {
 			factype = "공공시설";
 		}
+	
+	int nCurrentPage = 0;
+	session.setAttribute("nCurrentPage", nCurrentPage);
 	%>
+	<header id="header" class="header d-flex align-items-center">
+		<jsp:include page="../mainPage/header.jsp" />
+	</header>
 	<div class="container">
-		<jsp:include page="../mainPage/header.jsp" >
-			<jsp:param name="facno" value="<%=facno %>"></jsp:param>
-		</jsp:include>
 		<table class="table table-striped">
 			<tr>
 				<td rowspan="4">

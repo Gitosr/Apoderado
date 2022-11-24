@@ -351,6 +351,10 @@ li.mainmenu ul {
 	<header id="header" class="header d-flex align-items-center">
 		<jsp:include page="../mainPage/header.jsp" />
 	</header> 
+	
+	<div>
+		<jsp:include page="../mainPage/search_bar.jsp" />
+	</div>
 			<div class="container" data-aos="fade-up">
 
 				<div class="section-header" id="dbody">
