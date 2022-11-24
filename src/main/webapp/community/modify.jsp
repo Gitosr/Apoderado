@@ -7,6 +7,32 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- --------header  -------- -->
+<link rel="stylesheet" href="../css/main.css" />
+
+<!-- 수정된 부분 -->
+<link href="../Resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/bootstrap-icons/bootstrap-icons.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/aos/aos.css" rel="stylesheet">
+<link href="../Resources/vendor/glightbox/css/glightbox.min.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/swiper/swiper-bundle.min.css"
+	rel="stylesheet">
+<!-- Template Main CSS File -->
+<link href="../Resources/css/main.css" rel="stylesheet">
+<!-- Vendor JS Files -->
+<script src="../Resources/js/bootstrap.bundle.js"></script>
+<script src="../Resources/vendor/aos/aos.js"></script>
+<script src="../Resources/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="../Resources/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="../Resources/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="../Resources/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="../Resources/vendor/php-email-form/validate.js"></script>
+<link rel="stylesheet" href="../css/main.css" />
+<!-- ------------------------------------------- -->
+
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -15,6 +41,10 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script src="../lang/summernote-ko-KR.js"></script>
+
+<!--------------------------------------------------->
+
+
 <script type="text/javascript">
 
 $(function(){
@@ -24,13 +54,20 @@ $(function(){
 })
 </script>
 <style>
-div.col-sm-8{
-margin-top:10px;
-border-bottom:5px solid rgba(209,231,221);
-border-top:5px solid rgba(209,231,221);}
+div.margind{
+width:60%;
+margin:30px;
+margin-left:auto;
+margin-right:auto;
+}
 </style>
+
+
 </head>
 <body>
+<header id="header" class="header d-flex align-items-center">
+		<jsp:include page="../mainPage/header.jsp" />
+	</header>
 <%
 String no = request.getParameter("comno");
 if(no!=null){
@@ -40,12 +77,10 @@ if(no!=null){
 
 %>
 <form action="modifyOk.jsp" method="get">
-<div class="container">
-<div class="row">
-    <div class="col-sm-8">
+<div class="margind">
 		<table class="table">
 			<tr>
-				<th width="10%">작성자</th>
+				<th>작성자</th>
 				<td><input type="hidden" name="comno" value="<%=vo.getComno()%>" />
 				<!-- 게시물번호는 pk 값... 히든 으로 숨겨서 보내기. -->
 				<input type="text"  disabled="disabled" name="writer" id="" value="<%=vo.getClid()%>"/>
@@ -53,12 +88,12 @@ if(no!=null){
 			</tr>
 			<tr>
 				<th>제목</th>
-				<td><input type="text" name="title" id="" value="<%=vo.getComtitle() %>" size=80%/></td>
+				<td><input type="text" name="title" id="" value="<%=vo.getComtitle() %>" size="90%"/></td>
 			</tr>
 			<tr>
 				<th>내용</th>
 				<td>
-				<textarea name="contents" id="summernote" cols="80" rows="20"><%=vo.getComfield()%></textarea></td>
+				<textarea name="contents" id="summernote"><%=vo.getComfield()%></textarea></td>
 			</tr>
 			<tr>
 				<td></td><td align="right">
@@ -67,8 +102,6 @@ if(no!=null){
 				</td>
 			</tr>
 		</table>
-	</div>
-	</div>
 	</div>
 	
 	
