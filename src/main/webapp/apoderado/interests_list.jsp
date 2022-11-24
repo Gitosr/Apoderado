@@ -10,12 +10,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-div.margind{
-	width:65%;
-	margin:10px;
-	margin-left:auto;
-	margin-right:auto;
-	}
+
 	.tablehd{
 	background:rgb(209,231,221);
 	}
