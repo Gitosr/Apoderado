@@ -136,11 +136,11 @@ div.margind{
 			for (ReserveVO vo : list) {
 			%>
 			<tr>
-				<td><a href="detailFacilities.jsp?facno=<%=vo.getFacno()%>"><%=vo.getResno()%></a></td>
+				<td align="center"><a href="detailFacilities.jsp?facno=<%=vo.getFacno()%>"><%=vo.getResno()%></a></td>
 				<td><a href="detailFacilities.jsp?facno=<%=vo.getFacno()%>"><%=dao2.selectFacname(vo.getResno()) %></a></td>
-				<td><%=vo.getResdate()%></td>
-				<td><%=vo.getRestime()%></td>
-				<td><%=vo.getResstate()%></td>
+				<td align="center"><%=vo.getResdate()%></td>
+				<td align="center"><%=vo.getRestime()%></td>
+				<td align="center"><%=vo.getResstate()%></td>
 			
 			</tr>
 			<%
