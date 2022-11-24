@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../css/search_bar.css" />
 <script type="text/javascript">
 $(function(){
 
