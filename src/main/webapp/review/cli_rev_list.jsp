@@ -84,8 +84,7 @@
 	
 	$(function(){
 		cp_click(currentPage);
-		console.log(currentPage);
-			
+		console.log(currentPage);		
 	});
 	
 	function cp_click(currentPage) {
@@ -111,12 +110,12 @@
 	
 						data += "<tr>";
 						data += "<td>" + res[i].revno + "</td>";
-						data += "<td>" + res[i].facname + "</td>";
+						data += "<td><a href ='javascript:void(0);' onclick='toggleRow(this);' >" + res[i].facname + "</a></td>";
 						data += "<td><a href ='javascript:void(0);' onclick='toggleRow(this);' >" + res[i].revtitle + "</a></td>";
 						data += "<td>" + res[i].revdate + "</td>";
 						data += "<td>" + res[i].scoreStar + "</td>";
 						data += "</tr>";
-						data += "<tr style='display:'><td colspan=4 id='con' style='border-right:none;'>" + res[i].revcontents + "</td>";
+						data += "<tr style='display:none'><td class='hid' colspan=4 id='con' style='border-right:none;'>" + res[i].revcontents + "</td>";
 
 						
 						data += "<td style='border-left: none;'><a href ='../review/modify.jsp?revno="+res[i].revno+"'>";
@@ -126,7 +125,7 @@
 						data += "</td></tr>";
 	
 					} 
-	
+
 					data += "<tr class='page_bar'>";
 					data += "<td id='tfoot1' colspan='5' >";
 					data += "<a href='javascript:void(0);' onclick='pre_click()'><</a>";
@@ -166,7 +165,7 @@
 		search = $("#search_data").val();
 		type = 1;
 		count = 0;
-		cp_click(1);
+		cp_click(1);		
 	}
 	
 	function pre_click() {

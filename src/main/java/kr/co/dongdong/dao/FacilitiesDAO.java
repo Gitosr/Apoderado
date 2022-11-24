@@ -22,6 +22,7 @@ public class FacilitiesDAO {
 	ResultSet rs = null;
 	StringBuffer sb = new StringBuffer();
 	
+	
 	public FacilitiesDAO() {
 		try {
 			Class.forName(driver);
@@ -737,6 +738,26 @@ public class FacilitiesDAO {
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setInt(1, facno);
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	// 삭제
+	public void updateAvg(double average, int facno) {
+		sb.setLength(0);
+		sb.append("UPDATE facilities ");
+		sb.append("SET facmark = ? ");
+		sb.append("WHERE facno = ? ");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setDouble(1, average);
+			pstmt.setInt(2, facno);
 			
 			pstmt.executeUpdate();
 		} catch (SQLException e) {

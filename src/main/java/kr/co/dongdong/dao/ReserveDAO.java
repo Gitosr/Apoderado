@@ -81,37 +81,60 @@ public class ReserveDAO {
 		
 		return count;
 	}
+
+	
+	// 예약번호로 시설번호 가져오기
+	public int getFacno(int resno) {
+		sb.setLength(0);
+		sb.append("select facno from reserve where resno = ? ");
+		int facno = -1; // 기본값
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, resno);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				facno = rs.getInt("facno");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return facno;
+	}
 	
 	//전체조회
-		public ArrayList<ReserveVO> selectAll(){
-			ArrayList<ReserveVO> list = new ArrayList<ReserveVO>();
-			sb.setLength(0);
-			sb.append("SELECT RESNO, CLID, FACNO, RESTIME, RESDATE, ORDERDATE, RESSTATE ");
-			sb.append("FROM reserve");
+	public ArrayList<ReserveVO> selectAll(){
+		ArrayList<ReserveVO> list = new ArrayList<ReserveVO>();
+		sb.setLength(0);
+		sb.append("SELECT RESNO, CLID, FACNO, RESTIME, RESDATE, ORDERDATE, RESSTATE ");
+		sb.append("FROM reserve");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
 			
-			try {
-				pstmt = conn.prepareStatement(sb.toString());
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				int resno = rs.getInt("resno");
+				String clid = rs.getString("clid");
+				int facno = rs.getInt("facno");
+				int restime = rs.getInt("restime");
+				String resdate = rs.getString("resdate");
+				String orderdate = rs.getString("orderdate");
+				int resstate = rs.getInt("resstate");
 				
-				rs = pstmt.executeQuery();
-				
-				while(rs.next()) {
-					int resno = rs.getInt("resno");
-					String clid = rs.getString("clid");
-					int facno = rs.getInt("facno");
-					int restime = rs.getInt("restime");
-					String resdate = rs.getString("resdate");
-					String orderdate = rs.getString("orderdate");
-					int resstate = rs.getInt("resstate");
-					
-					ReserveVO vo = new ReserveVO(resno, clid, facno, restime, resdate, orderdate, resstate);
-					list.add(vo);
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				ReserveVO vo = new ReserveVO(resno, clid, facno, restime, resdate, orderdate, resstate);
+				list.add(vo);
 			}
-			return list;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return list;
+	}
 		
 	// 전체 조회
 	public ArrayList<ReserveVO> selectAll(String id, int startNo, int endNo){
