@@ -11,6 +11,32 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<!-- --------header  -------- -->
+<link rel="stylesheet" href="../css/main.css" />
+
+<!-- 수정된 부분 -->
+<link href="../Resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/bootstrap-icons/bootstrap-icons.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/aos/aos.css" rel="stylesheet">
+<link href="../Resources/vendor/glightbox/css/glightbox.min.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/swiper/swiper-bundle.min.css"
+	rel="stylesheet">
+<!-- Template Main CSS File -->
+<link href="../Resources/css/main.css" rel="stylesheet">
+<!-- Vendor JS Files -->
+<script src="../Resources/js/bootstrap.bundle.js"></script>
+<script src="../Resources/vendor/aos/aos.js"></script>
+<script src="../Resources/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="../Resources/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="../Resources/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="../Resources/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="../Resources/vendor/php-email-form/validate.js"></script>
+<link rel="stylesheet" href="../css/main.css" />
+<!-- ------------------------------------------- -->
+
 <!-- 글쓰기 영역을 위해 summernote.org 에서 복붙 -->
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -30,10 +56,23 @@ $(function(){
 	});
 })
 </script>
-
+<style>
+div.margind{
+width:60%;
+margin:30px;
+margin-left:auto;
+margin-right:auto;
+}
+#btnw{
+float:right;
+}
+</style>
 </head>
 
 <body>
+<header id="header" class="header d-flex align-items-center">
+		<jsp:include page="../mainPage/header.jsp" />
+	</header>
 <%Object obj = session.getAttribute("vo");
 
 ClientVO vo =null;
@@ -42,12 +81,11 @@ ClientVO vo =null;
 	
 %>
 
-<div class="container">
+<div class="margind">
 	<form action="writeOk.jsp" method="post">
-		<table class="table table-striped">
+		<table class="table">
 			<tr>
 			<% 
-			
 			ReviewDAO dao = new ReviewDAO();
 			ArrayList<Integer> list = dao.selectResno(vo.getClid());
 			%>
@@ -58,11 +96,7 @@ ClientVO vo =null;
 				</td>
 			</tr>
 			<tr>
-				<td>제목</td>
-				<td colspan=3><input type='text' name='title' id='' size=100/></td>
-				</tr>
-				<tr>
-				<td>시설명</td>
+				<th>시설명</th>
 				<td><select name="resno" id="">
 				<option value="">----</option>
 				<%String facname = "";
@@ -73,7 +107,8 @@ ClientVO vo =null;
 				
 				</select></td>
 			</tr>
-				<td>평점</td>
+			<tr>
+				<th>평점</th>
 				<td><select name="score" id="">
 				    <option value="">----</option>
 				    <option value=1>★</option>
@@ -84,13 +119,17 @@ ClientVO vo =null;
 				</select></td>
 			</tr>
 			<tr>
+			<th>제목</th>
+				<td colspan=3><input type='text' name='title' id='' size="90%"/></td>
+				</tr>
+			<tr>
 				<th>내용</th>
 				<td>
-				<textarea name="contents" id="summernote" cols="80" rows="30"></textarea></td>
+				<textarea name="contents" id="summernote"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2">
-				<input type="submit" value="작성" class="btn btn-primary"/>
+				<input type="submit" id="btnw" value="작성" class="btn btn-outline-success"/>
 				</td>
 			</tr>
 		</table>

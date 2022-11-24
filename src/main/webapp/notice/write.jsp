@@ -120,8 +120,6 @@ margin-right:auto;
 			</table>
 		</form>
 	</div>
-	</div>
-	</div>
 	<% 
 	}
 	%>
