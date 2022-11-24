@@ -67,7 +67,7 @@ ul.tabs li.current {
 }
 
 .tab-content {
-width:50%;
+width:70%;
 	float: left;
 	display: none;
 	padding: 10px 20px;
@@ -78,12 +78,10 @@ width:50%;
 
 	display: inherit;
 }
-div.tap-1{
-margin-left:50px;
-}
+
 #tab-1{
-padding:100px;
-padding-left:20%;
+padding-top:3%;
+padding-left:5%;
 }
 h6{
 font-family: GmarketSansMedium;
@@ -175,9 +173,9 @@ font-family: GmarketSansMedium;
 			
 			<form action="" name="frm">
 				
-					<h6>비밀번호를 입력해주세요.</h6>
+					<h6>비밀번호를 다시한번 입력해주세요.</h6>
 					<p><input type="password" name="pw" id="pw" /> <input
-							type="hidden" name="pwok" id="pwok" value="<%=vo.getClpw()%>" />　<input type="button" value="확인" id="btn13"/>
+							type="hidden" name="pwok" id="pwok" value="<%=vo.getClpw()%>" />　<input type="button" value="확인" id="btn13" class="btn btn-outline-success"/>
 						</p>
 			</form>
 			

@@ -21,7 +21,6 @@
 .btnref{
 float:right;
 }
-
 	table{
 	width:100%;
 	}
