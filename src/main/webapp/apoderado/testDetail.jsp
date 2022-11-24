@@ -53,7 +53,7 @@
     
     width: 450px;
 }
-ul.tabs li.current{
+/* ul.tabs li.current{
 	background: #ededed;
 	color: #222;
 }
@@ -65,26 +65,33 @@ ul.tabs li.current{
 
 .tab-content.current{
 	display: inherit;
+} */
+
+
+element.style {
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
 
   </style>
 <script type="text/javascript">
 	$(function() {
-		$('ul.nav li').click(function() {
+		/* $('ul.nav li').click(function() {
 			console.log("클릭");
 			var tab_id = $(this).attr('data-tab');
 			console.log(tab_id);
 	
 			$('ul.nav li').removeClass('current');
 			$('.tab-content').removeClass('current');
+			$('.tab-link').css("background","black");
 	
 			/* 현재 클릭한 li에 currnet 추가 */
 			$(this).addClass('current');
 			/* 현재 클릭한 li에 data-tab을 id로 하는 div에 current 추가 */
 			$("#" + tab_id).addClass('current');
 	
-		});
+		}); */
 		
 		$('#map_button').on("click", function(){
 
@@ -196,51 +203,62 @@ ul.tabs li.current{
 				
               	<div class="content">
               	
-              	<ul class="nav nav-tabs">
-					<li class="tab-link current" data-tab="tab-1">
-						<a class="nav-link active" aria-current="page" href="#">지도보기</a>
-					</li>
-					<li class="tab-link" data-tab="tab-2">
-					    <a class="nav-link" href="#">주소</a>
-					</li>
-					<li class="tab-link" data-tab="tab-3">
-					    <a class="nav-link" href="#">이용안내</a>
-					</li>
-					<li class="tab-link" data-tab="tab-4">
-					    <a class="nav-link" href="#">이용후기</a>
-					</li>
+              	
+              	<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+				  <li class="nav-item" role="presentation">
+				    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">지도보기</button>
+				  </li>
+				  <li class="nav-item" role="presentation">
+				    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">주소</button>
+				  </li>
+				  <li class="nav-item" role="presentation">
+				    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">이용안내</button>
+				  </li>
+				  <li class="nav-item" role="presentation">
+				    <button class="nav-link" id="pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#pills-review" type="button" role="tab" aria-controls="pills-review" aria-selected="false">이용후기</button>
+				  </li>
 				</ul>
-               
-               <div id="tab-1" class="tab-content current" >
-				<h3>지도</h3>
-				<jsp:include page="map.jsp">
-					<jsp:param name="facno" value="<%=vo.getFacno()%>"></jsp:param> 	
-				</jsp:include>
-				</div>
-				
-				<div id="tab-2" class="tab-content" >	
-				<h3>주소</h3>
-				<p> <%=vo.getFacaddr() %> </p>
-				</div>
-				
-				<div id="tab-3" class="tab-content" >
-				<h3>이용안내</h3>
+				<div class="tab-content" id="pills-tabContent">
+				  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+				  <h3>지도</h3>
+					<jsp:include page="map.jsp">
+						<jsp:param name="facno" value="<%=vo.getFacno()%>"></jsp:param> 	
+					</jsp:include>
+				  </div>
+				  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+				  <h3>주소</h3>
+					<p class="fw-bold"> <%=vo.getFacaddr() %> </p>
+				  </div>
+				  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+				  <h3>이용안내</h3>
 					<h3>시설 이용안내</h3>
-					<p><%=vo.getFacexplain() %></p>
+					<p class="fw-bold"><%=vo.getFacexplain() %></p>
+				  </div>
+	  				<div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab" tabindex="0">
+	  				<h3>이용후기</h3>
+						<jsp:include page="../review/fac_rev_list.jsp">
+								<jsp:param name="facno" value="<%=vo.getFacno() %>"></jsp:param>
+						</jsp:include>
+	  				</div>
+				  
 				</div>
-				
-				<div id="tab-4" class="tab-content">	
-				
-				<h3>이용후기</h3>
-				<jsp:include page="../review/fac_rev_list.jsp">
-						<jsp:param name="facno" value="<%=vo.getFacno() %>"></jsp:param>
-				</jsp:include>
-				</div>
-				<hr class="border border-danger border-2 opacity-50">
-
-              
+				<hr class="border border-danger border-2 opacity-50" side>
 
               </div><!-- End post content -->
+              
+              <div class="meta-bottom">
+                <i class="bi bi-folder"></i>
+                <ul class="cats">
+                  <li><a href="#">Business</a></li>
+                </ul>
+
+                <i class="bi bi-tags"></i>
+                <ul class="tags">
+                  <li><a href="#">Creative</a></li>
+                  <li><a href="#">Tips</a></li>
+                  <li><a href="#">Marketing</a></li>
+                </ul>
+              </div><!-- End meta bottom -->
 
              
 
@@ -255,6 +273,48 @@ ul.tabs li.current{
           <div class="col-lg-4">
 
             <div class="sidebar">
+            
+            <div class="table-responsive">
+			  <table class="table">
+			  <tr>
+				<td colspan="2"><jsp:include page="calendar.jsp" /></td>
+				
+			</tr>
+			  <tr>
+			  	<th>분류</th>
+			  	<td><%= facevent %></td>
+			  </tr>
+			   <tr>
+			  	<th>이용요금</th>
+			  	<td><%= vo.getFacprice() %></td>
+			   </tr>
+			   <tr>
+			  	<th>장소</th>
+			  	<td><%= vo.getFacname() %></td>
+			   </tr>
+			   <tr>
+			  	<th>주차장</th>
+			  	<td><%= facparking %></td>
+			   </tr>
+			   <tr>
+			  	<th>샤워장</th>
+			  	<td><%= facshower %></td>
+			   </tr>
+			   <tr>
+			  	<th>시설종류</th>
+			  	<td><%= factype %></td> 
+			   </tr>
+			  
+			  </table>
+			</div>
+			
+			
+					
+			
+			
+			
+			
+			
 
               <%-- <div class="sidebar-item search-form">
                 <h3 class="sidebar-title">분류</h3>
@@ -273,7 +333,7 @@ ul.tabs li.current{
                 </ul>
               </div>End sidebar categories -->
 
-              <div class="sidebar-item recent-posts">
+              <%-- <div class="sidebar-item recent-posts">
                 <h3 class="sidebar-title">분류</h3>
 
                 <div class="mt-3">
@@ -358,63 +418,8 @@ ul.tabs li.current{
 				
 				
 
-              	</div><!-- End sidebar recent posts-->
-              	
-              	
-              	
-              	
-              	
-              	
-                  <!-- <div class="post-item">
-                    <img src="../Resources/img/blog/blog-recent-2.jpg" alt="">
-                    <div>
-                      <h4><a href="blog-details.html">Quidem autem et impedit</a></h4>
-                      <time datetime="2020-01-01">Jan 1, 2020</time>
-                    </div>
-                  </div>End recent post item
-
-                  <div class="post-item">
-                    <img src="../Resources/img/blog/blog-recent-3.jpg" alt="">
-                    <div>
-                      <h4><a href="blog-details.html">Id quia et et ut maxime similique occaecati ut</a></h4>
-                      <time datetime="2020-01-01">Jan 1, 2020</time>
-                    </div>
-                  </div>End recent post item
-
-                  <div class="post-item">
-                    <img src="../Resources/img/blog/blog-recent-4.jpg" alt="">
-                    <div>
-                      <h4><a href="blog-details.html">Laborum corporis quo dara net para</a></h4>
-                      <time datetime="2020-01-01">Jan 1, 2020</time>
-                    </div>
-                  </div>End recent post item
-
-                  <div class="post-item">
-                    <img src="../Resources/img/blog/blog-recent-5.jpg" alt="">
-                    <div>
-                      <h4><a href="blog-details.html">Et dolores corrupti quae illo quod dolor</a></h4>
-                      <time datetime="2020-01-01">Jan 1, 2020</time>
-                    </div>
-                  </div>End recent post item -->
-
-                
-
-              <!-- <div class="sidebar-item tags">
-                <h3 class="sidebar-title">Tags</h3>
-                <ul class="mt-3">
-                  <li><a href="#">App</a></li>
-                  <li><a href="#">IT</a></li>
-                  <li><a href="#">Business</a></li>
-                  <li><a href="#">Mac</a></li>
-                  <li><a href="#">Design</a></li>
-                  <li><a href="#">Office</a></li>
-                  <li><a href="#">Creative</a></li>
-                  <li><a href="#">Studio</a></li>
-                  <li><a href="#">Smart</a></li>
-                  <li><a href="#">Tips</a></li>
-                  <li><a href="#">Marketing</a></li>
-                </ul>
-              </div>End sidebar tags -->
+              	</div><!-- End sidebar recent posts--> --%>
+            
 
             </div><!-- End Blog Sidebar -->
 
