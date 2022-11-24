@@ -263,7 +263,7 @@ $(function () {
                 			data += '<form name="reserve" method="get">';
                 			data += '<select name="restime" id="">-----------';
                 			for(var i=0; i<res.length; i++) {
-                				data += '<option value="'+ res[i].restime +'">' + res[i].restime + ' : ' +res[i].usetime+ "</option>";
+                				data += '<option value="'+ res[i].restime +'">' +res[i].usetime+ "</option>";
                 			}
                 			data += '</select>';
                 			data += '<input type="hidden" name="resdate" value="'+date+'"/>';
@@ -283,7 +283,6 @@ $(function () {
 <body>
 	
     <div id="calendarForm"></div>
-    <div id="#select_time"></div>
 
 </body>
 </html>

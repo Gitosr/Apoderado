@@ -10,7 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
-	<div id="map" style="width: 650px; height: 500px;"></div>
+	<div id="map" style="width: 770px; height: 400px;"></div>
 	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=be39b82c365176fd1189160e6062424c&libraries=services,clusterer,drawing"></script>
 	<script>
