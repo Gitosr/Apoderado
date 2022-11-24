@@ -12,7 +12,8 @@
 <meta charset="UTF-8">
 <title>체육시설 쉐어 플랫폼, 동동</title>
 
-<link rel="stylesheet" href="../css/main.css" />
+<link rel="stylesheet" href="../css/main.css?after" />
+<link rel="stylesheet" href="../css/search_bar.css" />
 <link rel="stylesheet" href="../css/footer.css" />
 
 <!-- 수정된 부분 -->
@@ -149,7 +150,7 @@ a {
 		
 		<!-- 11/18 16:00 수정-->
 		// 지역 이미지 클릭시 name의 값을 읽어 facloc의 parameter로
-		$("img.region").click(function() {
+		$("img.loc").click(function() {
 			var value = $(this).attr("name");
 			console.log(value);
 			location.href = "../search/list.jsp?facloc=" + value;
@@ -236,31 +237,12 @@ a {
 				<div class="wrap">
 					<!-- 11/18 16:00 수정-->
 					<ul class="img_list">
-						<li><img src="../images/gangbuk.png" alt="강북" class="loc" name="강북구"></li>
-						<li><img src="../images/nowon.png" alt="노원" class="loc" name="노원구"></li>
-						<li><img src="../images/dobong.png" alt="도봉" class="loc" name="도봉구"></li>
-						<li><img src="../images/seongbuk.png" alt="성북" class="loc" name="성북구"></li>
-						<li><img src="../images/gwangjin.png" alt="광진" class="loc" name="광진구"></li>
-						<li><img src="../images/dongdaemun.png" alt="동대문" class="loc" name="동대문"></li>
-						<li><img src="../images/seongdong.png" alt="성동" class="loc" name="성동"></li>
-						<li><img src="../images/jungnang.png" alt="중랑" class="loc" name="중랑"></li>
-						<li><img src="../images/yongsan.png" alt="용산" class="loc" name="용산"></li>
-						<li><img src="../images/jongro.png" alt="종로" class="loc" name="종로"></li>
-						<li><img src="../images/junggu.png" alt="중구" class="loc" name="중구"></li>
-						<li><img src="../images/mapo.png" alt="마포" class="loc" name="마포구"></li>
-						<li><img src="../images/seodaemun.png" alt="서대문" class="loc" name="서대문구"></li>
-						<li><img src="../images/eunpyeong.png" alt="은평" class="loc" name="은평구"></li>
-						<li><img src="../images/gangdong.png" alt="강동" class="loc" name="강동구"></li>
-						<li><img src="../images/songpa.png" alt="송파" class="loc" name="송파구"></li>
-						<li><img src="../images/gangnam.png" alt="강남" class="loc" name="강남구"></li>
-						<li><img src="../images/seocho.png" alt="서초" class="loc" name="서초구"></li>
-						<li><img src="../images/gangseo.png" alt="강서" class="loc" name="강서구"></li>
-						<li><img src="../images/yangcheon.png" alt="양천" class="loc" name="양천구"></li>
-						<li><img src="../images/guro.png" alt="구로" class="loc" name="구로구"></li>
-						<li><img src="../images/yeongdeungpo.png" alt="영등포" class="loc" name="영등포구"></li>
-						<li><img src="../images/gwanak.png" alt="관악" class="loc" name="관악구"></li>
-						<li><img src="../images/geumcheon.png" alt="금천" class="loc" name="금천구"></li>
-						<li><img src="../images/dongjak.png" alt="동작" class="loc" name="동작구"></li>
+						<li><img src="../images/gangnam-1.png" alt="강동/송파" class="loc" name=""></li>
+						<li><img src="../images/gangnam-2.png" alt="강남/서초" class="loc" name=""></li>
+						<li><img src="../images/gangnam-3.png" alt="영등포/동작/관악" class="loc" name=""></li>
+						<li><img src="../images/gangnam-4.png" alt="강서/양천/구로" class="loc" name=""></li>
+						<li><img src="../images/gangbuk-1.png" alt="마포/용산/종로" class="loc" name=""></li>
+						<li><img src="../images/gangbuk-2.png" alt="동대문/성동/광진/중랑" class="loc" name=""></li>
 					</ul>
 				</div>
 				<img src="../images/next.png" alt="다음 버튼" class="btn2" />
@@ -281,7 +263,7 @@ a {
 					<img src="<%=vo.getFacimg()%>" alt="" class="best" />
 					<p><%=vo.getFacname()%></p>
 				</a>
-				<p>★<%=vo.getFacmark()%>/ 5</p>
+				<p>★<%=vo.getFacmark()%></p>
 			</div>
 			<%
 			}
@@ -303,7 +285,7 @@ a {
 			%>
 		</div>
 		<div class="main6">
-			<a href="facRegister.jsp"><img src="../images/facad5.png" alt="시설등록 광고배너" /></a>
+			<a href="fac_Register.jsp"><img src="../images/facad5.png" alt="시설등록 광고배너" class="regi-ad"/></a>
 		</div>
 	</div>
 	<footer> 

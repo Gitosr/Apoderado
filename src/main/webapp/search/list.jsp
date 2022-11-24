@@ -12,6 +12,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<link rel="stylesheet" href="../css/footer.css" />
+<link rel="stylesheet" href="../css/search_bar.css?after" />
+
 <!-- Favicons -->
 <!--  <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -77,18 +80,33 @@
 	crossorigin="anonymous"></script>
 <script src="semantic/semantic.js"></script>
 <style>
-img {
+/* 폰트 수정 */
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.facName-font {
+	font-family: 'GmarketSansMedium';
+}
+img.facImg {
 	width: 100%;
 	height: 190px;
-	border: 2px solid black;
+	border: 2px solid darkgrey;
 	border-radius: 10px;
-	border: 2px solid black;
+}
+/* 하트 이미지 테두리 제거*/
+img.heart {
+	border: none;
+	width : 30px;
+	height : 30px;
 }
 
 #imgdiv {
 	width: 250px;
 	height: 200px;
-	margin: auto;
+	margin: 10px auto;
 }
 
 .service-item {
@@ -130,13 +148,14 @@ li.mainmenu ul {
 	margin-bottom: 50px;
 }
 
-/* 수정함 */
+/* 수정함 
 #inheart img{
-	/* float:left;
-	margin-bottom : 10px; */
+	float:left;
+	margin-bottom : 10px;
 	width : 30px;
 	height : 30px;
-}
+}*/
+
 </style>
 <script>
 	$(function() {
@@ -351,7 +370,6 @@ li.mainmenu ul {
 	<header id="header" class="header d-flex align-items-center">
 		<jsp:include page="../mainPage/header.jsp" />
 	</header> 
-	
 	<div>
 		<jsp:include page="../mainPage/search_bar.jsp" />
 	</div>
@@ -530,11 +548,11 @@ li.mainmenu ul {
 							<div class="service-item  position-relative">
 								<div id="imgdiv">
 								<a href="../apoderado/detailFacilities.jsp?facno=<%=vo.getFacno()%>">
-									<img src="<%=vo.getFacimg()%>" alt="<%=vo.getFacname()%>" />
+									<img src="<%=vo.getFacimg()%>" alt="<%=vo.getFacname()%>" class="facImg"/>
 								</a>
 								</div>
-								<h3><%=vo.getFacname()%></h3>
-								<p class="font-monospace"><%=vo.getFacaddr()%></p>
+								<h3 class="facName-font"><%=vo.getFacname()%></h3>
+								<p><%=vo.getFacaddr()%></p>
 								
 								<a href="../apoderado/detailFacilities.jsp?facno=<%=vo.getFacno()%>"
 									class="readmore ">detail more <i
@@ -616,7 +634,9 @@ li.mainmenu ul {
 				</div> <!-- id = 'dbody' end -->
 			</div>
 	</section>
-				
+	<footer> 
+		<jsp:include page="../mainPage/footer.jsp" />
+	</footer>			
 
 </body>
 </html>
