@@ -39,17 +39,27 @@
 <title>Insert title here</title>
 <style>
 ul.tabs {
+float: left;
 	margin: 0px;
 	padding: 0px;
 	list-style: none;
+	width: 15%;
+  height: 300px;
 }
 
 ul.tabs li {
+float: left;
+
+    width: 100%;
 	background: none;
 	color: #222;
-	display: inline-block;
-	padding: 10px 25px;
+	padding: 22px 16px;
 	cursor: pointer;
+    text-align: center;
+	display: inline-block;
+    outline: none;
+    transition: 0.3s;
+  
 }
 
 ul.tabs li.current {
@@ -58,8 +68,9 @@ ul.tabs li.current {
 }
 
 .tab-content {
+	float: left;
 	display: none;
-	padding: 15px 0;
+	padding: 10px 20px;
 	border-top: 3px solid #eee;
 }
 
@@ -144,17 +155,14 @@ ul.tabs li.current {
 		</ul>
 
 		<div id="tab-1" class="tab-content current">
-
 			<form action="" name="frm">
 				<table>
+					<tr>비밀번호를 다시한번 입력해주세요.</tr>
 					<tr>
-						<th>PW</th>
 						<td><input type="password" name="pw" id="pw" /> <input
-							type="hidden" name="pwok" id="pwok" value="<%=vo.getClpw()%>" />
+							type="hidden" name="pwok" id="pwok" value="<%=vo.getClpw()%>" />　
 						</td>
-					</tr>
-					<tr>
-						<td colspan="2"><input type="button" value="확인" id="btn1" />
+						<td colspan="2"><input type="button" value="확인" id="btn1" class="btn btn-outline-success"/>
 						</td>
 					</tr>
 				</table>
