@@ -117,7 +117,7 @@ div.margind{
 			<tr class="tablehd">
 				<th>시설명</th>
 				<th>찜한 날짜</th>
-				<th>수정</th>
+				<th>삭제</th>
 			</tr>
 			<!-- db 연결해서 데이터를 가져온 후 완성 -->
 			<%
