@@ -103,7 +103,7 @@ ClientVO vo =null;
 				<option value="">----</option>
 				<%String facname = "";
 				for (int x : list) {
-					facname = dao.selectFacname(x);
+					facname = dao.selectNameTime(x);
 				%><option value=<%= x%>><%= facname%></option>
 			<% }%>
 				
