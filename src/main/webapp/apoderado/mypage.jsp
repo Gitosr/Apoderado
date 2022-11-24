@@ -85,6 +85,10 @@ margin-left:50px;
 padding:100px;
 padding-left:20%;
 }
+h6{
+font-family: GmarketSansMedium;
+}
+
 
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -166,15 +170,11 @@ padding-left:20%;
 		<div id="tab-1" class="tab-content current">
 			
 			<form action="" name="frm">
-				<table>
-					<tr>비밀번호를 입력해주세요.</tr>
-					<tr>
-						<td><input type="password" name="pw" id="pw" /> <input
-							type="hidden" name="pwok" id="pwok" value="<%=vo.getClpw()%>" />　<input type="button" value="확인" id="btn1" class="btn btn-outline-success"/>
-						<td colspan=10>
-						</td>
-					</tr>
-				</table>
+				
+					<h6>비밀번호를 입력해주세요.</h6>
+					<p><input type="password" name="pw" id="pw" /> <input
+							type="hidden" name="pwok" id="pwok" value="<%=vo.getClpw()%>" />　<input type="button" value="확인" id="btn13"/>
+						</p>
 			</form>
 			
 		</div>
