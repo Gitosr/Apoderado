@@ -81,6 +81,10 @@ width:85%;
 div.tap-1{
 margin-left:50px;
 }
+#tab-1{
+padding:100px;
+padding-left:20%;
+}
 
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -163,7 +167,7 @@ margin-left:50px;
 			
 			<form action="" name="frm">
 				<table>
-					<tr>비밀번호를 다시한번 입력해주세요.</tr>
+					<tr>비밀번호를 입력해주세요.</tr>
 					<tr>
 						<td><input type="password" name="pw" id="pw" /> <input
 							type="hidden" name="pwok" id="pwok" value="<%=vo.getClpw()%>" />　<input type="button" value="확인" id="btn1" class="btn btn-outline-success"/>
