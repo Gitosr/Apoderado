@@ -1,4 +1,8 @@
 
+<%@page import="kr.co.dongdong.vo.FacilitiesVO"%>
+<%@page import="kr.co.dongdong.dao.FacilitiesDAO"%>
+<%@page import="kr.co.dongdong.vo.ReserveVO"%>
+<%@page import="kr.co.dongdong.dao.ReserveDAO"%>
 <%@page import="kr.co.dongdong.vo.ReviewVO"%>
 <%@page import="kr.co.dongdong.dao.ReviewDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -25,11 +29,26 @@
 		vo.setRevcontents(contents);
 		vo.setRevscore(revscore);
 		vo.setResno(resno);
-		
+		// 리뷰 등록
 		dao.insertOne(vo);
+		
+		// 리뷰를 들고한 시설의 평균 점수 최신화
+		ReserveDAO dao2 = new ReserveDAO();
+		int facno = dao2.getFacno(resno);
+		
+		ReviewDAO dao3 = new ReviewDAO();
+		int sum = dao.scoreTotal(facno);
+		int count = dao3.getTotal_facno(facno);
+		
+		double average = sum/count;
+		
+		FacilitiesDAO dao4 = new FacilitiesDAO();
+		
+		dao4.updateAvg(average, facno);
 		
 		//list.jsp로 리다이렉트
 		System.out.println(pre);
 		response.sendRedirect(pre);
+		System.out.println(average+"평균 : " + facno+" 시설번호");
 	}
 %>

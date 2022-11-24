@@ -606,6 +606,27 @@ public class ReviewDAO {
 			e.printStackTrace();
 		}
 	}
+	// 시설별 리뷰점수 총합
+	public int scoreTotal(int facno) {
+
+		sb.setLength(0);
+		sb.append("select sum(rw.revscore) total from reserve rs join review rw using(resno) where rs.facno = ? "); 
+		int sum = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, facno);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				sum = rs.getInt("total");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return sum;
+	}
 
 	// 삭제
 	public void deleteOne(int revno) {
