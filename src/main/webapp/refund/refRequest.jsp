@@ -70,7 +70,7 @@ width:100%;
 	RefundDAO dao = new RefundDAO();
 	ClientVO vo = (ClientVO)obj;
 	if(obj !=null){
-	ArrayList<Integer> list = dao.selectResno(vo.getClid());
+	ArrayList<Integer> list = dao.selectResnoSysdate(vo.getClid());
 	%>
 	<form action="deleteOk.jsp">
 	<div class="margind">
@@ -110,11 +110,15 @@ width:100%;
 					Calendar today = Calendar.getInstance(); //현재 오늘 날짜넣을 객체
 					Calendar dday = Calendar.getInstance(); //디데이 객체
 					Date d = new Date();
+					
 					dday.set(resdate.getYear(),resdate.getMonth(),resdate.getDay());
 					today.set(d.getYear(),d.getMonth(),d.getDay());
+
+					
 					long tday = today.getTimeInMillis();
 					long day = dday.getTimeInMillis();
 					long count = (day - tday)/86400000; //일수
+					System.out.println(count);
 					int facp = facprice;
 					if(count>=7){
 						facp = facprice*1;
