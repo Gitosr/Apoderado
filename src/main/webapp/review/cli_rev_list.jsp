@@ -14,8 +14,8 @@
 
 <title>Insert title here</title>
 <style>
-	table,tr,td{
-		border:1px solid black;
+	th{
+		border-top:1px solid green;
 	}
 	
 	ul li{
@@ -38,16 +38,25 @@
 	}
 	tr>th{
 	text-align: center;
+	
 	}
 	a {
 	text-decoration: none;
 	color: black;
 	}
-	.btn2{
-	border-left:0px;
+	.btn{
+	float:right;
+	margin-top:0px;
 	}
 	#con{
 	font-size:0.9rem;
+	}
+	.scbox{
+	margin-bottom:10px;
+	float:right;
+	}
+	#tfoot1{
+	border-bottom:0px;
 	}
 	</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -114,7 +123,7 @@
 					} 
 	
 					data += "<tr class='page_bar'>";
-					data += "<td colspan='5' >";
+					data += "<td id='tfoot1' colspan='5' >";
 					data += "<a href='javascript:void(0);' onclick='pre_click()'><</a>";
 					
 					for(var i=res[0].startPage; i <= res[0].endPage; i++) {
@@ -190,6 +199,9 @@
 </head>
 <body>
 	<div class="margind">
+	<div class="scbox">
+	<input type="text" name="search" id="search_data" placeholder="검색어"/>
+					<button type="button" style="border:none; background-color:transparent" onclick="search_run();" ><img width="25px" src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-vert.png" alt=""></button></div>
 
 		<table class="table">
 		<thead class="table-success">
@@ -208,17 +220,10 @@
 		</thead>
 		<tbody id="tbody">
 		</tbody>
-		<tfoot id="tfoot">		
-			<tr>
-				<td  colspan="5">
-					<input type="text" name="search" id="search_data" placeholder="검색어"/>
-					<button type="button" style="border:none; background-color:transparent" onclick="search_run();" ><img width="25px" src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-vert.png" alt=""></button>
-					<div class="btn">
-					<input type="button" value="목록" onclick="reset();" class="btn btn-outline-success" />
-					</div></td>
-			</tr>
-		</tfoot>
 		</table>
+		<div class="btn">
+			<input type="button" value="목록" onclick="reset();" class="btn btn-outline-success" />
+			</div>
 	</div>
 </body>
 </html>
