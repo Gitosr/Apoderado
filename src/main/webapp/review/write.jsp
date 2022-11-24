@@ -63,9 +63,11 @@ margin:30px;
 margin-left:auto;
 margin-right:auto;
 }
-#btnw{
+#btn{
 float:right;
 }
+
+
 </style>
 </head>
 
@@ -129,7 +131,8 @@ ClientVO vo =null;
 			</tr>
 			<tr>
 				<td colspan="2">
-				<input type="submit" id="btnw" value="작성" class="btn btn-outline-success"/>
+				<input type="submit" id="btn" value="작성" class="btn btn-outline-success"/>
+				<input type="button" id="btn" onClick="history.go(-1)" value="취소" class="btn btn-outline-success"/>
 				</td>
 			</tr>
 		</table>
