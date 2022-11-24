@@ -33,7 +33,7 @@ margin-bottom:10px;
 </style>
 
 <!-- --------header  -------- -->
-<link rel="stylesheet" href="../css/main.css" />
+<!-- <link rel="stylesheet" href="../css/main.css" /> -->
 
 <!-- 수정된 부분 -->
 <link href="../Resources/vendor/bootstrap/css/bootstrap.min.css"
@@ -65,6 +65,7 @@ margin-bottom:10px;
 <header id="header" class="header d-flex align-items-center">
 		<jsp:include page="../mainPage/header.jsp" />
 	</header>
+	<jsp:include page="../apoderado/adminHeader.jsp" />
 	<% 
 	ClientVO vo2 = null;
 	Object obj = session.getAttribute("vo");
@@ -192,7 +193,13 @@ margin-bottom:10px;
 		
 
 	</div>
-	
+	<%-- <%
+		if(vo2.getClrank() == 2){	
+	%>
+		<link rel="stylesheet" href="../css/adminheader.css" />
+	<%
+		}
+	%> --%>
 	
 </body>
 </html>
