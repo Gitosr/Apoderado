@@ -13,6 +13,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
 <style>
+
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -64,8 +65,8 @@
         -webkit-overflow-scrolling: touch;
       }
       img{
-          width: 200px;
-    	height: 180px;
+          width: 250px;
+    	height: 170px;
       }
     </style>
 <script type="text/javascript">
@@ -85,7 +86,7 @@
 	<main class="form-signin w-100 m-auto">
   <form action="loginOk.jsp" name="frm">
     <img class="mb-4" src="../images/dongdongarm.jpg" alt="" width="72" height="57">
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    
 
     <div class="form-floating">
       <input type="text" class="form-control" name="id" id="floatingInput" placeholder="name@example.com">
