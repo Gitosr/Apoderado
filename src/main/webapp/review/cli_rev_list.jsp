@@ -28,7 +28,6 @@
 		text-align: center;
 	}
 	div.margind{
-	width:65%;
 	margin:10px;
 	margin-left:auto;
 	margin-right:auto;

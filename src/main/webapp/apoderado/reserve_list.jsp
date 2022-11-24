@@ -22,10 +22,12 @@
 float:right;
 }
 div.margind{
-	width:65%;
 	margin:10px;
 	margin-left:auto;
 	margin-right:auto;
+	}
+	table{
+	width:100%;
 	}
 	.tablehd{
 	background:rgb(209,231,221);

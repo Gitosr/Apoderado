@@ -49,7 +49,6 @@ float: left;
 
 ul.tabs li {
 float: left;
-
     width: 100%;
 	background: none;
 	color: #222;
@@ -68,6 +67,7 @@ ul.tabs li.current {
 }
 
 .tab-content {
+width:85%;
 	float: left;
 	display: none;
 	padding: 10px 20px;
@@ -75,8 +75,13 @@ ul.tabs li.current {
 }
 
 .tab-content.current {
+
 	display: inherit;
 }
+div.tap-1{
+margin-left:50px;
+}
+
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -155,18 +160,19 @@ ul.tabs li.current {
 		</ul>
 
 		<div id="tab-1" class="tab-content current">
+			
 			<form action="" name="frm">
 				<table>
 					<tr>비밀번호를 다시한번 입력해주세요.</tr>
 					<tr>
 						<td><input type="password" name="pw" id="pw" /> <input
-							type="hidden" name="pwok" id="pwok" value="<%=vo.getClpw()%>" />　
-						</td>
-						<td colspan="2"><input type="button" value="확인" id="btn1" class="btn btn-outline-success"/>
+							type="hidden" name="pwok" id="pwok" value="<%=vo.getClpw()%>" />　<input type="button" value="확인" id="btn1" class="btn btn-outline-success"/>
+						<td colspan=10>
 						</td>
 					</tr>
 				</table>
 			</form>
+			
 		</div>
 
 		<div id="tab-2" class="tab-content">
