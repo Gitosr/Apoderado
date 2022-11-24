@@ -7,6 +7,34 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<!-- --------header  -------- -->
+<link rel="stylesheet" href="../css/main.css" />
+
+<!-- 수정된 부분 -->
+<link href="../Resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/bootstrap-icons/bootstrap-icons.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/aos/aos.css" rel="stylesheet">
+<link href="../Resources/vendor/glightbox/css/glightbox.min.css"
+	rel="stylesheet">
+<link href="../Resources/vendor/swiper/swiper-bundle.min.css"
+	rel="stylesheet">
+<!-- Template Main CSS File -->
+<link href="../Resources/css/main.css" rel="stylesheet">
+<!-- Vendor JS Files -->
+<script src="../Resources/js/bootstrap.bundle.js"></script>
+<script src="../Resources/vendor/aos/aos.js"></script>
+<script src="../Resources/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="../Resources/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="../Resources/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="../Resources/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="../Resources/vendor/php-email-form/validate.js"></script>
+<link rel="stylesheet" href="../css/main.css" />
+<!-- ------------------------------------------- -->
+
+
 <title>Insert title here</title>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -24,8 +52,19 @@ $(function(){
 		});
 })
 </script>
+<style>
+div.margind{
+width:60%;
+margin:30px;
+margin-left:auto;
+margin-right:auto;
+}
+</style>
 </head>
 <body>
+<header id="header" class="header d-flex align-items-center">
+		<jsp:include page="../mainPage/header.jsp" />
+	</header>
 <%
 	String no = request.getParameter("revno");
 	if(no!=null){
@@ -36,8 +75,8 @@ $(function(){
 
 %>
 <form action="modifyOk.jsp" method="get">
-<div class="container">
-		<table class="table table-striped">
+<div class="margind">
+		<table class="table">
 		<input type="hidden" name="revno" value=<%=revno %>>
 			<tr>
 				<th>작성자</th>
@@ -67,10 +106,10 @@ $(function(){
 				<textarea name="contents" id="summernote" cols="80" rows="50"><%=vo.getRevcontents()%></textarea></td>
 			</tr>
 			<tr>
-				<td colspan="2">
-				<a href="../review/list.jsp"><input type="button" value="목록" class="btn btn-success"/></a>
+				<td colspan="2" align="right">
+				<input type="button" value="취소" onClick="history.go(-1)" class="btn btn-outline-success"/>
 				<input type="hidden" name="pre" value="<%=request.getHeader("referer") %>"/>
-				<input type="submit" value="저장" class="btn btn-primary"/>
+				<input type="submit" value="저장" class="btn btn-outline-success"/>
 				</td>
 			</tr>
 		</table>
