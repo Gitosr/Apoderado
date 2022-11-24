@@ -26,6 +26,10 @@ margin:30px;
 margin-left:auto;
 margin-right:auto;
 }
+div.scbox{
+float:right;
+margin-bottom:10px;
+}
 </style>
 
 <!-- --------header  -------- -->
@@ -132,6 +136,9 @@ margin-right:auto;
 	%>
 
 	<div class="margind">
+	<div class="scbox">
+	<input type="text" name="search" id="" size="15%" placeholder="검색어"/>
+			<button type="submit" style="border:none; background-color:transparent"><img width="25px" src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-vert.png" alt=""></button></div>
 		<table class="table table-hover">
 		<thead class="table-success">
 			<tr>
