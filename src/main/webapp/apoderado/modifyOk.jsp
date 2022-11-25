@@ -9,31 +9,35 @@
 	ClientDAO dao = new ClientDAO();
 	ClientVO vo = null;
 	
-	if(obj != null) {
-		vo = (ClientVO)obj;
-		
-	}
+	
 	
 		String pw = request.getParameter("pw");
 		String name = request.getParameter("name");
+		
 		String birth1 = request.getParameter("birth1");
 		String birth2 = request.getParameter("birth2");
 		String birth3 = request.getParameter("birth3");
+		
 		String email1 = request.getParameter("email1");
 		String email2 = request.getParameter("email2");
+		
 		String mp = request.getParameter("mp");
 		String gender = request.getParameter("gender");
 		String cardno = request.getParameter("cardno");
 		String email = email1+"@"+email2;
+		String birthd = birth1+"-"+birth2+"-"+birth3;
 		
-		
+		if(obj != null) {
+			vo = (ClientVO)obj;
+			
+		}
 		vo.setClname(name);
 		vo.setClpw(pw);
 		
-		vo.setClmail(email1+email2);
+		vo.setClmail(email);
 		vo.setClcardno(cardno);
 		
-		vo.setClbirth(birth1+"/"+birth2+"/"+birth3);
+		vo.setClbirth(birthd);
 		vo.setClmp(mp);
 
 		if(gender.equals("남")) {
@@ -43,8 +47,7 @@
 			vo.setClgender(2);
 			
 		}
-		out.println("<h2> birth : "+birth1+"/"+birth2+"/"+birth3+"</h2>");
-		out.println("<h2> mp : "+mp+"</h2>");
+		
 		
 		dao.updateOne(vo);
 		

@@ -133,8 +133,8 @@
 			        String day = sdfd.format(birthd);
 			        
 					 %>
-						<input type="text" name="birth1" id=""  value="<%=year %>" class="text" placeholder="출생년도" size="7" />-
-						<input type="text" name="birth2" id=""  value="<%=month %>"  class="text" placeholder="출생달" size="7" />-
+						<input type="text" name="birth1" id=""  value="<%=year%>" class="text" placeholder="출생년도" size="7" />-
+						<input type="text" name="birth2" id=""  value="<%=month%>"  class="text" placeholder="출생달" size="7" />-
 						<input type="text" name="birth3" id="" value="<%=day%>"   class="text" placeholder="출생일" size="7" />
 					</td>
 				</tr>
