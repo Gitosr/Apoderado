@@ -90,7 +90,7 @@
 .facName-font {
 	font-family: 'GmarketSansMedium';
 }
-img.facImg {
+img {
 	width: 100%;
 	height: 190px;
 	border: 2px solid darkgrey;
@@ -548,7 +548,7 @@ li.mainmenu ul {
 							<div class="service-item  position-relative">
 								<div id="imgdiv">
 								<a href="../apoderado/detailFacilities.jsp?facno=<%=vo.getFacno()%>">
-									<img src="<%=vo.getFacimg()%>" alt="<%=vo.getFacname()%>" class="facImg"/>
+									<img src="<%=vo.getFacimg()%>" alt="<%=vo.getFacname()%>"/>
 								</a>
 								</div>
 								<h3 class="facName-font"><%=vo.getFacname()%></h3>
