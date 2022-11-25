@@ -64,88 +64,92 @@ width:100%;
 <body>
 <header id="header" class="header d-flex align-items-center">
 		<jsp:include page="../mainPage/header.jsp" />
-</header>
+	</header>
 	<%
 	Object obj = session.getAttribute("vo");
 	RefundDAO dao = new RefundDAO();
-	ClientVO vo =null;
-	if(vo !=null) {	
-		vo = (ClientVO)obj;
-	}
-	if(obj !=null){
-	ArrayList<Integer> list = dao.selectResno(vo.getClid());
-	%>
-	<form action="deleteOk.jsp">
-	<div class="margind">
+	ClientVO vo = (ClientVO)obj;
 	
-	<h5>환불 안내</h5></td></tr>
-			<ul>
-			<li>일주일 전 취소 : 전액 환불</li>
-			<li>3일전 취소 : 금액의 50% 환불</li>
-			<li>24시간 전 취소 : 30% 환불</li>
-			<li>당일 취소 : 환불 불가</li>
-			</ul>
-	<h5>예약내역 선택</h5>
+	if(obj !=null){
+	ArrayList<Integer> list = dao.selectResno();
+	%>
+	<form action="../refund/adminRefundOk.jsp">
+	<div class="margind">
 	
 	<table class="table table-hover">
 	<thead class="table-success">
 	<tr align="center">
-	<td></td><td>예약일</td><td>시설명</td><td>이용회차</td><td>결제금액</td><td>환불예정금액</td></tr></thead>
+	<td></td><td>예약일</td><td>시설명</td><td>이용회차</td><td>결제금액</td><td>환불예정금액</td>
+	</tr>
+	</thead>
 	
 	<%String facname = "";
 	
 	int facprice = -1;
 	int restime = -1;
 	int refundprice = -1;
+	String refreason = "";
 	Date resdate;
 	String sdfresdate;
-				for (int x : list) {  //예약번호
-					facname = dao.selectNameTime(x);
-					resdate = dao.selectResdate(x);
-					restime = dao.selectRestime(x);
-					facprice = dao.selectPrice(x);
-					
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
-					sdfresdate = sdf.format(resdate);
-					
-					
-					//날짜계산
-					Calendar today = Calendar.getInstance(); //현재 오늘 날짜넣을 객체
-					Calendar dday = Calendar.getInstance(); //디데이 객체
-					Date d = new Date();
-					dday.set(resdate.getYear(),resdate.getMonth(),resdate.getDay());
-					today.set(d.getYear(),d.getMonth(),d.getDay());
-					long tday = today.getTimeInMillis();
-					long day = dday.getTimeInMillis();
-					long count = (day - tday)/86400000; //일수
-					int facp = facprice;
-					if(count>=7){
-						facp = facprice*1;
-					}else if(count>=3){
-						facp = facprice/2;
-					}else if(count>=1){
-						facp = facprice/10*3;
-					}else{facp=0;}
-					
-					%>
+
+		for (int x : list) {  //예약번호
+			
+			facname = dao.selectNameTime(x);
+			resdate = dao.selectResdate(x);
+			
+			restime = dao.selectRestime(x);
+			facprice = dao.selectPrice(x);
+			System.out.println(x+"테스트");
+			
+			if(dao.refreason(x) != null) {
+				refreason = dao.refreason(x);
+			}else {
+				refreason = "없음";
+			}
+			
+		
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
+			sdfresdate = sdf.format(resdate);
+			
+			
+			//날짜계산
+			Calendar today = Calendar.getInstance(); //현재 오늘 날짜넣을 객체
+			Calendar dday = Calendar.getInstance(); //디데이 객체
+			Date d = new Date();
+			dday.set(resdate.getYear(),resdate.getMonth(),resdate.getDay());
+			today.set(d.getYear(),d.getMonth(),d.getDay());
+			long tday = today.getTimeInMillis();
+			long day = dday.getTimeInMillis();
+			long count = (day - tday)/86400000; //일수
+			int facp = facprice;
+			if(count>=7){
+				facp = facprice*1;
+			}else if(count>=3){
+				facp = facprice/2;
+			}else if(count>=1){
+				facp = facprice/10*3;
+			}else{facp=0;}
+			
+			%>
 	
 	<tr>
-	<td><input type='radio' name="resno" id="resno" value="<%=x%>" class="checkSelect"></td>
-	<td><%=sdfresdate%></td>
-	<td><%=facname %></td>
-	<td><%= restime%></td>
-	<td><%=facprice %></td>
-	<td><%=facp %></td>
+		<td><input type='checkbox' name="resno" id="resno" value="<%=x%>" class="checkSelect"></td>
+		<td><%=sdfresdate%></td>
+		<td><%=facname %></td>
+		<td><%=restime%></td>
+		<td><%=facprice %></td>
+		<td><%=facp %></td>
 	</tr>
-			<% }}%>
-			</td></tr>
-			</table>
-			
-		<h5>환불사유</h5>
-		<textarea name="refreason" rows="3"></textarea>
-		<br>
+	<tr>
+		<td colspan="6"><%=refreason %></td>
+	</tr>
+	<% 	}
+	}%>
 	
-	<input type="submit" value="환불신청" onclick="checkForm(this);" id="btn1" class="btn btn-outline-success"/>
+	</table>
+
+	
+	<input type="submit" value="환불승인" onclick="checkForm(this);" id="btn1" class="btn btn-outline-success"/>
 			
 			</div>
 			</form>

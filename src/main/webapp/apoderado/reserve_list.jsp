@@ -131,13 +131,23 @@ float:right;
 			// 최근 작성한 게시물 20개만 가져오기
 			ArrayList<ReserveVO> list = dao.selectAll(voi.getClid(), startNo, endNo);
 			for (ReserveVO vo : list) {
+				String state = "";
+				if(vo.getResstate()==0) {
+					state = "예약중";
+				}else if(vo.getResstate()==1) {
+					state = "이용완료";
+				}else if(vo.getResstate()==2) {
+					state = "환불신청중";
+				}else if(vo.getResstate()==3) {
+					state = "환불완료";
+				}
 			%>
 			<tr>
 				<td align="center"><a href="detailFacilities.jsp?facno=<%=vo.getFacno()%>"><%=vo.getResno()%></a></td>
 				<td><a href="detailFacilities.jsp?facno=<%=vo.getFacno()%>"><%=dao2.selectFacname(vo.getResno()) %></a></td>
 				<td align="center"><%=vo.getResdate()%></td>
 				<td align="center"><%=vo.getRestime()%></td>
-				<td align="center"><%=vo.getResstate()%></td>
+				<td align="center"><%=state%></td>
 			
 			</tr>
 			<%

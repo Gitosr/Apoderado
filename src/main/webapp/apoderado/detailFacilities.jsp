@@ -229,7 +229,7 @@
 								</tr>
 								<tr>
 									<th>이용요금</th>
-									<td><%= vo.getFacprice() %></td>
+									<td><%= vo.getFacprice() %> 원</td>
 								</tr>
 								<tr>
 									<th>장소</th>
