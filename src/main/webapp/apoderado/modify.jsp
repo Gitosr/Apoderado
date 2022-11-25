@@ -181,9 +181,9 @@
 				</tr>
 				<tr>
 					<td colspan="2" class="btn-box">
-						<input type="submit" value="가입하기" class="btn btn-outline-success" />
-						<a href="../mainPage/main.jsp">
-						<input type="button" value="돌아가기" class="btn btn-outline-success" />
+						<input type="submit" value="수정" class="btn btn-outline-success" />
+						<a href="mypage.jsp">
+						<input type="button" value="취소" class="btn btn-outline-success" />
 						</a>
 					</td>
 				</tr>
