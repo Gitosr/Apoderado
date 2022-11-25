@@ -41,7 +41,7 @@
 		vo.setClname(name);
 		vo.setClpw(pw);
 		
-		vo.setClmail(email1+email2);
+		vo.setClmail(email);
 		vo.setClcardno(cardno);
 		
 		vo.setClbirth(birth1+"/"+birth2+"/"+birth3);
