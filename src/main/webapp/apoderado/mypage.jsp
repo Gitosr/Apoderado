@@ -167,6 +167,9 @@ font-family: GmarketSansMedium;
 			<li class="tab-link" data-tab="tab-2">예약내역조회</li>
 			<li class="tab-link" data-tab="tab-3">찜목록조회</li>
 			<li class="tab-link" data-tab="tab-4">나의후기조회</li>
+			<%if(vo.getClrank()==2) { %>
+			<li class="tab-link" data-tab="tab-5">환불승인</li>
+			<%} %>
 		</ul>
 
 		<div id="tab-1" class="tab-content current">
@@ -191,6 +194,9 @@ font-family: GmarketSansMedium;
 		</div>
 		<div id="tab-4" class="tab-content">
 			<jsp:include page="../review/cli_rev_list.jsp" />
+		</div>
+		<div id="tab-5" class="tab-content">
+			<jsp:include page="../refund/adminRefund.jsp" />
 		</div>
 	</div>
 	<%

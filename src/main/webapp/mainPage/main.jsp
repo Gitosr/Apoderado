@@ -8,9 +8,10 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<jsp:include page="../apoderado/bootLink.jsp"></jsp:include>
 <head>
 <meta charset="UTF-8">
-<title>체육시설 쉐어 플랫폼, 동동</title>
+<jsp:include page="../apoderado/adminHeader.jsp"></jsp:include>
 
 <link rel="stylesheet" href="../css/main.css?after" />
 <link rel="stylesheet" href="../css/search_bar.css" />

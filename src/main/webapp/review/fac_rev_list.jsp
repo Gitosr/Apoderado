@@ -168,7 +168,7 @@
 </head>
 <body>
 	<div class="container">
-	<div id="btn5">
+	<div id="btn5"><!-- <input type="button" id="list10" value="목록" onclick="reset();" class="btn btn-outline-success" /> -->
 	<input type="text" name="search" id="search_data" placeholder="검색어"/>
 	<button type="button" onclick="search_run();" style="border:none; background-color:transparent" onclick="search_run();" ><img id="btn10" src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-vert.png" alt=""></button>
 					
@@ -189,7 +189,7 @@
 			
 		</tfoot>
 		</table>
-		<input type="button" id="list10" value="목록" onclick="reset();" class="btn btn-outline-success" />
+		
 	</div>
 </body>
 </html>

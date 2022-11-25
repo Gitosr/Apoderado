@@ -20,15 +20,11 @@ a {
 	text-decoration: none;
 	color: black;
 }
-div.margind{
-width:50%;
-margin:30px;
-margin-left:auto;
-margin-right:auto;
-}
+
 #btn1{
 margin-left:88%;
 }
+
 textarea{
 width:100%;
 }
@@ -62,9 +58,7 @@ width:100%;
 
 </head>
 <body>
-<header id="header" class="header d-flex align-items-center">
-		<jsp:include page="../mainPage/header.jsp" />
-	</header>
+
 	<%
 	Object obj = session.getAttribute("vo");
 	RefundDAO dao = new RefundDAO();
@@ -141,6 +135,7 @@ width:100%;
 		<td><%=facp %></td>
 	</tr>
 	<tr>
+		<td></td>
 		<td colspan="6"><%=refreason %></td>
 	</tr>
 	<% 	}

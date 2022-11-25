@@ -281,10 +281,6 @@ li.mainmenu ul {
 
 						var data = "";
 
-						data += "<h2>DongDong</h2>";
-											
-						data += "<p>나랑 " + eventname
-													+ "가자~!</p>";
 						data += "<input type='hidden' name='save' id='esave' value = '"+urlplus +"' />";
 						data += "<input type='hidden' name='save' id='lsave' value = '"+urlplus1 +"' />";
 						data += "<div class='row gy-4' data-aos='fade-up' data-aos-delay='100'>";
@@ -436,11 +432,6 @@ li.mainmenu ul {
 						System.out.println("facloc" + facloc); */
 					%>
 
-					<%-- <p>
-						나랑
-						<%=event%>
-						가자~!
-					</p> --%>
 					<input type="hidden" name="save" id="esave" value="<%=facevent%>" />
 					<input type="hidden" name="save" id="lsave" value="<%=facloc%>" />
 
