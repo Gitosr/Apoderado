@@ -377,6 +377,16 @@ li.mainmenu ul {
 
 				<div class="section-header" id="dbody">
 					<%
+					String keyword = request.getParameter("keyword");
+					
+					String[] keywordArr = null;
+					if(keyword != null) {
+						String re = keyword.replaceAll("[.,/]", " ");
+						String re1 = re.replaceAll("\\s+", " ");
+						
+						keywordArr = re1.split(" ");
+						
+					}
 					// 종목구분 파라미터 받아오기
 					String faceve = request.getParameter("facevent");
 					//faceve = "3";
@@ -520,27 +530,33 @@ li.mainmenu ul {
 							isNext = true;
 						}
 						
-						
-						// -----------------------------------------------------
-						
-						
 						ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
-						if(facevent == -1 && facloc.equals("전체")){
-							list = dao.selectAll(startNo,endNo);
-							System.out.println("list/dao.selectAll()실행");
-							
-						}else if(facevent != -1 && facloc.equals("전체") != true){
-							list = dao.elAll(facevent, faclocArray);
-							System.out.println("list/dao.elAll실행");
-						}
-						else if(facevent == -1){
-							list = dao.locAll(faclocArray);
+						// -----------------------------------------------------
+						if(keyword != null) {	
+							System.out.println( "번 / 예약번호 ");
+							ArrayList<Integer> list2 = dao.selectKeyword(keywordArr, startNo, endNo);
+							for (Integer vo : list2) {
+								FacilitiesVO vo2 = dao.selectOne(vo);
+								list.add(vo2);
+							}
+						}else {
+							if(facevent == -1 && facloc.equals("전체")){
+								list = dao.selectAll(startNo,endNo);
+								System.out.println("list/dao.selectAll()실행");
 								
-							System.out.println("list/dao.locAll실행");
-						}else if(facloc.equals("전체")){
-							//facevent = Integer.parseInt(fevent);
-							list = dao.eventAll(facevent);
-							System.out.println("list/dao.eventAll실행");
+							}else if(facevent != -1 && facloc.equals("전체") != true){
+								list = dao.elAll(facevent, faclocArray);
+								System.out.println("list/dao.elAll실행");
+							}
+							else if(facevent == -1){
+								list = dao.locAll(faclocArray);
+									
+								System.out.println("list/dao.locAll실행");
+							}else if(facloc.equals("전체")){
+								//facevent = Integer.parseInt(fevent);
+								list = dao.eventAll(facevent);
+								System.out.println("list/dao.eventAll실행");
+							}
 						}
 						for (FacilitiesVO vo : list) {
 						%>

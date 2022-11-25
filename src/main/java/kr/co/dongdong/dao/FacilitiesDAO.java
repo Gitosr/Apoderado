@@ -549,31 +549,6 @@ public class FacilitiesDAO {
 		return vo;
 	}
 	
-	// 1건 조회 (시설등록자와 시설명으로)
-		public int selectFacno(String facname, String clid) {
-			sb.setLength(0);
-			sb.append("SELECT FACNO ");
-			sb.append("FROM facilities ");
-			sb.append("WHERE FACNAME like ? AND CLID like ?");
-			int facno = 0;
-				
-			try {
-				pstmt = conn.prepareStatement(sb.toString());
-				pstmt.setString(1, facname);
-				pstmt.setString(2, clid);
-					
-				rs = pstmt.executeQuery();
-					
-				if(rs.next()) {
-					facno = rs.getInt("facno");;
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return facno;
-		}
-	
 	// 추가 (시설 등록)
 	public void insertOne(FacilitiesVO vo) {
 		sb.setLength(0);
@@ -706,6 +681,55 @@ public class FacilitiesDAO {
 				
 				while(rs.next()) {
 					int facno = rs.getInt("facno");
+					System.out.println(facno);
+					
+					Integer vo = new Integer(facno);
+					list.add(vo);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return list;
+		}
+		
+		// 검색결과 시작 끝 번호
+		public ArrayList<Integer> selectKeyword(String[] keyword, int startNo, int endNo){
+			ArrayList<Integer> list = new ArrayList<Integer>();
+			
+			sb.setLength(0);
+			sb.append("SELECT RN, FACNO ");
+			sb.append("FROM ( SELECT ROWNUM RN, FACNO ");
+			sb.append("FROM ( ");
+			
+			for(int i=0; i < keyword.length; i++) {
+				
+				sb.append("SELECT FACNO ");
+				sb.append("FROM FACILITIES ");
+				sb.append("WHERE FACNAME LIKE '%" + keyword[i] + "%' ");
+				sb.append("OR FACADDR LIKE '%" + keyword[i] + "%' ");	
+			
+				
+				if(i < keyword.length-1) {
+					sb.append("union ");
+			
+					
+				}
+			}
+			
+			sb.append(") WHERE ROWNUM <= ? ) ");
+			sb.append("WHERE RN >=  ? ");
+			System.out.println("4");
+			
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setInt(1, endNo);
+				pstmt.setInt(2, startNo);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					int facno = rs.getInt("facno");
+					
 					System.out.println(facno);
 					
 					Integer vo = new Integer(facno);

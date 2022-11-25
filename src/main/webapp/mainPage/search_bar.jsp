@@ -44,7 +44,7 @@ $(function(){
 		int num = (int) (Math.floor(Math.random() * 8));
 		String sportname = sport[num];
 		%>
-		<form action="searchResult.jsp">
+		<form action="../search/list.jsp">
 			<input type="text" class="search-text" name="keyword"
 				placeholder="<%=vo.getClname()%>님, 오늘은 <%=sportname%> 어때요?"
 				onfocus="this.placeholder=''"
@@ -56,7 +56,7 @@ $(function(){
 	} else {
 	%>
 	<div class="search-box">
-		<form action="searchResult.jsp">
+		<form action="../search/list.jsp">
 			<input type="text" class="search-text" name="keyword"
 				placeholder="종목, 지역으로 검색해보세요." onfocus="this.placeholder=''"
 				onblur="this.placeholder='종목, 지역으로 검색해보세요.'" id="text1" /> 
