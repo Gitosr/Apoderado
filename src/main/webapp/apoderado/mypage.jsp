@@ -171,11 +171,15 @@ font-family: GmarketSansMedium;
 
 		<div id="tab-1" class="tab-content current">
 			
-			<form action="" name="frm">
+			
 				
 					<h6>비밀번호를 다시한번 입력해주세요.</h6>
-					<p><input type="password" name="pw" id="pw" /> <input
-							type="hidden" name="pwok" id="pwok" value="<%=vo.getClpw()%>" />　<input type="button" value="확인" id="btn13" class="btn btn-outline-success"/>
+					<p><form action="modify.jsp" method="post">
+					<input type="password" name="pw" id="pw" /> <input
+							type="hidden" name="pwok" id="pwok" value="<%=vo.getClpw()%>" />　
+							
+							<input type="submit" value="확인" id="btn13" class="btn btn-outline-success"/>
+							</form>
 						</p>
 			</form>
 			
