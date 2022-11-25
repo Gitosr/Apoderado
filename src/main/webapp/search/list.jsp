@@ -365,6 +365,8 @@ li.mainmenu ul {
 		int nCurrentPage = 1;
 		session.setAttribute("nCurrentPage", nCurrentPage);
 		Object obj = session.getAttribute("vo");
+
+		
 	%>
 	<!-- 수정된 내용 -->
 	<header id="header" class="header d-flex align-items-center">
@@ -373,12 +375,12 @@ li.mainmenu ul {
 	<div>
 		<jsp:include page="../mainPage/search_bar.jsp" />
 	</div>
-			<div class="container" data-aos="fade-up">
-
+		<div class="container" data-aos="fade-up">
 				<div class="section-header" id="dbody">
 					<%
+					// 종목구분 파라미터 받아오기
 					String keyword = request.getParameter("keyword");
-					
+						
 					String[] keywordArr = null;
 					if(keyword != null) {
 						String re = keyword.replaceAll("[.,/]", " ");
@@ -387,7 +389,6 @@ li.mainmenu ul {
 						keywordArr = re1.split(" ");
 						
 					}
-					// 종목구분 파라미터 받아오기
 					String faceve = request.getParameter("facevent");
 					//faceve = "3";
 					// 지역 파라미터 받아오기
@@ -529,7 +530,6 @@ li.mainmenu ul {
 						if(currentPage+5 <= totalPage){
 							isNext = true;
 						}
-						
 						ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
 						// -----------------------------------------------------
 						if(keyword != null) {	
@@ -540,31 +540,36 @@ li.mainmenu ul {
 								list.add(vo2);
 							}
 						}else {
+							
 							if(facevent == -1 && facloc.equals("전체")){
-								list = dao.selectAll(startNo,endNo);
+								list = dao.selectAll(startNo, endNo);
 								System.out.println("list/dao.selectAll()실행");
 								
 							}else if(facevent != -1 && facloc.equals("전체") != true){
-								list = dao.elAll(facevent, faclocArray);
+								list = dao.elAll(facevent, faclocArray, startNo,endNo);
 								System.out.println("list/dao.elAll실행");
 							}
 							else if(facevent == -1){
-								list = dao.locAll(faclocArray);
+								list = dao.locAll(faclocArray, startNo, endNo);
 									
 								System.out.println("list/dao.locAll실행");
 							}else if(facloc.equals("전체")){
 								//facevent = Integer.parseInt(fevent);
-								list = dao.eventAll(facevent);
+								list = dao.eventAll(facevent, startNo, endNo);
 								System.out.println("list/dao.eventAll실행");
 							}
 						}
+						
+							
+							
+						
 						for (FacilitiesVO vo : list) {
 						%>
 						<div class="col-lg-4 col-md-6">
 							<div class="service-item  position-relative">
 								<div id="imgdiv">
 								<a href="../apoderado/detailFacilities.jsp?facno=<%=vo.getFacno()%>">
-									<img src="<%=vo.getFacimg()%>" alt="<%=vo.getFacname()%>"/>
+									<img src="<%=vo.getFacimg()%>" alt="<%=vo.getFacname()%>" class="facImg"/>
 								</a>
 								</div>
 								<h3 class="facName-font"><%=vo.getFacname()%></h3>
