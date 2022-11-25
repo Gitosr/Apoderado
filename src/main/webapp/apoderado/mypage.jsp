@@ -154,7 +154,7 @@ font-family: GmarketSansMedium;
 <header id="header" class="header d-flex align-items-center">
 		<jsp:include page="../mainPage/header.jsp" />
 	</header>
-
+<jsp:include page="../apoderado/adminHeader.jsp" />
 	<%
 	Object obj = session.getAttribute("vo");
 

@@ -99,6 +99,7 @@
 	<header id="header" class="header d-flex align-items-center">
 		<jsp:include page="header.jsp" />
 	</header>
+	<jsp:include page="../apoderado/adminHeader.jsp" />
 	<%
 	Object obj = session.getAttribute("vo");
 	if (obj != null) {
