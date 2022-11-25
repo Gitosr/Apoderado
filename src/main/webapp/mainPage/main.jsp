@@ -157,13 +157,6 @@ a {
 			location.href = "../search/list.jsp?facloc=" + value;
 		});
 	});	
-	
-		$(".regi-ad").on("click", function(){
-			if
-			alert("로그인이 필요한 서비스입니다.");
-		}
-	
-		
 </script>
 </head>
 <body>
