@@ -75,7 +75,7 @@
 	<header id="header" class="header d-flex align-items-center">
 		<jsp:include page="../mainPage/header.jsp" />
 	</header>
-	
+
 	<div class="title">
 		<h2>
 			회원정보수정<span>.</span>
@@ -88,11 +88,12 @@
 					<th class="th-title">아이디</th>
 					<td>
 					<% Object obj = session.getAttribute("vo");
+					String pw = request.getParameter("pw");
 					ClientDAO dao = new ClientDAO();
 					ClientVO vo =null;
 					if(obj !=null){
 						vo = (ClientVO)obj;
-					
+						if(pw.equals(vo.getClpw())){
 					%>
 					<input type="text" name="id" disabled class="text" id="id" size="20" value="<%=vo.getClid() %>" />
 					
@@ -186,7 +187,10 @@
 				</tr>
 			</table>
 		</form>
-		<%} %>
+		<%}else{
+			out.println("<script>alert('비밀번호가 틀렸습니다.'); location.href='mypage.jsp'</script>");
+		}}
+					%>
 	</div>
 	
 	<footer>
