@@ -103,6 +103,7 @@ a {
 
 		});
 		
+		// 검색창 유효성 검사 
 		$("#text1").keydown(function(key){
 			if(key.keyCode == 13) {
 				if($("#text1").val()=="") {
@@ -128,7 +129,7 @@ a {
 				$(".ad").attr("src", "../images/facad" + num + ".png"); num++;
 		}, 3000);
 			
-			// 종목 이미지 마우스 오버 시 크기변경
+		// 종목 이미지 마우스 오버 시 크기변경
 		$("img.sport").hover(function() {
 			$(this).animate({
 					width : "90px",
@@ -142,7 +143,7 @@ a {
 		});
 		
 		// 종목 이미지 클릭시 name의 값을 읽어 facevent의 parameter로
-		$("img.sport").click(function() {
+		$("img.sport").on("click", function() {
 			var value = $(this).attr("name");
 			console.log(value);
 			location.href = "../search/list.jsp?facevent=" + value; // 파라미터 전달 페이지 링크 수정
@@ -150,7 +151,7 @@ a {
 		
 		<!-- 11/18 16:00 수정-->
 		// 지역 이미지 클릭시 name의 값을 읽어 facloc의 parameter로
-		$("img.loc").click(function() {
+		$("img.loc").on("click", function() {
 			var value = $(this).attr("name");
 			console.log(value);
 			location.href = "../search/list.jsp?facloc=" + value;
@@ -237,12 +238,12 @@ a {
 				<div class="wrap">
 					<!-- 11/18 16:00 수정-->
 					<ul class="img_list">
-						<li><img src="../images/gangnam-1.png" alt="강동/송파" class="loc" name=""></li>
-						<li><img src="../images/gangnam-2.png" alt="강남/서초" class="loc" name=""></li>
-						<li><img src="../images/gangnam-3.png" alt="영등포/동작/관악" class="loc" name=""></li>
-						<li><img src="../images/gangnam-4.png" alt="강서/양천/구로" class="loc" name=""></li>
-						<li><img src="../images/gangbuk-1.png" alt="마포/용산/종로" class="loc" name=""></li>
-						<li><img src="../images/gangbuk-2.png" alt="동대문/성동/광진/중랑" class="loc" name=""></li>
+						<li><img src="../images/gangnam-1.png" alt="강동/송파" class="loc" name="송파구&facloc=강동구"></li>
+						<li><img src="../images/gangnam-2.png" alt="강남/서초" class="loc" name="서초구&facloc=강남구"></li>
+						<li><img src="../images/gangnam-3.png" alt="강서/양천/구로" class="loc" name="강서구&facloc=양천구&facloc=구로구"></li>
+						<li><img src="../images/gangnam-4.png" alt="영등포/동작/관악" class="loc" name="영등포구&facloc=동작구&facloc=관악구"></li>
+						<li><img src="../images/gangbuk-1.png" alt="마포/용산/종로" class="loc" name="마포구&facloc=용산구&facloc=종로구"></li>
+						<li><img src="../images/gangbuk-2.png" alt="동대문/성동/광진/중랑" class="loc" name="동대문구&facloc=성동구&facloc=광진구&facloc=중랑구 "></li>
 					</ul>
 				</div>
 				<img src="../images/next.png" alt="다음 버튼" class="btn2" />
