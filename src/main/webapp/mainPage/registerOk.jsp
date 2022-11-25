@@ -4,6 +4,10 @@
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="kr.co.dongdong.vo.ClientVO"%>
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/Gitosr/Apoderado.git
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
