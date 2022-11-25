@@ -75,25 +75,27 @@
 	<header id="header" class="header d-flex align-items-center">
 		<jsp:include page="../mainPage/header.jsp" />
 	</header>
-
+	
 	<div class="title">
 		<h2>
 			회원정보수정<span>.</span>
 		</h2>
 	</div>
 	<div class="register-form">
-		<form action="registerOk.jsp" method="get" name = "frm" >
+		<form action="modifyOk.jsp" method="get" name = "frm" >
 			<table id="register-table">
 				<tr>
 					<th class="th-title">아이디</th>
 					<td>
-					<% Object obj = session.getAttribute("vo");
+					<% 
 					String pw = request.getParameter("pw");
+					Object obj = session.getAttribute("vo");
 					ClientDAO dao = new ClientDAO();
 					ClientVO vo =null;
 					if(obj !=null){
 						vo = (ClientVO)obj;
-						if(pw.equals(vo.getClpw())){
+						if( pw.equals(vo.getClpw())){
+					
 					%>
 					<input type="text" name="id" disabled class="text" id="id" size="20" value="<%=vo.getClid() %>" />
 					
@@ -137,11 +139,11 @@
 					</td>
 				</tr>
 				<tr>
-					<th>이메일</th>
-					<%String email = vo.getClmail(); 
+					<th>이메일</th><%String email = vo.getClmail(); 
 					String mailid = email.substring(0, email.indexOf("@"));
 					String mailhost= email.substring(email.indexOf("@")+1,email.length());
 					%>
+					
 					<td colspan="2">
 						<input type="text" name="email1" id="email1" value="<%=mailid %>" class="text" size="11" />@
 						<input type="text" name="email2" id="email2" value="<%=mailhost %>"  class="text" size="11" />
@@ -187,10 +189,10 @@
 				</tr>
 			</table>
 		</form>
-		<%}else{
+		<%} else{
 			out.println("<script>alert('비밀번호가 틀렸습니다.'); location.href='mypage.jsp'</script>");
-		}}
-					%>
+		}}%>
+		
 	</div>
 	
 	<footer>
