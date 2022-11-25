@@ -45,6 +45,8 @@
 <script src="../lang/summernote-ko-KR.js"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<link rel="stylesheet" href="../css/fac_Register.css" />
+<link rel="stylesheet" href="../css/footer.css" />
 
 <script>
 	var cnt = 2;
@@ -58,7 +60,7 @@
 		
 		var newCell1 = newRow.insertCell(0);
 		var newCell2 = newRow.insertCell(1);
-		var html = "<td><input type='text' name='useTime'"+cnt+"' id='' class='text' size='30' placeholder='00:00 - 00:00 형식으로 작성해주세요.'/></td>";
+		var html = "<td><input type='text' name='useTime' id='' class='text' size='30' placeholder='00:00 - 00:00 형식으로 작성해주세요.'/></td>";
 		
 		newCell1.innerText = cnt+"회차";
 		newCell2.innerHTML = html;
@@ -89,6 +91,13 @@
 		$("#eventList").on("change", function(){
 			$("#facEvent").val($("#eventList").val());
 		});	
+		
+		$(".submit").on("click", function(){
+		});
+		$(".exit").on("click", function(){
+			confirm("등록을 취소하시겠습니까?");
+			
+		})
 		
 	});
 </script>
@@ -150,13 +159,13 @@
 				<tr>
 					<td>1회차</td>
 					<td>
-						<input type="text" name="useTime1" id="" class="text" size="30" placeholder="00:00 - 00:00 형식으로 작성해주세요."/>
+						<input type="text" name="useTime" id="" class="text" size="30" placeholder="00:00 - 00:00 형식으로 작성해주세요."/>
 					</td>			
 				</tr>
 				<tr>
 					<td>2회차</td>
 					<td>
-						<input type="text" name="useTime2" id="" class="text" size="30" placeholder="00:00 - 00:00 형식으로 작성해주세요."/>
+						<input type="text" name="useTime" id="" class="text" size="30" placeholder="00:00 - 00:00 형식으로 작성해주세요."/>
 					</td>			
 				</tr>
 				<tr>

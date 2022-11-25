@@ -154,7 +154,25 @@ import kr.co.dongdong.vo.UseVO;
 		return list;
 		
 	}
-	
+	// 회차 추가
+	public void insertOne(int facno, int restime, String usetime) {
+		sb.setLength(0);
+		sb.append("INSERT INTO use ");
+		sb.append("VALUES (?, ?, ?)");
+			
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, facno);
+			pstmt.setInt(2, restime);
+			pstmt.setString(3, usetime);
+				
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	// 자원반납
 	public void close() {
 		try {

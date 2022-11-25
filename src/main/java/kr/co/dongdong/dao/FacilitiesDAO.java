@@ -549,6 +549,31 @@ public class FacilitiesDAO {
 		return vo;
 	}
 	
+	// 1건 조회 (시설등록자와 시설명으로)
+		public int selectFacno(String facname, String clid) {
+			sb.setLength(0);
+			sb.append("SELECT FACNO ");
+			sb.append("FROM facilities ");
+			sb.append("WHERE FACNAME like ? AND CLID like ?");
+			int facno = 0;
+				
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setString(1, facname);
+				pstmt.setString(2, clid);
+					
+				rs = pstmt.executeQuery();
+					
+				if(rs.next()) {
+					facno = rs.getInt("facno");;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return facno;
+		}
+	
 	// 추가 (시설 등록)
 	public void insertOne(FacilitiesVO vo) {
 		sb.setLength(0);

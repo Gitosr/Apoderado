@@ -1,8 +1,11 @@
+<%@page import="kr.co.dongdong.dao.UseDAO"%>
 <%@page import="kr.co.dongdong.vo.FacilitiesVO"%>
 <%@page import="kr.co.dongdong.dao.FacilitiesDAO"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="kr.co.dongdong.vo.ClientVO"%>
+<%@page import="kr.co.dongdong.vo.FacilityVO"%>
+<%@page import="kr.co.dongdong.dao.FacilityDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,7 +27,7 @@
 			int maxFileSize = 1024 * 1024 * 10;
 			MultipartRequest mr = new MultipartRequest(request, saveDir, maxFileSize, "UTF-8", new DefaultFileRenamePolicy());
 			String f = mr.getOriginalFileName("filename");
-
+			
 			String facName = mr.getParameter("facName");
 			String facAddr = mr.getParameter("facAddr1") + " " + mr.getParameter("facAddr2");
 			int facEvent = Integer.parseInt(mr.getParameter("facEvent"));
@@ -50,8 +53,25 @@
 	
 			dao.insertOne(vo2);
 			out.println("시설등록 완료");
-	
-			response.sendRedirect("registerCheck.jsp");
+			
+			// 등록한 사용자 id 가져오기 
+			String clid = vo.getClid();
+			int facno = dao.selectFacno(facName, clid); // 등록한 시설명과 아이디로 시설번호 조회
+			
+			// 회차별 시간값 가져오기
+			String[] useTime = mr.getParameterValues("useTime");
+			int totalOrder= useTime.length;
+			
+			int restime;
+			String usetime;
+			
+			UseDAO dao2 = new UseDAO();
+			for(int i = 1; i <= totalOrder; i++ ){ // 입력한 회차수만큼 반복
+				restime = i;
+				usetime = useTime[i-1];
+				dao2.insertOne(facno, restime, usetime);
+			}
+			response.sendRedirect("main.jsp");
 		}	
 	%>
 </body>
