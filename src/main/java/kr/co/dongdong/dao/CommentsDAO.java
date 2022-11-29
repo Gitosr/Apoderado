@@ -209,6 +209,21 @@ public class CommentsDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	// 삭제
+	public void deleteAll(int comno) {
+		sb.setLength(0);
+		sb.append("delete from comments ");
+		sb.append("where comno = ?");
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, comno);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void close() {
 

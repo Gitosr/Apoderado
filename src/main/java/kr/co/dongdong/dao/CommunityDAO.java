@@ -248,7 +248,7 @@ public ArrayList<CommunityVO> searchRev(String x) {
 	public void deleteOne(int comno) {
 		sb.setLength(0);
 		sb.append("delete from community ");
-		sb.append("where comno = ?");
+		sb.append("where comno = ? ");
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setInt(1, comno);

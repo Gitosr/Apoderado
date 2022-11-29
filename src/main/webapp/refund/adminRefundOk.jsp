@@ -15,7 +15,7 @@ System.out.println(no);
 RefundVO vo = new RefundVO();
 	RefundDAO dao = new RefundDAO();
 if(no==null){
-	out.println("<script>alert('승인 할 환불 내역을 선택해주세요.'); location.href='refRequest.jsp'</script>");
+	out.println("<script>alert('승인 할 환불 내역을 선택해주세요.'); location.href='../apoderado/mypage.jsp?sign='</script>");
     out.flush();
 }
 
@@ -26,7 +26,7 @@ if(no!=null){
 	dao.stateRef(resno);
 	dao.stateRes(resno);
 	
-	out.println("<script>alert('환불을 승인하였습니다.'); location.href='refRequest.jsp'</script>");
+	out.println("<script>alert('환불을 승인하였습니다.'); location.href='../apoderado/mypage.jsp?sign='</script>");
     out.flush();
 	}
 }

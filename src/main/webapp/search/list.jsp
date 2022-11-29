@@ -474,7 +474,7 @@ li.mainmenu ul {
 						
 						
 						// 총 게시물 수
-						int totalCount = dao.getTotal();
+						int totalCount = dao.selectKeywordTotal(keywordArr);
 						
 						// 총페이지 수
 						int totalPage = (totalCount % recoredPerPage == 0)?totalCount/recoredPerPage : totalCount/recoredPerPage +1;
@@ -624,7 +624,7 @@ li.mainmenu ul {
 									System.out.println("endPage"+endPage);
 								for(int i = startPage; i<= endPage; i++){
 								%>
-							    <li class="page-item"><span class="page-link"><a class="item" href="#" data-page="<%= i %>" ><%= i %></a></span></li>
+							    <li class="page-item"><span class="page-link"><a class="item" href="../search/list.jsp?keyword=<%=keyword %>&cp=<%=i %>" data-page="<%= i %>" ><%= i %></a></span></li>
 							    <%-- href="list2.jsp?cp=<%= i %> --%>
 							    <%
 									}

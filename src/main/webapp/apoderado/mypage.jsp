@@ -132,6 +132,19 @@ font-family: GmarketSansMedium;
 			$("#tab-3").addClass('current');
 		}
 		
+		var link = document.location.href;
+		var tab = link.includes("?sign="); 
+		if(tab) {
+			console.log(tab);
+			$("ul.tabs li").removeClass('current');
+			$("#tab-1").removeClass('current');
+			$("#tab-2").removeClass('current');
+			$("#tab-3").removeClass('current');
+			$("#tab-4").removeClass('current');
+			$("ul.tabs li:nth-child(5)").addClass('current');
+			$("#tab-5").addClass('current');
+		}
+		
 		$("#btn1").on("click", function() {
 
 			var pw = $("#pw").val();
@@ -143,6 +156,8 @@ font-family: GmarketSansMedium;
 
 			}
 		});
+		
+		
 	});
 </script>
 </head>
