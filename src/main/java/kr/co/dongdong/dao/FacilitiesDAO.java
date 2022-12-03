@@ -154,7 +154,7 @@ public class FacilitiesDAO {
 		sb.append("FROM (SELECT ROWNUM RN, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
 		sb.append("FROM ( SELECT FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
 		sb.append("		FROM facilities ");
-		sb.append("		ORDER BY FACNO DESC) ");
+		sb.append("		ORDER BY FACNO ASC) ");
 		sb.append("	WHERE ROWNUM <= ?) ");
 		sb.append("WHERE RN >= ?");
 		ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();

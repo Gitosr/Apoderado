@@ -474,7 +474,13 @@ li.mainmenu ul {
 						
 						
 						// 총 게시물 수
-						int totalCount = dao.selectKeywordTotal(keywordArr);
+						int totalCount = 0;
+						if(keyword != null) {
+							totalCount = dao.selectKeywordTotal(keywordArr);
+						}else {
+							totalCount = dao.getTotal();
+						}
+						
 						
 						// 총페이지 수
 						int totalPage = (totalCount % recoredPerPage == 0)?totalCount/recoredPerPage : totalCount/recoredPerPage +1;
@@ -535,6 +541,7 @@ li.mainmenu ul {
 							if(facevent == -1 && facloc.equals("전체")){
 								list = dao.selectAll(startNo, endNo);
 								System.out.println("list/dao.selectAll()실행");
+								System.out.println(list);
 								
 							}else if(facevent != -1 && facloc.equals("전체") != true){
 								list = dao.elAll(facevent, faclocArray, startNo,endNo);
@@ -552,8 +559,7 @@ li.mainmenu ul {
 						}
 						
 							
-							
-						
+
 						for (FacilitiesVO vo : list) {
 						%>
 						<div class="col-lg-4 col-md-6">
@@ -623,11 +629,17 @@ li.mainmenu ul {
 									System.out.println("startPage"+startPage);
 									System.out.println("endPage"+endPage);
 								for(int i = startPage; i<= endPage; i++){
+									if(keyword != null) {
 								%>
 							    <li class="page-item"><span class="page-link"><a class="item" href="../search/list.jsp?keyword=<%=keyword %>&cp=<%=i %>" data-page="<%= i %>" ><%= i %></a></span></li>
 							    <%-- href="list2.jsp?cp=<%= i %> --%>
 							    <%
+									}else {
+								%>
+								<li class="page-item"><span class="page-link"><a class="item" href="../search/list.jsp?cp=<%=i %>" data-page="<%= i %>" ><%= i %></a></span></li>
+								<%
 									}
+								}
 								%>
 								<%
 							  		if(isNext){
