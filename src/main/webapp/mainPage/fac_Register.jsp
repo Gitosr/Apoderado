@@ -105,15 +105,19 @@
 <link rel="stylesheet" href="../css/footer.css" />
 </head>
 <body>
-	<header id="header" class="header d-flex align-items-center">
-		<jsp:include page="header.jsp" />
-	</header>
-	<jsp:include page="../apoderado/adminHeader.jsp" />
 	<%
+	int nCurrentPage = 0;
+	session.setAttribute("nCurrentPage", nCurrentPage);
+	
 	Object obj = session.getAttribute("vo");
 	if (obj != null) {
 		ClientVO vo = (ClientVO) obj;
 	%>
+	<header id="header" class="header d-flex align-items-center">
+		<jsp:include page="header.jsp" />
+	</header>
+	<jsp:include page="../apoderado/adminHeader.jsp" />
+	
 	<div class="title">
 		<h1>
 			시설 등록하기<span>.</span>

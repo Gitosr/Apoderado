@@ -541,7 +541,6 @@ li.mainmenu ul {
 							if(facevent == -1 && facloc.equals("전체")){
 								list = dao.selectAll(startNo, endNo);
 								System.out.println("list/dao.selectAll()실행");
-								System.out.println(list);
 								
 							}else if(facevent != -1 && facloc.equals("전체") != true){
 								list = dao.elAll(facevent, faclocArray, startNo,endNo);
