@@ -805,7 +805,7 @@ public class FacilitiesDAO {
 		sb.append("from (select facno, count(facno) count ");
 		sb.append("from reserve where orderdate between DATE_ADD(sysdate(), INTERVAL -1 WEEK) and sysdate() group by facno order by count(facno) desc)A, facilities f ");
 		sb.append("where A.facno = f.facno)B,(SELECT @ROWNUM :=0 ) TMP)C ");
-		sb.append("where ROWNUM <=? and ROWNUM>=?");
+		sb.append("where ROWNUM <=3 and ROWNUM>=1");
 		
 		ToprankVO vo;
 		
