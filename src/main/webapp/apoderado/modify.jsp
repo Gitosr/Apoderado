@@ -123,7 +123,7 @@
 					<th>생년월일</th>
 					<td>
 					<%String birth = vo.getClbirth();
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					Date birthd = sdf.parse(birth);
 					SimpleDateFormat sdfy = new SimpleDateFormat("yyyy");
 					SimpleDateFormat sdfm = new SimpleDateFormat("MM");
