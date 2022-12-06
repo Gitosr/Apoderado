@@ -11,10 +11,10 @@ import kr.co.dongdong.vo.ClientVO;
 import kr.co.dongdong.vo.ReserveVO;
 
 public class ReserveDAO {
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-	String user = "apoderado";
-	String password = "tiger";
+	String driver = "com.mysql.cj.jdbc.Driver";
+	String url = "jdbc:mysql://db1.c2iguougwqti.ap-northeast-2.rds.amazonaws.com:3306/semidb";
+	String user = "admin";
+	String password ="apoderado";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -140,13 +140,12 @@ public class ReserveDAO {
 	public ArrayList<ReserveVO> selectAll(String id, int startNo, int endNo){
 		ArrayList<ReserveVO> list = new ArrayList<ReserveVO>();
 		sb.setLength(0);
-		sb.append("SELECT resno, facno, restime, resdate, orderdate, resstate ");
-		sb.append("FROM ( SELECT ROWNUM RN, resno, facno, restime, resdate, orderdate, resstate  ");
-		sb.append("	FROM ( SELECT resno, facno, restime, resdate, orderdate, resstate  ");
-		sb.append("		FROM reserve WHERE clid = ? ");
-		sb.append("		ORDER BY resno DESC ) ");
-		sb.append("	WHERE ROWNUM <= ?) ");
-		sb.append("WHERE RN >= ? ");
+		sb.append("SELECT ROWNUM, resno, facno, restime, resdate, orderdate, resstate from ");
+		sb.append("(SELECT @ROWNUM := @ROWNUM +1 AS ROWNUM, A.* ");
+		sb.append("FROM (SELECT resno, facno, restime, resdate, orderdate, resstate "); 
+		sb.append("FROM reserve WHERE clid = ? ");
+		sb.append("ORDER BY resno DESC)A,(SELECT @ROWNUM :=0 ) TMP)B ");
+		sb.append("where ROWNUM <=? and ROWNUM>=?");
 		
 		
 		try {
@@ -179,7 +178,7 @@ public class ReserveDAO {
 	public void insertOne(ReserveVO vo) {
 		sb.setLength(0);
 		sb.append("INSERT INTO reserve ");
-		sb.append("VALUES (reserve_resno_SEQ.NEXTVAL,?,?,?,?,sysdate,0)");
+		sb.append("VALUES (null,?,?,?,?,sysdate(),0)");
 		
 		if(vo != null) {
 			try {

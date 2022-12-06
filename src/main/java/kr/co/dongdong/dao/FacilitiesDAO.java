@@ -12,10 +12,10 @@ import kr.co.dongdong.vo.FacilitiesVO;
 import kr.co.dongdong.vo.ToprankVO;
 
 public class FacilitiesDAO {
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-	String user = "apoderado";
-	String password = "tiger";
+	String driver = "com.mysql.cj.jdbc.Driver";
+	String url = "jdbc:mysql://db1.c2iguougwqti.ap-northeast-2.rds.amazonaws.com:3306/semidb";
+	String user = "admin";
+	String password ="apoderado";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -88,7 +88,7 @@ public class FacilitiesDAO {
 			int cnt = 0;
 			sb.setLength(0);
 			sb.append("SELECT COUNT(*) cnt FROM facilities ");
-			sb.append("where ( ");
+			sb.append("where (");
 			for(String facloc : faclocArray) {
 				cnt ++;
 				sb.append("facaddr like '%"+facloc+"%' ");
@@ -150,13 +150,12 @@ public class FacilitiesDAO {
 	// selectAll a-b까지의 게시물 가져오기
 	public ArrayList<FacilitiesVO> selectAll(int startNo, int endNo){
 		sb.setLength(0);
-		sb.append("SELECT RN, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
-		sb.append("FROM (SELECT ROWNUM RN, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
-		sb.append("FROM ( SELECT FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
-		sb.append("		FROM facilities ");
-		sb.append("		ORDER BY FACNO ASC) ");
-		sb.append("	WHERE ROWNUM <= ?) ");
-		sb.append("WHERE RN >= ?");
+		sb.append("SELECT ROWNUM, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+		sb.append("FROM (SELECT @ROWNUM := @ROWNUM +1 AS ROWNUM, A.* ");
+		sb.append("FROM (SELECT FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+		sb.append("FROM facilities ");
+		sb.append("ORDER BY FACNO asc)A,(SELECT @ROWNUM :=0 ) TMP)C ");
+		sb.append("	WHERE ROWNUM <= ? and ROWNUM>=?");
 		ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -269,14 +268,13 @@ public class FacilitiesDAO {
 		// eventAll a-b까지의 게시물 가져오기
 		public ArrayList<FacilitiesVO> eventAll(int facevent, int startNo, int endNo){
 			sb.setLength(0);
-			sb.append("SELECT RN, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
-			sb.append("FROM (SELECT ROWNUM RN, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
-			sb.append("FROM ( SELECT FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
-			sb.append("		FROM facilities ");
-			sb.append("		WHERE FACEVENT = ? ");
-			sb.append("		ORDER BY FACNO DESC) ");
-			sb.append("	WHERE ROWNUM <= ?) ");
-			sb.append("WHERE RN >= ?");
+			sb.append("SELECT ROWNUM, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+			sb.append("FROM (SELECT @ROWNUM := @ROWNUM +1 AS ROWNUM, A.*");
+			sb.append("FROM (SELECT FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+			sb.append("FROM facilities ");
+			sb.append("WHERE FACEVENT = ? ");
+			sb.append("ORDER BY FACNO DESC)A,(SELECT @ROWNUM :=0 ) TMP)C ");
+			sb.append("WHERE ROWNUM <= ? and ROWNUM>=?");
 			ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
 			try {
 				pstmt = conn.prepareStatement(sb.toString());
@@ -362,10 +360,10 @@ public class FacilitiesDAO {
 		public ArrayList<FacilitiesVO> locAll(String[] faclocArray, int startNo, int endNo){
 			int cnt = 0;
 			sb.setLength(0);
-			sb.append("SELECT RN, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
-			sb.append("FROM (SELECT ROWNUM RN, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+			sb.append("SELECT ROWNUM, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+			sb.append("FROM (SELECT @ROWNUM := @ROWNUM +1 AS ROWNUM, A.* ");
 			sb.append("FROM ( SELECT FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
-			sb.append("		FROM facilities ");
+			sb.append("FROM facilities ");
 			sb.append("where ( ");
 			for(String facloc : faclocArray) {
 				cnt ++;
@@ -375,9 +373,8 @@ public class FacilitiesDAO {
 				}
 			}
 			sb.append(") ");
-			sb.append("		ORDER BY FACNO DESC) ");
-			sb.append("	WHERE ROWNUM <= ?) ");
-			sb.append("WHERE RN >= ?");
+			sb.append("ORDER BY FACNO DESC)A,(SELECT @ROWNUM :=0 ) TMP)C ");
+			sb.append("	WHERE ROWNUM <= ? and ROWNUM>=?");
 			ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
 			try {
 				pstmt = conn.prepareStatement(sb.toString());
@@ -463,10 +460,10 @@ public class FacilitiesDAO {
 	public ArrayList<FacilitiesVO> elAll(int facevent, String[] faclocArray, int startNo, int endNo){
 		int cnt = 0;
 		sb.setLength(0);
-		sb.append("SELECT RN, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
-		sb.append("FROM (SELECT ROWNUM RN, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
-		sb.append("FROM ( SELECT FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
-		sb.append("		FROM facilities ");
+		sb.append("SELECT ROWNUM, FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+		sb.append("FROM (SELECT @ROWNUM := @ROWNUM +1 AS ROWNUM, A.* ");
+		sb.append("FROM (SELECT FACNO, FACEVENT, FACNAME, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, FACIMG, FACPARKING, FACSHOWER, FACTYPE, FACREGISTER, CLID ");
+		sb.append("FROM facilities ");
 		sb.append("where facevent = ? ");
 		sb.append("AND ( ");
 		for(String facloc : faclocArray) {
@@ -477,9 +474,8 @@ public class FacilitiesDAO {
 			}
 		}
 		sb.append(") ");
-		sb.append("		ORDER BY FACNO DESC) ");
-		sb.append("	WHERE ROWNUM <= ?) ");
-		sb.append("WHERE RN >= ?");
+		sb.append("ORDER BY FACNO DESC)A,(SELECT @ROWNUM :=0 ) TMP)C ");
+		sb.append("WHERE ROWNUM <= ? ROWNUM>=?");
 		ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -576,7 +572,7 @@ public class FacilitiesDAO {
 	public void insertOne(FacilitiesVO vo) {
 		sb.setLength(0);
 		sb.append("INSERT INTO facilities ");
-		sb.append("VALUES (facilities_facno_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?,sysdate,?)");
+		sb.append("VALUES (null,?,?,?,?,?,?,?,?,?,?,sysdate(),?)");
 		
 		if(vo != null) {
 			try {
@@ -608,7 +604,7 @@ public class FacilitiesDAO {
 		sb.append("SELECT FACNO, FACEVENT, FACADDR, FACMARK, FACPRICE, FACEXPLAIN, ");
 		sb.append("FACIMG, FACPARKING, FACSHOWER, FACTYPE, ");
 		sb.append("FACREGISTER FROM facilities ");
-		sb.append("WHERE CLID = ? ");
+		sb.append("WHERE CLID = ?");
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -645,7 +641,7 @@ public class FacilitiesDAO {
 		ArrayList<FacilitiesVO> list = new ArrayList<FacilitiesVO>();
 		sb.setLength(0);
 		sb.append("SELECT * ");
-		sb.append("FROM FACILITIES ");
+		sb.append("FROM facilities ");
 		sb.append("WHERE FACNAME LIKE '%" + keyword + "%'");
 		sb.append("OR FACADDR LIKE '%" + keyword + "%'");	
 		FacilitiesVO vo = null;
@@ -688,7 +684,7 @@ public class FacilitiesDAO {
 			
 			for(int i=0; i < keyword.length; i++) {
 				sb.append("SELECT facno ");
-				sb.append("FROM FACILITIES ");
+				sb.append("FROM facilities ");
 				sb.append("WHERE FACNAME LIKE '%" + keyword[i] + "%' ");
 				sb.append("OR FACADDR LIKE '%" + keyword[i] + "%' ");	
 				
@@ -721,28 +717,21 @@ public class FacilitiesDAO {
 			ArrayList<Integer> list = new ArrayList<Integer>();
 			
 			sb.setLength(0);
-			sb.append("SELECT RN, FACNO ");
-			sb.append("FROM ( SELECT ROWNUM RN, FACNO ");
+			sb.append("SELECT ROWNUM, FACNO ");
+			sb.append("FROM ( SELECT @ROWNUM := @ROWNUM +1 AS ROWNUM, A.FACNO ");
 			sb.append("FROM ( ");
 			
 			for(int i=0; i < keyword.length; i++) {
 				
 				sb.append("SELECT FACNO ");
-				sb.append("FROM FACILITIES ");
+				sb.append("FROM facilities ");
 				sb.append("WHERE FACNAME LIKE '%" + keyword[i] + "%' ");
 				sb.append("OR FACADDR LIKE '%" + keyword[i] + "%' ");	
-			
-				
 				if(i < keyword.length-1) {
 					sb.append("union ");
-			
-					
 				}
 			}
-			
-			sb.append(") WHERE ROWNUM <= ? ) ");
-			sb.append("WHERE RN >=  ? ");
-			System.out.println("4");
+			sb.append(")A,(SELECT @ROWNUM :=0 ) TMP)C WHERE ROWNUM <= ? and ROWNUM>=?");
 			
 			try {
 				pstmt = conn.prepareStatement(sb.toString());
@@ -775,7 +764,7 @@ public class FacilitiesDAO {
 		for(int i=0; i < keyword.length; i++) {
 			
 			sb.append("SELECT FACNO ");
-			sb.append("FROM FACILITIES ");
+			sb.append("FROM facilities ");
 			sb.append("WHERE FACNAME LIKE '%" + keyword[i] + "%' ");
 			sb.append("OR FACADDR LIKE '%" + keyword[i] + "%' ");	
 		
@@ -810,12 +799,13 @@ public class FacilitiesDAO {
 		ArrayList<ToprankVO> list = new ArrayList<ToprankVO>();
 		
 		sb.setLength(0);
-		sb.append("select rownum, r.count, f.facno, f.facname, f.facimg, f.facmark ");
-		sb.append("from (select facno, count(facno) count from reserve ");
-		sb.append("where orderdate between sysdate-7 and sysdate ");
-		sb.append("group by facno order by count(facno) desc) r, facilities f ");
-		sb.append("where r.facno = f.facno ");
-		sb.append("and rownum between 1 and 3");
+		sb.append("select ROWNUM, count, facno, facname,facimg,facmark ");
+		sb.append("from (select @ROWNUM := @ROWNUM +1 AS ROWNUM, B.*  ");
+		sb.append("from(select A.count, f.facno, f.facname, f.facimg, f.facmark ");
+		sb.append("from (select facno, count(facno) count ");
+		sb.append("from reserve where orderdate between DATE_ADD(sysdate(), INTERVAL -1 WEEK) and sysdate() group by facno order by count(facno) desc)A, facilities f ");
+		sb.append("where A.facno = f.facno)B,(SELECT @ROWNUM :=0 ) TMP)C ");
+		sb.append("where ROWNUM <=? and ROWNUM>=?");
 		
 		ToprankVO vo;
 		

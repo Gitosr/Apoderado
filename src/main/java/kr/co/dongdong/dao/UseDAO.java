@@ -11,15 +11,10 @@ import kr.co.dongdong.vo.ClientVO;
 import kr.co.dongdong.vo.UseVO;
 
 	public class UseDAO {
-//		String driver = "com.mysql.cj.jdbc.Driver";
-//		String url = "jdbc:mysql://db1.ceujsugmrik1.ap-northeast-2.rds.amazonaws.com:3306/semidb";
-//		String user = "admin";
-//		String password ="oracletiger";
-		
-		String driver = "oracle.jdbc.driver.OracleDriver";
-		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-		String user = "apoderado";
-		String password = "tiger";
+		String driver = "com.mysql.cj.jdbc.Driver";
+		String url = "jdbc:mysql://db1.c2iguougwqti.ap-northeast-2.rds.amazonaws.com:3306/semidb";
+		String user = "admin";
+		String password ="apoderado";
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -45,7 +40,7 @@ import kr.co.dongdong.vo.UseVO;
 	// 시설번호의 총 예약 횟수
 	public int getTotal(int facno) {
 		sb.setLength(0);
-		sb.append("SELECT COUNT(*) useorder FROM use WHERE facno = ? ");
+		sb.append("SELECT COUNT(*) useorder FROM `use` WHERE facno = ? ");
 		int count = -1; // 기본값
 		
 		try {
@@ -66,7 +61,7 @@ import kr.co.dongdong.vo.UseVO;
 	
 	public UseVO selecttime(int facno,int useorder) {
 		sb.setLength(0);
-		sb.append("SELECT * FROM use u , facilities f ");
+		sb.append("SELECT * FROM `use` u , facilities f ");
 		sb.append("WHERE f.facno = u.facno ");
 		sb.append("AND f.facno = ? ");
 		sb.append("AND useorder = ?");
@@ -95,7 +90,7 @@ import kr.co.dongdong.vo.UseVO;
 	
 	public UseVO getUseTime(int facno, int restime) {
 		sb.setLength(0);
-		sb.append("SELECT * FROM use ");
+		sb.append("SELECT * FROM `use` ");
 		sb.append("WHERE facno = ? and restime = ? ");
 		
 		UseVO vo = null;
@@ -122,11 +117,11 @@ import kr.co.dongdong.vo.UseVO;
 	
 	public ArrayList<UseVO> getTime(int facno, String resdate) {
 		sb.setLength(0);
-		sb.append("select * from ( " );
-		sb.append("select restime, usetime from use ");
+		sb.append("select * from ( ");
+		sb.append("select restime, usetime from `use` ");
 		sb.append("where facno = ? and restime not in ");
-		sb.append("(select restime from reserve where resdate = ? and facno = ? ) ");
-		sb.append(") order by restime asc ");
+		sb.append("(select restime from reserve where resdate = ? and facno = ? ))A ");
+		sb.append("order by restime asc;");
 		
 		ArrayList<UseVO> list = new ArrayList<UseVO>();
 		
@@ -157,7 +152,7 @@ import kr.co.dongdong.vo.UseVO;
 	// 회차 추가
 	public void insertOne(int facno, int restime, String usetime) {
 		sb.setLength(0);
-		sb.append("INSERT INTO use ");
+		sb.append("INSERT INTO `use` ");
 		sb.append("VALUES (?, ?, ?)");
 			
 		try {

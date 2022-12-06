@@ -12,11 +12,10 @@ import kr.co.dongdong.vo.ReviewVO;
 
 
 public class ReviewDAO {
-
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-	String user = "apoderado";
-	String password = "tiger";
+	String driver = "com.mysql.cj.jdbc.Driver";
+	String url = "jdbc:mysql://db1.c2iguougwqti.ap-northeast-2.rds.amazonaws.com:3306/semidb";
+	String user = "admin";
+	String password ="apoderado";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -72,10 +71,11 @@ public class ReviewDAO {
 		ArrayList<ReviewVO> list = new ArrayList<ReviewVO>();
 		sb.setLength(0);
 		
-		sb.append("select rn, revno, revtitle, revcontents, revdate, revscore, resno ");
-		sb.append("from (select rownum rn, revno, revtitle, revcontents, revdate, revscore, resno ");
-		sb.append("from (select revno, revtitle, revcontents, revdate, revscore, resno from review order by revno desc) ");
-		sb.append("where rownum<=?) where rn>=? ");
+		sb.append("select rownum, revno, revtitle, revcontents, revdate, revscore, resno ");
+		sb.append("from (select @ROWNUM := @ROWNUM +1 AS ROWNUM, A.* ");
+		sb.append("from (select revno, revtitle, revcontents, revdate, revscore, resno ");
+		sb.append("from review order by revno desc)A,(SELECT @ROWNUM :=0 ) TMP)C ");
+		sb.append("where rownum<=? where rownum>=? ");
 
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -371,15 +371,14 @@ public class ReviewDAO {
 	public ArrayList<ReviewVO> selectReview(int facno, int startNo, int endNo) {
 		ArrayList<ReviewVO> list = new ArrayList<ReviewVO>();
 		sb.setLength(0);
-		
-		sb.append("select revno, revtitle, revcontents, revdate, revscore, resno ");
-		sb.append("from ( select rownum rn, revno, revtitle, revcontents, revdate, revscore, resno ");
-		sb.append("from ( select revno, revtitle, revcontents, revdate, revscore, resno ");
+		sb.append("select rownum, revno, revtitle, revcontents, revdate, revscore, resno ");
+		sb.append("from (select @ROWNUM := @ROWNUM +1 AS ROWNUM, A.* ");
+		sb.append("from (select revno, revtitle, revcontents, revdate, revscore, resno ");
 		sb.append("from review ");
 		sb.append("where resno in (select resno from reserve where facno = ? ) ");
-		sb.append("ORDER BY revno DESC ) ");
-		sb.append("	WHERE ROWNUM <= ?) ");
-		sb.append("WHERE RN >= ? ");
+		sb.append("ORDER BY revdate DESC)A,(SELECT @ROWNUM :=0 ) TMP)C ");
+		sb.append("WHERE ROWNUM <= ? and ROWNUM >= ? ");
+
 
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -409,14 +408,12 @@ public class ReviewDAO {
 		public ArrayList<ReviewVO> selectReview(String clid, int startNo, int endNo) {
 			ArrayList<ReviewVO> list = new ArrayList<ReviewVO>();
 			sb.setLength(0);
-			
-			sb.append("select revno, revtitle, revcontents, revdate, revscore, resno ");
-			sb.append("from ( select rownum rn, revno, revtitle, revcontents, revdate, revscore, resno ");
-			sb.append("from ( select rw.revno, rw.revtitle, rw.revcontents, rw.revdate, rw.revscore, resno ");
-			sb.append("from review rw join reserve rs using(resno) where rs.clid = ? ");
-			sb.append("ORDER BY rw.revno DESC ) ");
-			sb.append("WHERE ROWNUM <= ? )");
-			sb.append("WHERE RN >= ? ");
+			sb.append("select ROWNUM, revno, revtitle, revcontents, revdate, revscore, resno  ");
+			sb.append("from (select @ROWNUM := @ROWNUM +1 AS ROWNUM, A.* ");
+			sb.append("from (select rw.revno, rw.revtitle, rw.revcontents, rw.revdate, rw.revscore, resno ");
+			sb.append("from review rw join reserve rs using(resno) where rs.clid = ?  ");
+			sb.append("ORDER BY rw.revno DESC )A,(SELECT @ROWNUM :=0 ) TMP)C  ");
+			sb.append("WHERE ROWNUM <= ? and ROWNUM >= ?  ");
 
 
 			try {
@@ -595,7 +592,7 @@ public class ReviewDAO {
 
 		sb.setLength(0);
 		sb.append("insert into review ");
-		sb.append("values ( review_revno_seq.nextval,?,?,sysdate,?,?)");
+		sb.append("values (null,?,?,sysdate(),?,?)");
 		// 등록날짜는 오늘날짜, 처음 조회수는 0. 처음 글 상태는 정상으로 1.
 		try {
 			pstmt = conn.prepareStatement(sb.toString());

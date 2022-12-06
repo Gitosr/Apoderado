@@ -10,11 +10,10 @@ import java.util.ArrayList;
 import kr.co.dongdong.vo.CommunityVO;
 
 public class CommunityDAO {
-
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-	String user = "apoderado";
-	String password = "tiger";
+	String driver = "com.mysql.cj.jdbc.Driver";
+	String url = "jdbc:mysql://db1.c2iguougwqti.ap-northeast-2.rds.amazonaws.com:3306/semidb";
+	String user = "admin";
+	String password ="apoderado";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -69,11 +68,11 @@ public class CommunityDAO {
 	public ArrayList<CommunityVO> selectAll(int startNo, int endNo) {
 		ArrayList<CommunityVO> list = new ArrayList<CommunityVO>();
 		sb.setLength(0);
-		
-		sb.append("select rn, comno, clid, comtitle, comfield, comdate, hits ");
-		sb.append("from (select rownum rn, comno, clid, comtitle, comfield, comdate, hits ");
-		sb.append("from (select comno, clid, comtitle, comfield, comdate, hits from community order by comno desc) ");
-		sb.append("where rownum<=?) where rn>=? ");
+		sb.append("select ROWNUM, comno, clid, comtitle, comfield, comdate, hits from ");
+		sb.append("(select @ROWNUM := @ROWNUM +1 AS ROWNUM, B.* ");
+		sb.append("FROM (select comno, clid, comtitle, comfield, comdate, hits ");
+		sb.append("from community order by comno desc) B,(SELECT @ROWNUM :=0 ) TMP)C ");
+		sb.append("where ROWNUM <=? and ROWNUM>=?");
 
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -203,7 +202,7 @@ public ArrayList<CommunityVO> searchRev(String x) {
 
 		sb.setLength(0);
 		sb.append("insert into community ");
-		sb.append("values ( community_comno_seq.nextval,?,?,?,sysdate,0)");
+		sb.append("values (null,?,?,?,sysdate(),0)");
 		// 등록날짜는 오늘날짜, 처음 조회수는 0, 처음 글 상태는 정상으로 1.
 
 
@@ -228,7 +227,7 @@ public ArrayList<CommunityVO> searchRev(String x) {
 		sb.append("set clid = ? ,");
 		sb.append("comtitle = ? ,");
 		sb.append("comfield = ?, ");
-		sb.append("comdate = sysdate ");
+		sb.append("comdate = sysdate() ");
 		// 수정된 날짜, 시간으로 변경
 		sb.append("where comno = ?");
 

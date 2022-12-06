@@ -7,21 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.mysql.cj.protocol.Resultset;
-
 import kr.co.dongdong.vo.ClientVO;
 
 
 public class ClientDAO {
-//	String driver = "com.mysql.cj.jdbc.Driver";
-//	String url = "jdbc:mysql://db1.ceujsugmrik1.ap-northeast-2.rds.amazonaws.com:3306/semidb";
-//	String user = "admin";
-//	String password ="oracletiger";
-	
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-	String user = "apoderado";
-	String password = "tiger";
+	String driver = "com.mysql.cj.jdbc.Driver";
+	String url = "jdbc:mysql://db1.c2iguougwqti.ap-northeast-2.rds.amazonaws.com:3306/semidb";
+	String user = "admin";
+	String password ="apoderado";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -48,7 +41,7 @@ public class ClientDAO {
 	public ArrayList<ClientVO> selectAll(){
 		ArrayList<ClientVO> list = new ArrayList<ClientVO>();
 		sb.setLength(0);
-		sb.append("SELECT CLID,CLNAME,CLPW,CLMAIL,CLCARDNO,CLGENDER, ");
+		sb.append("SELECT CLID,CLNAME,CLPW,CLEMAIL,CLCARDNO,CLGENDER, ");
 		sb.append("CLBIRTH, CLMP, CLDATE, CLRANK FROM client");
 		
 		try {
@@ -60,7 +53,7 @@ public class ClientDAO {
 				String clid = rs.getString("clid");
 				String clname = rs.getString("clname");
 				String clpw = rs.getString("clpw");
-				String clmail = rs.getString("clmail");
+				String clemail = rs.getString("clemail");
 				String clcardno = rs.getString("clcardno");
 				int clgender = rs.getInt("clgender");
 				String clbirth = rs.getString("clbirth");
@@ -68,7 +61,7 @@ public class ClientDAO {
 				String cldate = rs.getString("cldate");
 				int clrank = rs.getInt("clrank");
 				
-				ClientVO vo = new ClientVO(clid, clname, clpw, clmail, clcardno, clgender, clbirth, clmp, cldate, clrank);
+				ClientVO vo = new ClientVO(clid, clname, clpw, clemail, clcardno, clgender, clbirth, clmp, cldate, clrank);
 				list.add(vo);
 			}
 		} catch (SQLException e) {
@@ -81,7 +74,7 @@ public class ClientDAO {
 	// 로그인 체크
 	public ClientVO loginOk(String clid,String clpw) {
 		sb.setLength(0);
-		sb.append("SELECT CLID,CLNAME,CLPW,CLMAIL,CLCARDNO,CLGENDER, ");
+		sb.append("SELECT CLID,CLNAME,CLPW,CLEMAIL,CLCARDNO,CLGENDER, ");
 		sb.append("CLBIRTH, CLMP, CLDATE, CLRANK FROM client ");
 		sb.append("WHERE CLID = ? ");
 		sb.append("AND CLPW = ?");
@@ -96,7 +89,7 @@ public class ClientDAO {
 			
 			if(rs.next()) {
 				String clname = rs.getString("clname");
-				String clmail = rs.getString("clmail");
+				String clemail = rs.getString("clemail");
 				String clcardno = rs.getString("clcardno");
 				int clgender = rs.getInt("clgender");
 				String clbirth = rs.getString("clbirth");
@@ -104,7 +97,7 @@ public class ClientDAO {
 				String cldate = rs.getString("cldate");
 				int clrank = rs.getInt("clrank");
 				
-				vo = new ClientVO(clid, clname, clpw, clmail, clcardno, clgender, clbirth, clmp, cldate, clrank);
+				vo = new ClientVO(clid, clname, clpw, clemail, clcardno, clgender, clbirth, clmp, cldate, clrank);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -117,7 +110,7 @@ public class ClientDAO {
 	// 아이디 1건 조회
 	public ClientVO selectOne(String clid) {
 		sb.setLength(0);
-		sb.append("SELECT CLID,CLNAME,CLPW,CLMAIL,CLCARDNO,CLGENDER, ");
+		sb.append("SELECT CLID,CLNAME,CLPW,CLEMAIL,CLCARDNO,CLGENDER, ");
 		sb.append("CLBIRTH, CLMP, CLDATE, CLRANK FROM client ");
 		sb.append("WHERE CLID = ?");
 		ClientVO vo = null;
@@ -131,7 +124,7 @@ public class ClientDAO {
 			if(rs.next()) {
 				String clname = rs.getString("clname");
 				String clpw = rs.getString("clpw");
-				String clmail = rs.getString("clmail");
+				String clemail = rs.getString("clemail");
 				String clcardno = rs.getString("clcardno");
 				int clgender = rs.getInt("clgender");
 				String clbirth = rs.getString("clbirth");
@@ -139,7 +132,7 @@ public class ClientDAO {
 				String cldate = rs.getString("cldate");
 				int clrank = rs.getInt("clrank");
 				
-				vo = new ClientVO(clid, clname, clpw, clmail, clcardno, clgender, clbirth, clmp, cldate, clrank);
+				vo = new ClientVO(clid, clname, clpw, clemail, clcardno, clgender, clbirth, clmp, cldate, clrank);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -152,7 +145,7 @@ public class ClientDAO {
 	public void insertOne(ClientVO vo) {
 		sb.setLength(0);
 		sb.append("INSERT INTO client ");
-		sb.append("VALUES (?,?,?,?,?,?,?,?,sysdate,?)");
+		sb.append("VALUES (?,?,?,?,?,?,?,?,sysdate(),?)");
 		
 		if(vo != null) {
 			try {
@@ -160,7 +153,7 @@ public class ClientDAO {
 				pstmt.setString(1, vo.getClid());
 				pstmt.setString(2, vo.getClname());
 				pstmt.setString(3, vo.getClpw());
-				pstmt.setString(4, vo.getClmail());
+				pstmt.setString(4, vo.getClemail());
 				pstmt.setString(5, vo.getClcardno());
 				pstmt.setInt(6, vo.getClgender()); 
 				pstmt.setString(7, vo.getClbirth());
@@ -179,7 +172,7 @@ public class ClientDAO {
 	public void updateOne(ClientVO vo) {
 		sb.setLength(0);
 		sb.append("UPDATE client ");
-		sb.append("SET clname = ?, clpw = ?, clmail = ?, clcardno = ?, clgender = ?, clbirth = ?, clmp = ? ");
+		sb.append("SET clname = ?, clpw = ?, clemail = ?, clcardno = ?, clgender = ?, clbirth = ?, clmp = ? ");
 		sb.append("WHERE clid = ? ");
 		
 		if(vo != null) {
@@ -188,7 +181,7 @@ public class ClientDAO {
 				
 				pstmt.setString(1, vo.getClname());
 				pstmt.setString(2, vo.getClpw());
-				pstmt.setString(3, vo.getClmail());
+				pstmt.setString(3, vo.getClemail());
 				pstmt.setString(4, vo.getClcardno());
 				pstmt.setInt(5, vo.getClgender()); 
 				pstmt.setString(6, vo.getClbirth());

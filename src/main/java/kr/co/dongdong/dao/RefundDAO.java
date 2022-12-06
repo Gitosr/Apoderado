@@ -12,10 +12,10 @@ import java.util.Date;
 import kr.co.dongdong.vo.RefundVO;
 
 public class RefundDAO {
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-	String user = "apoderado";
-	String password = "tiger";
+	String driver = "com.mysql.cj.jdbc.Driver";
+	String url = "jdbc:mysql://db1.c2iguougwqti.ap-northeast-2.rds.amazonaws.com:3306/semidb";
+	String user = "admin";
+	String password ="apoderado";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -118,7 +118,7 @@ public class RefundDAO {
 	public ArrayList<Integer> selectResnoSysdate(String clid) {
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		sb.setLength(0);
-		sb.append("select resno from reserve where to_date(sysdate, 'yyyy-mm-dd') < to_date(resdate, 'yyyy-mm-dd') and clid= ? and resstate = 0 order by resdate asc ");
+		sb.append("select resno from reserve where sysdate()< resdate and clid= ? and resstate = 0 order by resdate asc ");
 
 
 		try {
@@ -306,7 +306,7 @@ public class RefundDAO {
 
 		sb.setLength(0);
 		sb.append("insert into refund ");
-		sb.append("values ( refund_refno_seq.nextval,?,?,sysdate,0)");
+		sb.append("values (null,?,?,sysdate(),0)");
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());

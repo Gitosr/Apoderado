@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import kr.co.dongdong.vo.CommentsVO;
 
 public class CommentsDAO {
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-	String user = "apoderado";
-	String password = "tiger";
+	String driver = "com.mysql.cj.jdbc.Driver";
+	String url = "jdbc:mysql://db1.c2iguougwqti.ap-northeast-2.rds.amazonaws.com:3306/semidb";
+	String user = "admin";
+	String password ="apoderado";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -66,12 +66,11 @@ public class CommentsDAO {
 	public ArrayList<CommentsVO> selectAll(int startNo, int endNo) {
 		ArrayList<CommentsVO> list = new ArrayList<CommentsVO>();
 		sb.setLength(0);
-		
-		
-		sb.append("select rn, clistno, comno, clid, comscontents,comsdate "); 
-		sb.append("from (select rownum rn, clistno, comno, clid, comscontents,comsdate "); 
-		sb.append("from (select clistno, comno, clid, comscontents,comsdate from comments order by comsdate desc) "); 
-		sb.append("where rownum<=?) where rn>=? ");
+		sb.append("select ROWNUM, clistno, comno, clid, comscontents,comsdate from ");
+		sb.append("(select @ROWNUM := @ROWNUM +1 AS ROWNUM, A.* ");
+		sb.append("from (select clistno, comno, clid, comscontents,comsdate ");
+		sb.append("from comments order by comsdate desc)A,(SELECT @ROWNUM :=0 ) TMP)C ");
+		sb.append("where ROWNUM <=? and ROWNUM>=?");
 		 
 
 		try {
@@ -160,7 +159,7 @@ public class CommentsDAO {
 
 		sb.setLength(0);
 		sb.append("insert into comments ");
-		sb.append("values (comments_clistno_seq.nextval,?,?,?,sysdate)");
+		sb.append("values (null,?,?,?,now())");
 		// 등록날짜는 오늘날짜, 처음 조회수는 0. 처음 글 상태는 정상으로 1.
 
 

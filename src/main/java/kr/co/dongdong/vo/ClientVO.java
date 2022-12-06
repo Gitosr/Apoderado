@@ -11,7 +11,7 @@ public class ClientVO {
 	String clid;
 	String clname;
 	String clpw;
-	String clmail;
+	String clemail;
 	String clcardno;
 	int clgender;
 	String clbirth;

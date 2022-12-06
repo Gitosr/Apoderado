@@ -14,11 +14,10 @@ import kr.co.dongdong.vo.NoticeVO;
 
 
 public class NoticeDAO {
-
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-	String user = "apoderado";
-	String password = "tiger";
+	String driver = "com.mysql.cj.jdbc.Driver";
+	String url = "jdbc:mysql://db1.c2iguougwqti.ap-northeast-2.rds.amazonaws.com:3306/semidb";
+	String user = "admin";
+	String password ="apoderado";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -76,10 +75,11 @@ public class NoticeDAO {
 		ArrayList<NoticeVO> list = new ArrayList<NoticeVO>();
 		sb.setLength(0);
 		
-		sb.append("select notno, clid, clrank, facno, nottitle, notcontents, notdate,nothits ");
-		sb.append("from (select rownum rn, notno, clid, clrank, facno, nottitle, notcontents, notdate,nothits ");
-		sb.append("from (select notno, clid, clrank, facno, nottitle, notcontents, notdate,nothits from notice order by notdate desc) ");
-		sb.append("where rownum<=?) where rn>=? ");
+		sb.append("select rownum, notno, clid, clrank, facno, nottitle, notcontents, notdate,nothits ");
+		sb.append("from (select  @ROWNUM := @ROWNUM +1 AS ROWNUM, A.* ");
+		sb.append("from (select notno, clid, clrank, facno, nottitle, notcontents, notdate,nothits ");
+		sb.append("from notice order by notdate desc)A,(SELECT @ROWNUM :=0 ) TMP)C ");
+		sb.append("where rownum<=? and rownum>=?");
 
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -287,14 +287,13 @@ public class NoticeDAO {
 		ArrayList<NoticeVO> list = new ArrayList<NoticeVO>();
 		sb.setLength(0);
 		
-		sb.append("select notno, clid, clrank,facno, nottitle, notcontents, notdate,nothits ");
-		sb.append("from (select rownum rn, notno, clid, clrank,facno, nottitle, notcontents, notdate,nothits ");
+		sb.append("select ROWNUM, notno, clid, clrank,facno, nottitle, notcontents, notdate,nothits ");
+		sb.append("from (select @ROWNUM := @ROWNUM +1 AS ROWNUM, A.* ");
 		sb.append("from (select notno, clid, clrank,facno, nottitle, notcontents, notdate,nothits ");
 		sb.append("from notice ");
 		sb.append("where facno = ? ");
-		sb.append("ORDER BY notdate DESC ) ");
-		sb.append("WHERE ROWNUM <= ?) ");
-		sb.append("WHERE RN >= ?");
+		sb.append("ORDER BY notdate DESC)A,(SELECT @ROWNUM :=0 ) TMP)C ");
+		sb.append("WHERE ROWNUM <=? and ROWNUM>=?");
 
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -380,7 +379,7 @@ public class NoticeDAO {
 
 		sb.setLength(0);
 		sb.append("insert into notice ");
-		sb.append("values ( notice_notno_seq.nextval,?,?,?,?,?,sysdate,0)");
+		sb.append("values (null,?,?,?,?,?,sysdate(),0)");
 		// 등록날짜는 오늘날짜, 처음 조회수는 0. 처음 글 상태는 정상으로 1.
 		try {
 			pstmt = conn.prepareStatement(sb.toString());

@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import kr.co.dongdong.vo.InterestsVO;
 
 public class InterestsDAO {
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-	String user = "apoderado";
-	String password = "tiger";
+	String driver = "com.mysql.cj.jdbc.Driver";
+	String url = "jdbc:mysql://db1.c2iguougwqti.ap-northeast-2.rds.amazonaws.com:3306/semidb";
+	String user = "admin";
+	String password ="apoderado";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -41,7 +41,7 @@ public class InterestsDAO {
 		int totalcnt = 0;
 		sb.setLength(0);
 		sb.append("SELECT COUNT(*) ");
-		sb.append("FROM INTERESTS ");
+		sb.append("FROM interests ");
 		sb.append("WHERE CLID = ? ");
 		sb.append("AND FACNO = ?");
 		
@@ -63,8 +63,8 @@ public class InterestsDAO {
 	// 1건 추가
 	public void InsertOne(String clid, int facno) {
 		sb.setLength(0);
-		sb.append("INSERT INTO INTERESTS ");
-		sb.append("VALUES (?, ?, SYSDATE)");
+		sb.append("INSERT INTO interests ");
+		sb.append("VALUES (?, ?, SYSDATE())");
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -81,7 +81,7 @@ public class InterestsDAO {
 	// 1건 삭제
 	public void deleteOne(String clid, int facno) {
 		sb.setLength(0);
-		sb.append("DELETE FROM INTERESTS ");
+		sb.append("DELETE FROM interests ");
 		sb.append("WHERE CLID = ? ");
 		sb.append("AND FACNO = ?");
 		
@@ -123,13 +123,12 @@ public class InterestsDAO {
 	public ArrayList<InterestsVO> selectAll(String id, int startNo, int endNo){
 		ArrayList<InterestsVO> list = new ArrayList<InterestsVO>();
 		sb.setLength(0);
-		sb.append("SELECT clid, facno, intdate ");
-		sb.append("FROM ( SELECT ROWNUM RN, clid, facno, intdate  ");
-		sb.append("	FROM ( SELECT clid, facno, intdate  ");
-		sb.append("		FROM interests WHERE clid = ? ");
-		sb.append("		ORDER BY intdate DESC ) ");
-		sb.append("	WHERE ROWNUM <= ?) ");
-		sb.append("WHERE RN >= ? ");
+		sb.append("SELECT ROWNUM,clid, facno, intdate ");
+		sb.append("FROM (SELECT @ROWNUM := @ROWNUM +1 AS ROWNUM, A.* ");
+		sb.append("FROM (SELECT clid, facno, intdate ");
+		sb.append("FROM interests WHERE clid = ? ");
+		sb.append("ORDER BY intdate DESC)A,(SELECT @ROWNUM :=0 )TMP)C ");
+		sb.append("WHERE ROWNUM <= ? and ROWNUM>=?");
 		
 		
 		try {
