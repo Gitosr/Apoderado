@@ -139,7 +139,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th>이메일</th><%String email = vo.getClmail(); 
+					<th>이메일</th><%String email = vo.getClemail(); 
 					String mailid = email.substring(0, email.indexOf("@"));
 					String mailhost= email.substring(email.indexOf("@")+1,email.length());
 					%>
