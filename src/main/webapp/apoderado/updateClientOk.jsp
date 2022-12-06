@@ -32,7 +32,7 @@
 	vo.setClid(id);
 	vo.setClname(name);
 	vo.setClpw(pw);
-	vo.setClmail(email1+email2);
+	vo.setClemail(email1+email2);
 	vo.setClcardno(cardno);
 	
 	vo.setClbirth(birth1+"/"+birth2+"/"+birth3);
